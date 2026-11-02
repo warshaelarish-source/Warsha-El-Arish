@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ورشة العريش | صنايعية في أي وقت</title>
+<meta name="description" content="ورشة العريش — منصة أهالي العريش لطلب الصنايعية: كهرباء، سباكة، نجارة. اطلب صنايعي في أي وقت في العريش.">
+<meta name="keywords" content="ورشة العريش, صنايعي العريش, صنايعية العريش, سباك في العريش, كهربائي العريش, نجار العريش, صيانة العريش">
+<meta property="og:title" content="ورشة العريش | صنايعية في أي وقت">
+<meta property="og:description" content="اطلب أقرب صنايعي كهرباء أو سباكة أو نجارة في العريش في دقايق.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_EG">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;-webkit-tap-highlight-color:transparent}
+:root{
+  --pri:#0891b2; --pri2:#0d9488; --dark:#0f172a; --mut:#64748b; --bg:#f1f5f9;
+  --card:#ffffff; --line:#e2e8f0; --ok:#16a34a; --bad:#dc2626; --warn:#d97706;
+}
+body{background:#e2e8f0;color:var(--dark)}
+.phone{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15);position:relative}
+.screen{display:none;flex:1;flex-direction:column;animation:fade .25s ease}
+.screen.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pad{padding:20px 18px 96px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--pri);font-weight:700;cursor:pointer;margin-bottom:14px;font-size:15px}
+h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-size:16px;font-weight:800}
+.mut{color:var(--mut);font-size:14px}
+
+/* ===== AUTH ===== */
+.auth-hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:44px 24px 60px;border-radius:0 0 32px 32px;text-align:center}
+.auth-hero .logo{font-size:34px;font-weight:900}
+.auth-hero .logo span{color:#fef08a}
+.auth-hero p{opacity:.9;margin-top:6px;font-size:15px}
+.auth-card{background:var(--card);margin:-34px 18px 0;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(2,6,23,.08)}
+.tabs{display:flex;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:18px}
+.tabs button{flex:1;border:0;background:transparent;padding:10px;border-radius:10px;font-weight:800;font-size:15px;color:var(--mut);cursor:pointer}
+.tabs button.on{background:#fff;color:var(--pri);box-shadow:0 2px 8px rgba(2,6,23,.08)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#334155}
+.inp{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;background:#fff;outline:none;transition:.2s}
+.inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+.btn{display:block;width:100%;padding:14px;border:0;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;transition:.15s;text-align:center}
+.btn-pri{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;box-shadow:0 6px 16px rgba(8,145,178,.35)}
+.btn-pri:active{transform:scale(.98)}
+.btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--dark);margin-top:10px}
+.btn-ok{background:var(--ok);color:#fff;flex:1;padding:11px;font-size:14px}
+.btn-bad{background:#fff;border:1.5px solid var(--bad);color:var(--bad);flex:1;padding:11px;font-size:14px}
+.link{color:var(--pri);font-weight:800;cursor:pointer;font-size:14px}
+.demo-box{margin:14px 18px 0;background:#ecfeff;border:1.5px dashed #67e8f9;border-radius:14px;padding:12px;text-align:center;font-size:13px;color:#155e75}
+
+/* ===== HOME ===== */
+.hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:26px 20px 60px;border-radius:0 0 30px 30px}
+.hero .hi{font-size:15px;opacity:.9}
+.hero h1{font-size:24px;margin:4px 0 14px}
+.hero .cta{background:#fff;color:var(--pri);border-radius:14px;padding:14px;font-weight:900;font-size:16px;display:block;text-align:center;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.hero .cta2{text-align:center;display:block;margin-top:12px;color:#fff;font-weight:700;font-size:14px;text-decoration:underline;cursor:pointer}
+.stats{display:flex;gap:10px;margin:-34px 18px 0}
+.stat{flex:1;background:#fff;border-radius:16px;padding:14px 8px;text-align:center;box-shadow:0 8px 20px rgba(2,6,23,.07)}
+.stat b{display:block;font-size:19px;color:var(--pri)}
+.stat span{font-size:12px;color:var(--mut);font-weight:700}
+.sec{margin:26px 18px 0}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cat{background:#fff;border-radius:18px;padding:18px 8px;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(2,6,23,.05);border:2px solid transparent;transition:.15s}
+.cat:active{transform:scale(.96)}
+.cat .ic{font-size:34px}
+.cat b{display:block;margin-top:8px;font-size:14px}
+.cat small{color:var(--mut);font-size:11px}
+.steps .step{display:flex;gap:14px;background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.step .n{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;min-width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
+.testi{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.testi .who{display:flex;align-items:center;gap:10px;margin-top:10px}
+.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
+.footer{background:var(--dark);color:#cbd5e1;margin-top:30px;padding:26px 20px 100px;border-radius:28px 28px 0 0}
+.footer b{color:#fff;font-size:18px}
+.footer .row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.chip{background:#1e293b;padding:8px 14px;border-radius:10px;font-size:13px}
+
+/* ===== FORMS / SEARCH ===== */
+.card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.radio-row{display:flex;gap:10px}
+.radio-row label{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:14px;font-weight:700;cursor:pointer}
+.radio-row input{display:none}
+.radio-row input:checked+span{color:var(--pri)}
+.radio-row label:has(input:checked){border-color:var(--pri);background:#ecfeff}
+
+/* ===== RESULTS ===== */
+.craft{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 4px 14px rgba(2,6,23,.05);cursor:pointer}
+.craft .top{display:flex;gap:12px;align-items:center}
+.craft .info{flex:1}
+.craft .nm{font-weight:900;font-size:16px}
+.badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px}
+.b-near{background:#dcfce7;color:#166534}
+.b-cat{background:#e0f2fe;color:#075985}
+.b-done{background:#dcfce7;color:#166534}
+.b-active{background:#fef3c7;color:#92400e}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:13px}
+.stars-off{color:#e2e8f0;font-size:13px}
+.mini{font-size:12px;color:var(--mut);font-weight:700}
+.craft .acts{display:flex;gap:8px;margin-top:12px}
+.btn-s{padding:10px;border-radius:11px;font-size:13px;font-weight:800;cursor:pointer;border:0;flex:1;text-align:center}
+.btn-s.p{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff}
+.btn-s.g{background:#f1f5f9;color:#334155}
+
+/* ===== PROFILE ===== */
+.prof-h{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:26px 20px 54px;border-radius:0 0 30px 30px;text-align:center}
+.prof-h .avatar{width:84px;height:84px;font-size:32px;margin:0 auto 10px;border:4px solid rgba(255,255,255,.4)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chips .c{background:#f1f5f9;border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:700;color:#334155}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.g-item{border-radius:14px;height:110px;display:flex;align-items:flex-end;padding:10px;color:#fff;font-weight:800;font-size:12px}
+.review{background:#f8fafc;border-radius:14px;padding:12px;margin-bottom:10px;border:1px solid var(--line)}
+.sticky-cta{position:fixed;bottom:74px;left:0;right:0;margin:0 auto;max-width:480px;padding:12px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+
+/* ===== CHAT ===== */
+.chat-top{position:sticky;top:0;background:#fff;padding:12px 16px;border-bottom:1px solid var(--line);z-index:5}
+.chat-top .row1{display:flex;align-items:center;gap:10px}
+.neg{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:10px}
+.neg p{font-size:12px;color:var(--mut);font-weight:700;margin-bottom:8px}
+.neg .btns{display:flex;gap:8px}
+.msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:78%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.7;position:relative}
+.msg.me{align-self:flex-start;background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;border-bottom-right-radius:4px}
+.msg.him{align-self:flex-end;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg .t{display:block;font-size:10px;opacity:.7;margin-top:4px}
+.typing{align-self:flex-end;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 16px;font-size:12px;color:var(--mut)}
+.chat-in{display:flex;gap:8px;padding:12px 14px;background:#fff;border-top:1px solid var(--line)}
+.chat-in input{flex:1;border:1.5px solid var(--line);border-radius:24px;padding:11px 16px;font-size:14px;outline:none}
+.chat-in button{width:46px;height:46px;border-radius:50%;border:0;background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;font-size:18px;cursor:pointer}
+
+/* ===== ORDERS ===== */
+.order{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05);cursor:pointer}
+.order .top{display:flex;justify-content:space-between;align-items:center}
+.order .det{font-size:13px;color:var(--mut);margin-top:6px;line-height:1.7}
+
+/* ===== SUCCESS ===== */
+.succ{text-align:center;padding:60px 24px}
+.check{width:100px;height:100px;border-radius:50%;background:#dcfce7;color:var(--ok);font-size:52px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+
+/* ===== TABBAR ===== */
+#tabbar{position:fixed;bottom:0;left:0;right:0;margin:0 auto;max-width:480px;background:#fff;border-top:1px solid var(--line);display:none;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:20}
+#tabbar.show{display:flex}
+#tabbar button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:800;color:var(--mut);cursor:pointer;padding:4px}
+#tabbar button.on{color:var(--pri)}
+#tabbar .ic{font-size:21px}
+
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:30px;font-size:14px;font-weight:700;opacity:0;transition:.3s;z-index:99;max-width:88%;text-align:center;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hidden{display:none!important}
+.empty{text-align:center;padding:50px 20px;color:var(--mut)}
+.empty .big{font-size:52px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<!-- ================= AUTH ================= -->
+<section id="s-auth" class="screen active">
+  <div class="auth-hero">
+    <div class="logo">🔧 ورشة <span>العريش</span></div>
+    <p>أي صنايعي في العريش.. في أي وقت، في دقايق</p>
+  </div>
+  <div class="auth-card">
+    <div class="tabs">
+      <button id="tabLogin" class="on" onclick="authTab('login')">تسجيل الدخول</button>
+      <button id="tabReg" onclick="authTab('reg')">حساب جديد</button>
+    </div>
+    <!-- LOGIN -->
+    <form id="formLogin" onsubmit="doLogin(event)">
+      <div class="field"><label>رقم الموبايل</label><input class="inp" id="li-phone" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11"></div>
+      <div class="field"><label>كلمة السر</label><input class="inp" id="li-pass" type="password" placeholder="••••••••"></div>
+      <button class="btn btn-pri">دخول</button>
+    </form>
+    <!-- REGISTER -->
+    <form id="formReg" class="hidden" onsubmit="doRegister(event)">
+      <div class="field"><label>الاسم بالكامل</label><input class="inp" id="rg-name" placeholder="مثال: أحمد محمد"></div>
+      <div class="field"><label>رقم الموبايل</label><input class="inp" id="rg-phone" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11"></div>
+      <div class="field"><label>كلمة السر</label><input class="inp" id="rg-pass" type="password" placeholder="6 حروف على الأقل"></div>
+      <div class="field"><label>تأكيد كلمة السر</label><input class="inp" id="rg-pass2" type="password" placeholder="اكتبها تاني"></div>
+      <button class="btn btn-pri">إنشاء الحساب</button>
+    </form>
+    <p style="text-align:center;margin-top:14px;font-size:14px">صنايعي؟ <span class="link" onclick="showScreen('s-join')">انضم واشتغل معانا من هنا</span></p>
+  </div>
+  <div class="demo-box">نسخة تجريبية — <span class="link" onclick="demoLogin()">ادخل بحساب تجريبي بضغطة واحدة</span></div>
+</section>
+
+<!-- ================= HOME ================= -->
+<section id="s-home" class="screen">
+  <div class="hero">
+    <div class="hi" id="hi-user">أهلًا 👋</div>
+    <h1>ورشة العريش —<br>محتاج صنايعي؟</h1>
+    <span class="cta" onclick="goSearch()">⚡ اطلب صنايعي دلوقتي</span>
+    <span class="cta2" onclick="goSearch()">أو دور بنفسك على صنايعي ←</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>+40</b><span>صنايعي معانا</span></div>
+    <div class="stat"><b>+1200</b><span>شغلانة اتعملت</span></div>
+    <div class="stat"><b>4.8 ★</b><span>تقييم العملاء</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h2>الأقسام</h2><span class="mut" style="font-size:12px">وأقسام تانية قريب 🔜</span></div>
+    <div class="cats">
+      <div class="cat" onclick="quickSearch('كهرباء')"><div class="ic">⚡</div><b>كهرباء</b><small>أعطال وتأسيس</small></div>
+      <div class="cat" onclick="quickSearch('سباكة')"><div class="ic">🔧</div><b>سباكة</b><small>أعطال وتأسيس</small></div>
+      <div class="cat" onclick="quickSearch('نجارة')"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></div>
+    </div>
+  </div>
+
+  <div class="sec steps">
+    <div class="sec-h"><h2>إزاي بنشتغل؟</h2></div>
+    <div class="step"><div class="n">1</div><div><h3>اكتب طلبك</h3><p class="mut">حدد نوع الشغل والمنطقة واكتب التفاصيل</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>اختار صنايعي</h3><p class="mut">شوف التقييمات والشغل واختار اللي يعجبك</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3>اتفق في الشات</h3><p class="mut">اتفاوا على السعر، والدفع كاش للصنايعي بعد الشغل</p></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h2>عملاء قالوا إيه؟</h2></div>
+    <div class="testi">"طلبت سباك الساعة 10 بالليل ووصلني في ربع ساعة. خدمة أكتر من ممتازة!"<div class="who"><div class="avatar" style="background:#0891b2">م</div><div><b style="font-size:14px">أم محمود</b><div class="mini">حي السلام — سباكة</div></div></div></div>
+    <div class="testi">"أخيرًا منصة تجمع صنايعية محترمين في العريش. الكهربائي شغل نظيف وبالضمان."<div class="who"><div class="avatar" style="background:#0d9488">ع</div><div><b style="font-size:14px">الحاج عبد الرحمن</b><div class="mini">حي النصر — كهرباء</div></div></div></div>
+  </div>
+
+  <div class="footer">
+    <b>🔧 ورشة العريش</b>
+    <p style="margin-top:8px;font-size:13px">منصة بتجمع أهالي العريش بأحسن الصنايعية — الخدمة مجانية والدفع للصنايعي كاش بعد ما الشغل يخلص.</p>
+    <div class="row">
+      <span class="chip">📞 01508207016</span>
+      <span class="chip">💬 واتساب</span>
+      <span class="chip" style="cursor:pointer" onclick="showScreen('s-join')">🛠️ انضم كصنايعي</span>
+    </div>
+    <p style="margin-top:16px;font-size:11px;opacity:.6">© 2026 ورشة العريش — جميع الحقوق محفوظة</p>
+  </div>
+</section>
+
+<!-- ================= SEARCH ================= -->
+<section id="s-search" class="screen">
+  <div class="pad">
+    <span class="back" onclick="navHome()">→ رجوع</span>
+    <h1 style="margin-bottom:4px">دور على صنايعي 🔍</h1>
+    <p class="mut" style="margin-bottom:20px">اكتب طلبك بالتفصيل عشان الصنايعي يوصلك جاهز</p>
+    <form class="card" onsubmit="submitSearch(event)">
+      <div class="field"><label>1️⃣ نوع الشغل</label>
+        <select class="inp" id="q-cat">
+          <optgroup label="⚡ كهرباء">
+            <option>كهرباء — أعطال وأسلاك</option><option>كهرباء — تأسيس وتشطيب</option><option>كهرباء — لوحات وأجهزة</option><option>كهرباء — تركيب سخانات وأجهزة</option>
+          </optgroup>
+          <optgroup label="🔧 سباكة">
+            <option>سباكة — أعطال وتسريبات</option><option>سباكة — تأسيس</option><option>سباكة — سخانات مياه</option><option>سباكة — أطقم حمامات ومطابخ</option>
+          </optgroup>
+          <optgroup label="🪚 نجارة">
+            <option>نجارة — أبواب وشبابيك</option><option>نجارة — غرف وأثاث</option><option>نجارة — مطابخ خشبية</option><option>نجارة — تصليح وصيانة</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="field"><label>2️⃣ المكان (العريش)</label>
+        <select class="inp" id="q-area"></select>
+      </div>
+      <div class="field"><label>3️⃣ رقم التواصل</label>
+        <div class="radio-row">
+          <label><input type="radio" name="q-phone" value="same" checked onchange="phoneOpt(false)"><span>نفس رقم حسابي</span></label>
+          <label><input type="radio" name="q-phone" value="new" onchange="phoneOpt(true)"><span>رقم مختلف</span></label>
+        </div>
+        <input class="inp hidden" id="q-phone-new" style="margin-top:8px" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11">
+      </div>
+      <div class="field"><label>4️⃣ تفاصيل الشغل</label>
+        <textarea class="inp" id="q-details" rows="4" placeholder="مثال: عندي تلاجة بايظة نوعها كذا، بتسخن ومش بتبرد، محتاج حد يجي يشوفها النهاردة"></textarea>
+      </div>
+      <button class="btn btn-pri">دور دلوقتي 🔍</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= RESULTS ================= -->
+<section id="s-results" class="screen">
+  <div class="pad">
+    <span class="back" onclick="showScreen('s-search')">→ رجوع</span>
+    <h1 style="margin-bottom:4px">الصنايعية المتاحين 🛠️</h1>
+    <p class="mut" id="res-sub" style="margin-bottom:18px"></p>
+    <div id="res-list"></div>
+  </div>
+</section>
+
+<!-- ================= PROFILE ================= -->
+<section id="s-profile" class="screen">
+  <div class="prof-h">
+    <span class="back" style="color:#fff" onclick="historyBack()">→ رجوع</span>
+    <div class="avatar" id="pf-avatar"></div>
+    <h2 id="pf-name"></h2>
+    <div id="pf-stars" style="margin-top:4px"></div>
+    <div class="chips" id="pf-chips" style="justify-content:center"></div>
+  </div>
+  <div class="pad" style="padding-top:18px">
+    <div class="card" style="margin-bottom:14px"><h3 style="margin-bottom:6px">نبذة</h3><p class="mut" id="pf-bio" style="line-height:1.9"></p></div>
+    <div class="sec-h"><h3>من شغله 📸</h3></div>
+    <div class="gallery" id="pf-gallery" style="margin-bottom:16px"></div>
+    <div class="sec-h"><h3>تقييمات العملاء ⭐</h3></div>
+    <div id="pf-reviews"></div>
+  </div>
+  <div class="sticky-cta"><button class="btn btn-pri" id="pf-chat-btn">💬 ابدأ المحادثة واتفق على السعر</button></div>
+</section>
+
+<!-- ================= CHAT ================= -->
+<section id="s-chat" class="screen">
+  <div class="chat-top">
+    <div class="row1">
+      <span class="back" style="margin:0" onclick="historyBack()">→</span>
+      <div class="avatar" id="ch-avatar" style="width:40px;height:40px;font-size:15px"></div>
+      <div style="flex:1"><b id="ch-name" style="font-size:15px"></b><div class="mini" style="color:var(--ok)">● متاح الآن</div></div>
+    </div>
+    <div class="neg">
+      <p>⚖️ اتفاوا هنا على السعر بالاتفاق.. واختاروا النتيجة:</p>
+      <div class="btns">
+        <button class="btn btn-ok" onclick="agree()">✅ تم الاتفاق</button>
+        <button class="btn btn-bad" onclick="disagree()">⛔ لم يتم الاتفاق</button>
+      </div>
+    </div>
+  </div>
+  <div class="msgs" id="ch-msgs"></div>
+  <div class="chat-in">
+    <input id="ch-input" placeholder="اكتب رسالتك.. (جرّب: بكام؟ / امتى تيجي؟)" onkeydown="if(event.key==='Enter')sendMsg()">
+    <button onclick="sendMsg()">➤</button>
+  </div>
+</section>
+
+<!-- ================= ORDERS ================= -->
+<section id="s-orders" class="screen">
+  <div class="pad">
+    <h1 style="margin-bottom:4px">طلباتي 📋</h1>
+    <p class="mut" style="margin-bottom:18px">تابع حالة طلباتك ومحادثاتك</p>
+    <div id="orders-list"></div>
+  </div>
+</section>
+
+<!-- ================= ACCOUNT ================= -->
+<section id="s-account" class="screen">
+  <div class="pad">
+    <h1 style="margin-bottom:20px">حسابي 👤</h1>
+    <div class="card" style="text-align:center;padding:26px">
+      <div class="avatar" id="ac-avatar" style="width:80px;height:80px;font-size:30px;margin:0 auto 12px;background:linear-gradient(135deg,#0891b2,#0d9488)"></div>
+      <h2 id="ac-name"></h2>
+      <p class="mut" id="ac-phone" style="margin-top:4px"></p>
+      <span class="badge b-cat" style="margin-top:10px">عميل</span>
+    </div>
+    <button class="btn btn-ghost" style="margin-top:20px" onclick="logout()">تسجيل الخروج</button>
+  </div>
+</section>
+
+<!-- ================= JOIN AS CRAFTSMAN ================= -->
+<section id="s-join" class="screen">
+  <div class="pad">
+    <span class="back" onclick="showScreen('s-auth')">→ رجوع</span>
+    <h1 style="margin-bottom:4px">انضم كصنايعي 🛠️</h1>
+    <p class="mut" style="margin-bottom:20px">اشتغل بحرية زي نظام أوبر — بتاخد طلبات العملاء على طول ومن غير عمولة مننا</p>
+    <div id="join-wrap">
+      <form class="card" onsubmit="joinCraftsman(event)">
+        <div class="field"><label>الاسم بالكامل</label><input class="inp" id="jn-name" placeholder="مثال: محمد أبو السعود"></div>
+        <div class="field"><label>رقم الموبايل</label><input class="inp" id="jn-phone" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11"></div>
+        <div class="field"><label>كلمة السر</label><input class="inp" id="jn-pass" type="password" placeholder="6 حروف على الأقل"></div>
+        <div class="field"><label>التخصص</label>
+          <select class="inp" id="jn-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select>
+        </div>
+        <div class="field"><label>منطقتك في العريش</label><select class="inp" id="jn-area"></select></div>
+        <div class="field"><label>سنين الخبرة</label><input class="inp" id="jn-exp" inputmode="numeric" placeholder="مثال: 7"></div>
+        <div class="field"><label>نبذة عن شغلك (اختياري)</label><textarea class="inp" id="jn-bio" rows="3" placeholder="اكتب أبرز شغلك وخبراتك"></textarea></div>
+        <button class="btn btn-pri">سجل دلوقتي مجانًا</button>
+      </form>
+    </div>
+    <div id="join-done" class="hidden">
+      <div class="succ">
+        <div class="check">✓</div>
+        <h2>تم استلام بياناتك!</h2>
+        <p class="mut" style="margin-top:8px;line-height:1.9">حسابك قيد المراجعة دلوقتي.<br>هنتواصل معاك على رقمك خلال 24 ساعة عشان نفعّل حسابك.</p>
+        <button class="btn btn-pri" style="margin-top:20px" onclick="showScreen('s-auth')">رجوع</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUCCESS ================= -->
+<section id="s-success" class="screen">
+  <div class="succ">
+    <div class="check">✓</div>
+    <h2>تم الاتفاق بنجاح! 🎉</h2>
+    <p class="mut" style="margin-top:8px" id="sc-order"></p>
+    <div class="card" style="text-align:right;margin-top:18px" id="sc-box"></div>
+    <p class="mut" style="margin-top:14px;font-size:13px">💵 الدفع كاش للصنايعي بعد ما الشغل يخلص.<br>⭐ متنساش تقيّم الصنايعي بعد الشغل!</p>
+    <button class="btn btn-pri" style="margin-top:18px" onclick="showScreen('s-home')">رجوع للرئيسية</button>
+    <button class="btn btn-ghost" onclick="showScreen('s-orders')">شوف طلباتي</button>
+  </div>
+</section>
+
+</div>
+
+<!-- TABBAR -->
+<nav id="tabbar">
+  <button data-t="s-home" onclick="navHome()"><span class="ic">🏠</span>الرئيسية</button>
+  <button data-t="s-search" onclick="goSearch()"><span class="ic">🔍</span>دور على صنايعي</button>
+  <button data-t="s-orders" onclick="showOrders()"><span class="ic">📋</span>طلباتي</button>
+  <button data-t="s-account" onclick="showAccount()"><span class="ic">👤</span>حسابي</button>
+</nav>
+
+<div id="toast"></div>
+
+<script>
+/* ================= DATA ================= */
+const AREAS = ["حي أول العريش","حي ثاني العريش","حي ثالث العريش","حي رابع العريش","حي السلام","حي النصر","حي الزهور","حي المستقبل","وسط البلد","المنطقة الصناعية","كفر العريش الجديدة","أبو صقل"];
+const CAT_ICON = {"كهرباء":"⚡","سباكة":"🔧","نجارة":"🪚"};
+const AV_COLORS = ["#0891b2","#0d9488","#7c3aed","#db2777","#ea580c","#65a30d","#2563eb","#c026d3","#0f766e"];
+
+const CRAFTSMEN = [
+ {id:1,name:"أ/ محمد السيد",cat:"كهرباء",area:"حي أول العريش",rating:4.9,jobs:320,years:12,price:"فحص مجاني — السعر بعد المعاينة",bio:"مهندس كهرباء بخبرة 12 سنة في أعطال الكهرباء والتأسيس والتشطيبات. شغل نظيف وبالضمان، وبشتغل في كل أحياء العريش."},
+ {id:2,name:"أ/ أحمد فتحي",cat:"كهرباء",area:"حي السلام",rating:4.7,jobs:210,years:8,price:"زيارة معاينة 50 جنيه",bio:"متخصص في أعطال الأسلاك واللوحات وتركيب السخانات والأجهزة. سريع في التوصيل وشغل مضمون."},
+ {id:3,name:"أ/ كريم عبد الله",cat:"كهرباء",area:"حي ثالث العريش",rating:4.5,jobs:150,years:6,price:"فحص مجاني",bio:"كهربائي منازل وتشطيبات، بشتغل بنظام الفورمة وبضمان سنة على الشغل."},
+ {id:4,name:"أ/ مصطفى النجار",cat:"سباكة",area:"حي النصر",rating:4.8,jobs:280,years:10,price:"زيارة معاينة 50 جنيه",bio:"سباك محترف في الأعطال والتسريبات والتأسيس، عندي عدد كامل وشغل بنظام الضمان."},
+ {id:5,name:"أ/ حسن علي",cat:"سباكة",area:"حي ثاني العريش",rating:4.6,jobs:190,years:7,price:"فحص مجاني",bio:"متخصص في السخانات والأطقم وكشف التسريبات بجهاز حديث من غير تكسير."},
+ {id:6,name:"أ/ إبراهيم قطب",cat:"سباكة",area:"حي السلام",rating:4.4,jobs:120,years:5,price:"زيارة معاينة 30 جنيه",bio:"سباك شاطر وأسعاره في المتناول، بيشتغل في كل مناطق العريش ومتاح طوال الأسبوع."},
+ {id:7,name:"أ/ سمير فرج",cat:"نجارة",area:"حي أول العريش",rating:4.9,jobs:350,years:15,price:"سعر حسب المقايس",bio:"نجار موبيليا بخبرة 15 سنة — غرف نوم، مطابخ، أبواب وشبابيك. تصميم ومعاينة مجانية."},
+ {id:8,name:"أ/ رمضان شعبان",cat:"نجارة",area:"حي المستقبل",rating:4.6,jobs:160,years:8,price:"سعر حسب المقايس",bio:"نجار ديكور وتشطيبات، شغل مودرن ودقة في المواعيد."},
+ {id:9,name:"أ/ جمال حسين",cat:"نجارة",area:"حي الزهور",rating:4.3,jobs:90,years:4,price:"أسعار تبدأ من 150 جنيه",bio:"نجار شباب وأسعاره حلوة، بيشتغل صيانة وتصليح أثاث وأبواب."}
+];
+const REVIEWS = {
+ "كهرباء":[["أم كريم","حي السلام","شغل نظيف جدًا وخلص في نفس اليوم، والسعر كان مناسب جدًا."],["أبو آدم","حي النصر","محترم ووصل في المعاد بالظبط، ركّبلي لوحة جديدة بالضمان."]],
+ "سباكة":[["الحاج سالم","حي أول العريش","كشف التسريب في دقايق من غير ما يكسر حاجة، ربنا يباركله."],["م/ هشام","حي ثالث العريش","سريع ونضيف وضمير، أنصح بيه وبقوة."]],
+ "نجارة":[["أ/ منى","حي المستقبل","عمللي مطبخ تحفة وبسعر أحسن من السوق بكتير."],["أبو سلمى","وسط البلد","غرفة نوم عظمة، معاد وتسليم في الوقت."]]
+};
+const GALLERY = {
+ "كهرباء":["تأسيس كهرباء كامل","لوحة توزيع حديثة","تركيب سخان","تشطيب إنتركم"],
+ "سباكة":["تأسيس حمام كامل","كشف تسريب","تركيب سخان مياه","أطقم حمامات"],
+ "نجارة":["مطبخ خشب مودرن","غرفة نوم","أبواب وشبابيك","ديكور خشبي"]
+};
+
+/* ================= STATE ================= */
+const LS_U="warsha_user_v1", LS_O="warsha_orders_v1";
+let user = JSON.parse(localStorage.getItem(LS_U)||"null");
+let orders = JSON.parse(localStorage.getItem(LS_O)||"[]");
+let curOrder=null, curCraft=null, hist=[];
+
+const $=id=>document.getElementById(id);
+function saveOrders(){localStorage.setItem(LS_O,JSON.stringify(orders))}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),2600)}
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function stars(r){const n=Math.round(r);return `<span class="stars">${"★".repeat(n)}</span><span class="stars-off">${"★".repeat(5-n)}</span> <b style="font-size:13px">${r}</b>`}
+function colorFor(n){let h=0;for(const c of n)h+=c.charCodeAt(0);return AV_COLORS[h%AV_COLORS.length]}
+function avatar(c,size){return `<div class="avatar" style="background:${colorFor(c.name)};${size?`width:${size}px;height:${size}px;font-size:${size/2.4}px`:""}">${c.name.replace("أ/ ","")[0]}</div>`}
+
+/* ================= NAV ================= */
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo(0,0);
+  const noTab = (id==="s-auth"||id==="s-join");
+  $("tabbar").classList.toggle("show",!noTab);
+  document.querySelectorAll("#tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));
+  hist.push(id);
+}
+function historyBack(){hist.pop();const p=hist.pop()||"s-home";showScreen(p);if(p==="s-results")renderResults();}
+function navHome(){renderHome();showScreen("s-home")}
+function goSearch(){fillAreas();showScreen("s-search")}
+function fillAreas(){const o=$("q-area");if(o.options.length)return;AREAS.forEach(a=>{const op=document.createElement("option");op.textContent=a;o.appendChild(op)});const j=$("jn-area");AREAS.forEach(a=>{const op=document.createElement("option");op.textContent=a;j.appendChild(op)})}
+
+/* ================= AUTH ================= */
+function authTab(t){
+  $("tabLogin").classList.toggle("on",t==="login");$("tabReg").classList.toggle("on",t==="reg");
+  $("formLogin").classList.toggle("hidden",t!=="login");$("formReg").classList.toggle("hidden",t!=="reg");
+}
+function validPhone(p){return /^01[0-9]{9}$/.test(p)}
+function doRegister(e){
+  e.preventDefault();
+  const n=$("rg-name").value.trim(),p=$("rg-phone").value.trim(),p1=$("rg-pass").value,p2=$("rg-pass2").value;
+  if(n.length<3)return toast("اكتب اسمك بالكامل");
+  if(!validPhone(p))return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(p1.length<6)return toast("كلمة السر 6 حروف على الأقل");
+  if(p1!==p2)return toast("كلمتي السر مش متطابقتين");
+  user={name:n,phone:p};localStorage.setItem(LS_U,JSON.stringify(user));
+  toast("أهلًا بيك يا "+n+"! 👋");renderHome();showScreen("s-home");
+}
+function doLogin(e){
+  e.preventDefault();
+  const p=$("li-phone").value.trim(),p1=$("li-pass").value;
+  if(!validPhone(p))return toast("اكتب رقم موبايل صحيح");
+  if(!p1)return toast("اكتب كلمة السر");
+  const saved=JSON.parse(localStorage.getItem(LS_U)||"null");
+  const nm=saved&&saved.phone===p?saved.name:"عميل ورشة العريش";
+  user={name:nm,phone:p};localStorage.setItem(LS_U,JSON.stringify(user));
+  toast("أهلًا بيك تاني! 👋");renderHome();showScreen("s-home");
+}
+function demoLogin(){user={name:"ضيف ورشة العريش",phone:"01508207016"};localStorage.setItem(LS_U,JSON.stringify(user));toast("دخلت بالحساب التجريبي ✓");renderHome();showScreen("s-home")}
+function logout(){user=null;localStorage.removeItem(LS_U);showScreen("s-auth")}
+
+/* ================= HOME ================= */
+function renderHome(){$("hi-user").textContent="أهلًا، "+(user?user.name.split(" ")[0]:"")+" 👋"}
+function quickSearch(cat){fillAreas();const def={"كهرباء":"كهرباء — أعطال وأسلاك","سباكة":"سباكة — أعطال وتسريبات","نجارة":"نجارة — أبواب وشبابيك"};$("q-cat").value=def[cat];showScreen("s-search")}
+
+/* ================= SEARCH ================= */
+function phoneOpt(show){$("q-phone-new").classList.toggle("hidden",!show)}
+function submitSearch(e){
+  e.preventDefault();
+  const cat=$("q-cat").value.split(" — ")[0];
+  const area=$("q-area").value;
+  const same=document.querySelector('input[name="q-phone"]:checked').value==="same";
+  const phone=same?user.phone:$("q-phone-new").value.trim();
+  if(!same&&!validPhone(phone))return toast("اكتب رقم التواصل صحيح");
+  const det=$("q-details").value.trim();
+  if(det.length<5)return toast("اكتب تفاصيل الشغل بشكل أوضح");
+  const o={id:Date.now(),no:"WR-"+Math.floor(1000+Math.random()*9000),cat,area,phone,det,status:"active",craftsmanId:null,msgs:[],created:Date.now()};
+  orders.unshift(o);saveOrders();
+  curOrder=o;renderResults();showScreen("s-results");
+}
+
+/* ================= RESULTS ================= */
+function renderResults(){
+  const o=curOrder;
+  $("res-sub").innerHTML=`${CAT_ICON[o.cat]} ${o.cat} — 📍 ${o.area} — <span class="badge b-active">متاح</span>`;
+  let list=CRAFTSMEN.filter(c=>c.cat===o.cat)
+    .map(c=>({...c,near:c.area===o.area}))
+    .sort((a,b)=>(b.near-a.near)||(b.rating-a.rating));
+  $("res-list").innerHTML=list.map(c=>`
+    <div class="craft" onclick="openProfile(${c.id})">
+      <div class="top">${avatar(c)}
+        <div class="info">
+          <div class="nm">${c.name} ${c.near?'<span class="badge b-near">قريب منك 📍</span>':""}</div>
+          <div>${stars(c.rating)}</div>
+          <div class="mini">${CAT_ICON[c.cat]} ${c.cat} — ${c.area} — ${c.jobs} شغلانة — خبرة ${c.years} سنة</div>
+        </div>
+      </div>
+      <div class="acts">
+        <button class="btn-s p" onclick="event.stopPropagation();openChat(${c.id})">💬 كلّمه واتفق</button>
+        <button class="btn-s g" onclick="event.stopPropagation();openProfile(${c.id})">الملف الشخصي</button>
+      </div>
+    </div>`).join("");
+}
+
+/* ================= PROFILE ================= */
+function openProfile(id){
+  const c=CRAFTSMEN.find(x=>x.id===id);curCraft=c;
+  $("pf-avatar").outerHTML=avatar(c,84).replace('class="avatar"','class="avatar" id="pf-avatar"');
+  $("pf-name").textContent=c.name;
+  $("pf-stars").innerHTML=stars(c.rating);
+  $("pf-chips").innerHTML=`<span class="c">${CAT_ICON[c.cat]} ${c.cat}</span><span class="c">📍 ${c.area}</span><span class="c">🧰 ${c.jobs} شغلانة</span><span class="c">💼 خبرة ${c.years} سنة</span><span class="c">💰 ${c.price}</span>`;
+  $("pf-bio").textContent=c.bio;
+  const cols=["#0891b2","#0d9488","#7c3aed","#ea580c"];
+  $("pf-gallery").innerHTML=GALLERY[c.cat].map((g,i)=>`<div class="g-item" style="background:linear-gradient(135deg,${cols[i%4]},${cols[(i+1)%4]}cc)">${g}</div>`).join("");
+  $("pf-reviews").innerHTML=REVIEWS[c.cat].map(r=>`<div class="review">"${r[2]}"<div class="who" style="display:flex;align-items:center;gap:8px;margin-top:8px">${avatar({name:r[0]},34)}<div><b style="font-size:13px">${r[0]}</b><div class="mini">${r[1]}</div></div></div></div>`).join("");
+  $("pf-chat-btn").onclick=()=>openChat(c.id);
+  showScreen("s-profile");
+}
+
+/* ================= CHAT ================= */
+function openChat(id){
+  const c=CRAFTSMEN.find(x=>x.id===id);curCraft=c;
+  if(!curOrder||curOrder.status!=="active"){toast("اعمل طلب جديد الأول");return goSearch()}
+  curOrder.craftsmanId=id;saveOrders();
+  $("ch-avatar").outerHTML=avatar(c,40).replace('class="avatar"','class="avatar" id="ch-avatar"');
+  $("ch-name").textContent=c.name;
+  if(!curOrder.seeded){
+    curOrder.msgs.push({from:"him",text:`أهلًا! أنا ${c.name} 👋 شفت طلبك: ${curOrder.cat} في ${curOrder.area} — "${curOrder.det}"`});
+    curOrder.msgs.push({from:"him",text:`أقدر أوصللك النهاردة. ${c.price}. قولي ميناسبك إيه؟`});
+    curOrder.seeded=true;saveOrders();
+  }
+  renderMsgs();showScreen("s-chat");
+}
+function renderMsgs(){
+  const box=$("ch-msgs");
+  box.innerHTML=curOrder.msgs.map(m=>{
+    const d=new Date(m.t||Date.now());
+    const tm=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0");
+    return `<div class="msg ${m.from}">${esc(m.text)}<span class="t">${m.from==="me"?"✓✓ ":""}${tm}</span></div>`;
+  }).join("");
+  box.scrollTop=box.scrollHeight;
+}
+function sendMsg(){
+  const inp=$("ch-input"),v=inp.value.trim();if(!v)return;
+  curOrder.msgs.push({from:"me",text:v,t:Date.now()});inp.value="";saveOrders();renderMsgs();
+  setTimeout(()=>{
+    const box=$("ch-msgs");const ty=document.createElement("div");ty.className="typing";ty.textContent="يكتب الآن...";box.appendChild(ty);box.scrollTop=box.scrollHeight;
+    setTimeout(()=>{
+      ty.remove();
+      let r;
+      if(/بكام|سعر|قد إيه|قد ايه|فلوس|تكلفة/.test(v))r=`${curCraft.price}، ولو الشغل كبير هعملك خصم. الفحص عندنا أمانة 🙂`;
+      else if(/امتى|موعد|تيجي|تعالى|خليك/.test(v))r="أقدر أكون عندك خلال ساعة إن شاء الله، ابعتلي العنوان بالتفصيل 📍";
+      else if(/صور|صورة|فوتو/.test(v))r="تمام، ابعت الصور هنا وهقولك التشخيص والسعر المبدئي على طول 📸";
+      else if(/تمام|ماشي|الله|تم|اوك|أوك|موافق/.test(v))r="تمام يا معلم 🤝 دوس على زرار (تم الاتفاق) فوق عشان نثبت الطلب";
+      else r=["تمام، وصلتني رسالتك 👌","حاضر، هرد عليك في دقيقة واحدة","ماشي يا غالي، اتفضل اسأل براحتك","خير إن شاء الله، قولي أكتر عن المشكلة"][Math.floor(Math.random()*4)];
+      curOrder.msgs.push({from:"him",text:r,t:Date.now()});saveOrders();renderMsgs();
+    },1300);
+  },400);
+}
+function agree(){
+  curOrder.status="done";curOrder.doneWith=curCraft.name;saveOrders();
+  $("sc-order").textContent="طلبك رقم "+curOrder.no;
+  $("sc-box").innerHTML=`<h3>${curCraft.name} ${CAT_ICON[curCraft.cat]}</h3>
+    <p class="mut" style="margin:6px 0">📞 هيتوصل معاك على: <b style="color:var(--dark)">${curOrder.phone}</b></p>
+    <p class="mut">📍 العنوان: ${curOrder.area} — العريش</p>
+    <p class="mut" style="margin-top:6px">📝 ${esc(curOrder.det)}</p>`;
+  showScreen("s-success");
+}
+function disagree(){
+  curOrder.craftsmanId=null;saveOrders();
+  toast("الطلب لسه موجود ✓ تقدر تدور على صنايعي تاني");
+  renderResults();showScreen("s-results");
+}
+
+/* ================= ORDERS ================= */
+function showOrders(){
+  const box=$("orders-list");
+  if(!orders.length){box.innerHTML=`<div class="empty"><div class="big">📭</div><h3>لسه مفيش طلبات</h3><p>اطلب أول صنايعي ليك دلوقتي</p><button class="btn btn-pri" style="margin-top:14px" onclick="goSearch()">اطلب دلوقتي</button></div>`}
+  else box.innerHTML=orders.map(o=>`
+    <div class="order" onclick="openOrder(${o.id})">
+      <div class="top"><b>${CAT_ICON[o.cat.split(" — ")[0]]||"🛠️"} ${esc(o.cat)}</b>
+      <span class="badge ${o.status==="done"?"b-done":"b-active"}">${o.status==="done"?"✓ تم الاتفاق":"متاح للتفاوض"}</span></div>
+      <div class="det">📍 ${esc(o.area)} — 🔖 رقم الطلب ${o.no}${o.status==="done"?"<br>🤝 مع: "+esc(o.doneWith):""}<br>📝 ${esc(o.det.slice(0,70))}${o.det.length>70?"...":""}</div>
+    </div>`).join("");
+  showScreen("s-orders");
+}
+function openOrder(id){
+  const o=orders.find(x=>x.id===id);
+  if(o.status==="done")return toast("الطلب ده اتعمل بالفعل ✓ — اعمل طلب جديد");
+  curOrder=o;
+  if(o.craftsmanId){openChat(o.craftsmanId)}
+  else{toast("اختار صنايعي للطلب ده");renderResults();showScreen("s-results")}
+}
+
+/* ================= ACCOUNT ================= */
+function showAccount(){
+  $("ac-avatar").textContent=user.name[0];
+  $("ac-name").textContent=user.name;
+  $("ac-phone").textContent=user.phone;
+  showScreen("s-account");
+}
+
+/* ================= JOIN CRAFTSMAN ================= */
+function joinCraftsman(e){
+  e.preventDefault();
+  const n=$("jn-name").value.trim(),p=$("jn-phone").value.trim(),p1=$("jn-pass").value,ex=$("jn-exp").value.trim();
+  if(n.length<3)return toast("اكتب اسمك بالكامل");
+  if(!validPhone(p))return toast("رقم الموبايل غلط — لازم 11 رقم يبدأوا بـ 01");
+  if(p1.length<6)return toast("كلمة السر 6 حروف على الأقل");
+  if(!ex)return toast("اكتب سنين خبرتك");
+  $("join-wrap").classList.add("hidden");$("join-done").classList.remove("hidden");
+}
+
+/* ================= INIT ================= */
+window.onload=()=>{
+  if(user){renderHome();showScreen("s-home")}
+};
+</script>
+</body>
+</html>
