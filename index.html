@@ -3,649 +3,567 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0891b2">
 <title>ورشة العريش | صنايعية في أي وقت</title>
-<meta name="description" content="ورشة العريش — منصة أهالي العريش لطلب الصنايعية: كهرباء، سباكة، نجارة. اطلب صنايعي في أي وقت في العريش.">
-<meta name="keywords" content="ورشة العريش, صنايعي العريش, صنايعية العريش, سباك في العريش, كهربائي العريش, نجار العريش, صيانة العريش">
+<meta name="description" content="ورشة العريش — انشر طلبك واتواصل مع صنايعي كهرباء أو سباكة أو نجارة في العريش.">
+<link rel="canonical" href="https://warshaelarish-source.github.io/Warsha-El-Arish/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔧%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="ورشة العريش | صنايعية في أي وقت">
-<meta property="og:description" content="اطلب أقرب صنايعي كهرباء أو سباكة أو نجارة في العريش في دقايق.">
+<meta property="og:description" content="انشر طلبك واتواصل مع صنايعي في العريش.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_EG">
+<meta property="og:url" content="https://warshaelarish-source.github.io/Warsha-El-Arish/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;-webkit-tap-highlight-color:transparent}
-:root{
-  --pri:#0891b2; --pri2:#0d9488; --dark:#0f172a; --mut:#64748b; --bg:#f1f5f9;
-  --card:#ffffff; --line:#e2e8f0; --ok:#16a34a; --bad:#dc2626; --warn:#d97706;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+:root{--pri:#0891b2;--pri2:#0d9488;--dark:#0f172a;--mut:#64748b;--bg:#f1f5f9;--line:#e2e8f0;--ok:#16a34a;--bad:#dc2626}
 body{background:#e2e8f0;color:var(--dark)}
-.phone{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15);position:relative}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.phone{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15)}
 .screen{display:none;flex:1;flex-direction:column;animation:fade .25s ease}
 .screen.active{display:flex}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.pad{padding:20px 18px 96px}
-.back{display:inline-flex;align-items:center;gap:6px;color:var(--pri);font-weight:700;cursor:pointer;margin-bottom:14px;font-size:15px}
+.pad{padding:20px 18px 110px}
+.back{display:inline-flex;gap:6px;color:var(--pri);font-weight:700;cursor:pointer;margin-bottom:14px;font-size:15px;background:none;border:0}
 h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-size:16px;font-weight:800}
 .mut{color:var(--mut);font-size:14px}
-
-/* ===== AUTH ===== */
-.auth-hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:44px 24px 60px;border-radius:0 0 32px 32px;text-align:center}
-.auth-hero .logo{font-size:34px;font-weight:900}
-.auth-hero .logo span{color:#fef08a}
-.auth-hero p{opacity:.9;margin-top:6px;font-size:15px}
-.auth-card{background:var(--card);margin:-34px 18px 0;border-radius:20px;padding:20px;box-shadow:0 10px 30px rgba(2,6,23,.08)}
-.tabs{display:flex;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:18px}
-.tabs button{flex:1;border:0;background:transparent;padding:10px;border-radius:10px;font-weight:800;font-size:15px;color:var(--mut);cursor:pointer}
-.tabs button.on{background:#fff;color:var(--pri);box-shadow:0 2px 8px rgba(2,6,23,.08)}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#334155}
-.inp{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;background:#fff;outline:none;transition:.2s}
+.inp{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fff;outline:none;transition:.2s}
 .inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
-.btn{display:block;width:100%;padding:14px;border:0;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;transition:.15s;text-align:center}
+.btn{display:block;width:100%;padding:14px;border:0;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;text-align:center;transition:.15s}
+.btn:disabled{opacity:.6}
 .btn-pri{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;box-shadow:0 6px 16px rgba(8,145,178,.35)}
-.btn-pri:active{transform:scale(.98)}
+.btn-wa{background:var(--ok);color:#fff;box-shadow:0 6px 16px rgba(22,163,74,.3)}
 .btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--dark);margin-top:10px}
-.btn-ok{background:var(--ok);color:#fff;flex:1;padding:11px;font-size:14px}
-.btn-bad{background:#fff;border:1.5px solid var(--bad);color:var(--bad);flex:1;padding:11px;font-size:14px}
-.link{color:var(--pri);font-weight:800;cursor:pointer;font-size:14px}
-.demo-box{margin:14px 18px 0;background:#ecfeff;border:1.5px dashed #67e8f9;border-radius:14px;padding:12px;text-align:center;font-size:13px;color:#155e75}
-
-/* ===== HOME ===== */
-.hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:26px 20px 60px;border-radius:0 0 30px 30px}
-.hero .hi{font-size:15px;opacity:.9}
-.hero h1{font-size:24px;margin:4px 0 14px}
-.hero .cta{background:#fff;color:var(--pri);border-radius:14px;padding:14px;font-weight:900;font-size:16px;display:block;text-align:center;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-.hero .cta2{text-align:center;display:block;margin-top:12px;color:#fff;font-weight:700;font-size:14px;text-decoration:underline;cursor:pointer}
+.hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:30px 20px 60px;border-radius:0 0 30px 30px}
+.hero .logo{font-size:15px;opacity:.9;font-weight:700}
+.hero h1{font-size:24px;margin:6px 0 8px}
+.hero p{font-size:14px;opacity:.9;margin-bottom:16px}
+.hero .cta{background:#fff;color:var(--pri);border-radius:14px;padding:14px;font-weight:900;font-size:16px;display:block;width:100%;border:0;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .stats{display:flex;gap:10px;margin:-34px 18px 0}
-.stat{flex:1;background:#fff;border-radius:16px;padding:14px 8px;text-align:center;box-shadow:0 8px 20px rgba(2,6,23,.07)}
-.stat b{display:block;font-size:19px;color:var(--pri)}
+.stat{flex:1;background:#fff;border-radius:16px;padding:14px 6px;text-align:center;box-shadow:0 8px 20px rgba(2,6,23,.07)}
+.stat b{display:block;font-size:22px}
 .stat span{font-size:12px;color:var(--mut);font-weight:700}
 .sec{margin:26px 18px 0}
 .sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.cat{background:#fff;border-radius:18px;padding:18px 8px;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(2,6,23,.05);border:2px solid transparent;transition:.15s}
+.cat{background:#fff;border-radius:18px;padding:18px 8px;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(2,6,23,.05);border:2px solid transparent;font-family:inherit}
 .cat:active{transform:scale(.96)}
 .cat .ic{font-size:34px}
 .cat b{display:block;margin-top:8px;font-size:14px}
 .cat small{color:var(--mut);font-size:11px}
-.steps .step{display:flex;gap:14px;background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.step{display:flex;gap:14px;background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
 .step .n{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;min-width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
-.testi{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
-.testi .who{display:flex;align-items:center;gap:10px;margin-top:10px}
-.avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px}
-.footer{background:var(--dark);color:#cbd5e1;margin-top:30px;padding:26px 20px 100px;border-radius:28px 28px 0 0}
+.footer{background:var(--dark);color:#cbd5e1;margin-top:30px;padding:26px 20px 110px;border-radius:28px 28px 0 0}
 .footer b{color:#fff;font-size:18px}
 .footer .row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.chip{background:#1e293b;padding:8px 14px;border-radius:10px;font-size:13px}
-
-/* ===== FORMS / SEARCH ===== */
+.chip{background:#1e293b;padding:8px 14px;border-radius:10px;font-size:13px;color:#cbd5e1;border:0;cursor:pointer}
 .card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.guide{background:rgba(8,145,178,.08);border:1.5px solid rgba(8,145,178,.25);border-radius:16px;padding:14px;margin-bottom:16px}
+.guide h3{font-size:14px;color:#155e75;margin-bottom:8px}
+.guide ul{list-style:none}
+.guide li{font-size:13px;line-height:1.9;color:#155e75;display:flex;gap:8px}
+.tabs{display:flex;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:18px}
+.tabs button{flex:1;border:0;background:transparent;padding:10px;border-radius:10px;font-weight:800;font-size:15px;color:var(--mut);cursor:pointer}
+.tabs button.on{background:#fff;color:var(--pri);box-shadow:0 2px 8px rgba(2,6,23,.08)}
 .radio-row{display:flex;gap:10px}
-.radio-row label{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:14px;font-weight:700;cursor:pointer}
+.radio-row label{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:14px;font-weight:700;cursor:pointer;margin:0}
 .radio-row input{display:none}
-.radio-row input:checked+span{color:var(--pri)}
-.radio-row label:has(input:checked){border-color:var(--pri);background:#ecfeff}
-
-/* ===== RESULTS ===== */
-.craft{background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 4px 14px rgba(2,6,23,.05);cursor:pointer}
-.craft .top{display:flex;gap:12px;align-items:center}
-.craft .info{flex:1}
-.craft .nm{font-weight:900;font-size:16px}
-.badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px}
-.b-near{background:#dcfce7;color:#166534}
-.b-cat{background:#e0f2fe;color:#075985}
-.b-done{background:#dcfce7;color:#166534}
-.b-active{background:#fef3c7;color:#92400e}
-.stars{color:#f59e0b;letter-spacing:1px;font-size:13px}
-.stars-off{color:#e2e8f0;font-size:13px}
-.mini{font-size:12px;color:var(--mut);font-weight:700}
-.craft .acts{display:flex;gap:8px;margin-top:12px}
-.btn-s{padding:10px;border-radius:11px;font-size:13px;font-weight:800;cursor:pointer;border:0;flex:1;text-align:center}
-.btn-s.p{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff}
+.radio-row label:has(input:checked){border-color:var(--pri);background:#ecfeff;color:var(--pri)}
+.hidden{display:none!important}
+.req{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.req .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.req .det{font-size:13.5px;color:#334155;margin-top:8px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.req .meta{font-size:12px;color:var(--mut);font-weight:700;margin-top:6px}
+.acts{display:flex;gap:8px;margin-top:12px}
+.btn-s{padding:11px;border-radius:11px;font-size:14px;font-weight:800;cursor:pointer;border:0;flex:1;text-align:center;display:block}
+.btn-s.ok{background:var(--ok);color:#fff}
 .btn-s.g{background:#f1f5f9;color:#334155}
-
-/* ===== PROFILE ===== */
-.prof-h{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:26px 20px 54px;border-radius:0 0 30px 30px;text-align:center}
-.prof-h .avatar{width:84px;height:84px;font-size:32px;margin:0 auto 10px;border:4px solid rgba(255,255,255,.4)}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.chips .c{background:#f1f5f9;border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:700;color:#334155}
-.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.g-item{border-radius:14px;height:110px;display:flex;align-items:flex-end;padding:10px;color:#fff;font-weight:800;font-size:12px}
-.review{background:#f8fafc;border-radius:14px;padding:12px;margin-bottom:10px;border:1px solid var(--line)}
-.sticky-cta{position:fixed;bottom:74px;left:0;right:0;margin:0 auto;max-width:480px;padding:12px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
-
-/* ===== CHAT ===== */
-.chat-top{position:sticky;top:0;background:#fff;padding:12px 16px;border-bottom:1px solid var(--line);z-index:5}
-.chat-top .row1{display:flex;align-items:center;gap:10px}
-.neg{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:10px}
-.neg p{font-size:12px;color:var(--mut);font-weight:700;margin-bottom:8px}
-.neg .btns{display:flex;gap:8px}
-.msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:78%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.7;position:relative}
-.msg.me{align-self:flex-start;background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;border-bottom-right-radius:4px}
-.msg.him{align-self:flex-end;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
-.msg .t{display:block;font-size:10px;opacity:.7;margin-top:4px}
-.typing{align-self:flex-end;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 16px;font-size:12px;color:var(--mut)}
-.chat-in{display:flex;gap:8px;padding:12px 14px;background:#fff;border-top:1px solid var(--line)}
-.chat-in input{flex:1;border:1.5px solid var(--line);border-radius:24px;padding:11px 16px;font-size:14px;outline:none}
-.chat-in button{width:46px;height:46px;border-radius:50%;border:0;background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;font-size:18px;cursor:pointer}
-
-/* ===== ORDERS ===== */
-.order{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05);cursor:pointer}
-.order .top{display:flex;justify-content:space-between;align-items:center}
-.order .det{font-size:13px;color:var(--mut);margin-top:6px;line-height:1.7}
-
-/* ===== SUCCESS ===== */
-.succ{text-align:center;padding:60px 24px}
-.check{width:100px;height:100px;border-radius:50%;background:#dcfce7;color:var(--ok);font-size:52px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:pop .5s ease}
-@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
-
-/* ===== TABBAR ===== */
-#tabbar{position:fixed;bottom:0;left:0;right:0;margin:0 auto;max-width:480px;background:#fff;border-top:1px solid var(--line);display:none;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:20}
-#tabbar.show{display:flex}
+.btn-s.bad{background:#fff;border:1.5px solid var(--bad);color:var(--bad)}
+.badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.b-open{background:#fef3c7;color:#92400e}
+.b-cancel{background:#fee2e2;color:#991b1b}
+.b-ok{background:#dcfce7;color:#166534}
+.b-info{background:#e0f2fe;color:#075985}
+.empty{text-align:center;padding:50px 20px;color:var(--mut)}
+.empty .big{font-size:52px;margin-bottom:10px}
+.kv{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kv:last-child{border-bottom:0}
+.kv span{color:var(--mut);font-weight:700}
+.kv b{font-weight:800;word-break:break-all}
+.legal p{line-height:2;margin-bottom:10px;font-size:14px;color:#334155}
+.legal h3{margin:16px 0 4px}
+#tabbar{position:fixed;bottom:0;left:0;right:0;margin:0 auto;max-width:480px;background:#fff;border-top:1px solid var(--line);display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:20}
 #tabbar button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:800;color:var(--mut);cursor:pointer;padding:4px}
 #tabbar button.on{color:var(--pri)}
 #tabbar .ic{font-size:21px}
-
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:30px;font-size:14px;font-weight:700;opacity:0;transition:.3s;z-index:99;max-width:88%;text-align:center;pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.hidden{display:none!important}
-.empty{text-align:center;padding:50px 20px;color:var(--mut)}
-.empty .big{font-size:52px;margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="phone">
 
-<!-- ================= AUTH ================= -->
-<section id="s-auth" class="screen active">
-  <div class="auth-hero">
-    <div class="logo">🔧 ورشة <span>العريش</span></div>
-    <p>أي صنايعي في العريش.. في أي وقت، في دقايق</p>
-  </div>
-  <div class="auth-card">
-    <div class="tabs">
-      <button id="tabLogin" class="on" onclick="authTab('login')">تسجيل الدخول</button>
-      <button id="tabReg" onclick="authTab('reg')">حساب جديد</button>
-    </div>
-    <!-- LOGIN -->
-    <form id="formLogin" onsubmit="doLogin(event)">
-      <div class="field"><label>رقم الموبايل</label><input class="inp" id="li-phone" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11"></div>
-      <div class="field"><label>كلمة السر</label><input class="inp" id="li-pass" type="password" placeholder="••••••••"></div>
-      <button class="btn btn-pri">دخول</button>
-    </form>
-    <!-- REGISTER -->
-    <form id="formReg" class="hidden" onsubmit="doRegister(event)">
-      <div class="field"><label>الاسم بالكامل</label><input class="inp" id="rg-name" placeholder="مثال: أحمد محمد"></div>
-      <div class="field"><label>رقم الموبايل</label><input class="inp" id="rg-phone" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11"></div>
-      <div class="field"><label>كلمة السر</label><input class="inp" id="rg-pass" type="password" placeholder="6 حروف على الأقل"></div>
-      <div class="field"><label>تأكيد كلمة السر</label><input class="inp" id="rg-pass2" type="password" placeholder="اكتبها تاني"></div>
-      <button class="btn btn-pri">إنشاء الحساب</button>
-    </form>
-    <p style="text-align:center;margin-top:14px;font-size:14px">صنايعي؟ <span class="link" onclick="showScreen('s-join')">انضم واشتغل معانا من هنا</span></p>
-  </div>
-  <div class="demo-box">نسخة تجريبية — <span class="link" onclick="demoLogin()">ادخل بحساب تجريبي بضغطة واحدة</span></div>
-</section>
-
-<!-- ================= HOME ================= -->
-<section id="s-home" class="screen">
+<!-- ============ HOME ============ -->
+<section id="s-home" class="screen active">
   <div class="hero">
-    <div class="hi" id="hi-user">أهلًا 👋</div>
-    <h1>ورشة العريش —<br>محتاج صنايعي؟</h1>
-    <span class="cta" onclick="goSearch()">⚡ اطلب صنايعي دلوقتي</span>
-    <span class="cta2" onclick="goSearch()">أو دور بنفسك على صنايعي ←</span>
+    <div class="logo">🔧 ورشة العريش</div>
+    <h1>محتاج صنايعي<br>في العريش؟</h1>
+    <p>انشر طلبك والصنايعية المناسبين هيتواصلوا معاك.</p>
+    <button class="cta" type="button" onclick="goRequest()">⚡ انشر طلبك دلوقتي</button>
   </div>
   <div class="stats">
-    <div class="stat"><b>+40</b><span>صنايعي معانا</span></div>
-    <div class="stat"><b>+1200</b><span>شغلانة اتعملت</span></div>
-    <div class="stat"><b>4.8 ★</b><span>تقييم العملاء</span></div>
+    <div class="stat"><b>🆓</b><span>الطلب مجاني</span></div>
+    <div class="stat"><b>💵</b><span>الدفع بعد الشغل</span></div>
+    <div class="stat"><b>📍</b><span>داخل العريش</span></div>
   </div>
-
   <div class="sec">
     <div class="sec-h"><h2>الأقسام</h2><span class="mut" style="font-size:12px">وأقسام تانية قريب 🔜</span></div>
     <div class="cats">
-      <div class="cat" onclick="quickSearch('كهرباء')"><div class="ic">⚡</div><b>كهرباء</b><small>أعطال وتأسيس</small></div>
-      <div class="cat" onclick="quickSearch('سباكة')"><div class="ic">🔧</div><b>سباكة</b><small>أعطال وتأسيس</small></div>
-      <div class="cat" onclick="quickSearch('نجارة')"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></div>
+      <button class="cat" type="button" onclick="quickRequest('كهرباء')"><div class="ic">⚡</div><b>كهرباء</b><small>أعطال وتأسيس</small></button>
+      <button class="cat" type="button" onclick="quickRequest('سباكة')"><div class="ic">🔧</div><b>سباكة</b><small>أعطال وتأسيس</small></button>
+      <button class="cat" type="button" onclick="quickRequest('نجارة')"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></button>
     </div>
   </div>
-
-  <div class="sec steps">
-    <div class="sec-h"><h2>إزاي بنشتغل؟</h2></div>
-    <div class="step"><div class="n">1</div><div><h3>اكتب طلبك</h3><p class="mut">حدد نوع الشغل والمنطقة واكتب التفاصيل</p></div></div>
-    <div class="step"><div class="n">2</div><div><h3>اختار صنايعي</h3><p class="mut">شوف التقييمات والشغل واختار اللي يعجبك</p></div></div>
-    <div class="step"><div class="n">3</div><div><h3>اتفق في الشات</h3><p class="mut">اتفاوا على السعر، والدفع كاش للصنايعي بعد الشغل</p></div></div>
-  </div>
-
   <div class="sec">
-    <div class="sec-h"><h2>عملاء قالوا إيه؟</h2></div>
-    <div class="testi">"طلبت سباك الساعة 10 بالليل ووصلني في ربع ساعة. خدمة أكتر من ممتازة!"<div class="who"><div class="avatar" style="background:#0891b2">م</div><div><b style="font-size:14px">أم محمود</b><div class="mini">حي السلام — سباكة</div></div></div></div>
-    <div class="testi">"أخيرًا منصة تجمع صنايعية محترمين في العريش. الكهربائي شغل نظيف وبالضمان."<div class="who"><div class="avatar" style="background:#0d9488">ع</div><div><b style="font-size:14px">الحاج عبد الرحمن</b><div class="mini">حي النصر — كهرباء</div></div></div></div>
+    <div class="sec-h"><h2>إزاي بنشتغل؟</h2></div>
+    <div class="step"><div class="n">1</div><div><h3>انشر طلبك</h3><p class="mut">حدد نوع الشغل والمنطقة واكتب التفاصيل</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>الصنايعية يشوفوه</h3><p class="mut">الصنايعية المعتمدين في نفس التخصص بيشوفوا طلبك ويتواصلوا معاك</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3>اتفق على السعر</h3><p class="mut">اتفق مع الصنايعي، والدفع كاش له بعد ما الشغل يخلص</p></div></div>
   </div>
-
   <div class="footer">
     <b>🔧 ورشة العريش</b>
-    <p style="margin-top:8px;font-size:13px">منصة بتجمع أهالي العريش بأحسن الصنايعية — الخدمة مجانية والدفع للصنايعي كاش بعد ما الشغل يخلص.</p>
+    <p style="margin-top:8px;font-size:13px">بنساعد أهالي العريش يوصلوا لصنايعي كهرباء وسباكة ونجارة. الطلب مجاني والدفع للصنايعي كاش بعد ما الشغل يخلص.</p>
     <div class="row">
-      <span class="chip">📞 01508207016</span>
-      <span class="chip">💬 واتساب</span>
-      <span class="chip" style="cursor:pointer" onclick="showScreen('s-join')">🛠️ انضم كصنايعي</span>
+      <a class="chip" href="https://wa.me/201508207016" target="_blank" rel="noopener">💬 تواصل معنا</a>
+      <button class="chip" type="button" onclick="goJoin()">🛠️ انضم كصنايعي</button>
+      <button class="chip" type="button" onclick="showScreen('s-privacy')">🔒 الخصوصية والشروط</button>
     </div>
     <p style="margin-top:16px;font-size:11px;opacity:.6">© 2026 ورشة العريش — جميع الحقوق محفوظة</p>
   </div>
 </section>
 
-<!-- ================= SEARCH ================= -->
-<section id="s-search" class="screen">
+<!-- ============ AUTH ============ -->
+<section id="s-auth" class="screen">
   <div class="pad">
-    <span class="back" onclick="navHome()">→ رجوع</span>
-    <h1 style="margin-bottom:4px">دور على صنايعي 🔍</h1>
-    <p class="mut" style="margin-bottom:20px">اكتب طلبك بالتفصيل عشان الصنايعي يوصلك جاهز</p>
-    <form class="card" onsubmit="submitSearch(event)">
-      <div class="field"><label>1️⃣ نوع الشغل</label>
-        <select class="inp" id="q-cat">
-          <optgroup label="⚡ كهرباء">
-            <option>كهرباء — أعطال وأسلاك</option><option>كهرباء — تأسيس وتشطيب</option><option>كهرباء — لوحات وأجهزة</option><option>كهرباء — تركيب سخانات وأجهزة</option>
-          </optgroup>
-          <optgroup label="🔧 سباكة">
-            <option>سباكة — أعطال وتسريبات</option><option>سباكة — تأسيس</option><option>سباكة — سخانات مياه</option><option>سباكة — أطقم حمامات ومطابخ</option>
-          </optgroup>
-          <optgroup label="🪚 نجارة">
-            <option>نجارة — أبواب وشبابيك</option><option>نجارة — غرف وأثاث</option><option>نجارة — مطابخ خشبية</option><option>نجارة — تصليح وصيانة</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="field"><label>2️⃣ المكان (العريش)</label>
-        <select class="inp" id="q-area"></select>
-      </div>
-      <div class="field"><label>3️⃣ رقم التواصل</label>
+    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <h1 style="margin-bottom:4px">أهلاً بيك 👋</h1>
+    <p class="mut" id="auth-msg" style="margin-bottom:16px">ادخل برقم موبايلك وكلمة السر، أو اعمل حساب جديد</p>
+    <div class="tabs">
+      <button type="button" id="t-login" class="on" onclick="authTab('login')">دخول</button>
+      <button type="button" id="t-signup" onclick="authTab('signup')">حساب جديد</button>
+    </div>
+
+    <form class="card" id="f-login" onsubmit="doLogin(event)" novalidate>
+      <div class="field"><label for="l-phone">رقم الموبايل</label><input class="inp" id="l-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="l-pass">كلمة السر</label><input class="inp" id="l-pass" type="password" autocomplete="current-password"></div>
+      <button class="btn btn-pri" id="l-btn" type="submit">دخول</button>
+    </form>
+
+    <form class="card hidden" id="f-signup" onsubmit="doSignup(event)" novalidate>
+      <div class="field"><label>أنا:</label>
         <div class="radio-row">
-          <label><input type="radio" name="q-phone" value="same" checked onchange="phoneOpt(false)"><span>نفس رقم حسابي</span></label>
-          <label><input type="radio" name="q-phone" value="new" onchange="phoneOpt(true)"><span>رقم مختلف</span></label>
+          <label><input type="radio" name="s-role" value="customer" checked onchange="roleChange()"><span>🙋 عميل</span></label>
+          <label><input type="radio" name="s-role" value="craftsman" onchange="roleChange()"><span>🛠️ صنايعي</span></label>
         </div>
-        <input class="inp hidden" id="q-phone-new" style="margin-top:8px" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11">
       </div>
-      <div class="field"><label>4️⃣ تفاصيل الشغل</label>
-        <textarea class="inp" id="q-details" rows="4" placeholder="مثال: عندي تلاجة بايظة نوعها كذا، بتسخن ومش بتبرد، محتاج حد يجي يشوفها النهاردة"></textarea>
+      <div class="field"><label for="s-name">الاسم بالكامل</label><input class="inp" id="s-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
+      <div class="field"><label for="s-phone">رقم الموبايل</label><input class="inp" id="s-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="s-pass">كلمة السر</label><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="6 حروف أو أرقام على الأقل (احفظها كويس)"></div>
+      <div id="craft-fields" class="hidden">
+        <div class="field"><label for="s-cat">التخصص</label><select class="inp" id="s-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
+        <div class="field"><label for="s-area">منطقتك في العريش</label><select class="inp" id="s-area"></select></div>
+        <div class="field"><label for="s-exp">سنين الخبرة</label><input class="inp" id="s-exp" inputmode="numeric" maxlength="2" placeholder="مثال: 7"></div>
+        <div class="field"><label for="s-bio">نبذة عن شغلك (اختياري)</label><textarea class="inp" id="s-bio" rows="3" maxlength="500"></textarea></div>
+        <p class="mut" style="margin-bottom:12px">⏳ حساب الصنايعي بيتراجع قبل التفعيل، وبعدها تشوف الطلبات.</p>
       </div>
-      <button class="btn btn-pri">دور دلوقتي 🔍</button>
+      <button class="btn btn-pri" id="s-btn" type="submit">إنشاء الحساب</button>
     </form>
   </div>
 </section>
 
-<!-- ================= RESULTS ================= -->
-<section id="s-results" class="screen">
+<!-- ============ REQUEST ============ -->
+<section id="s-request" class="screen">
   <div class="pad">
-    <span class="back" onclick="showScreen('s-search')">→ رجوع</span>
-    <h1 style="margin-bottom:4px">الصنايعية المتاحين 🛠️</h1>
-    <p class="mut" id="res-sub" style="margin-bottom:18px"></p>
-    <div id="res-list"></div>
-  </div>
-</section>
-
-<!-- ================= PROFILE ================= -->
-<section id="s-profile" class="screen">
-  <div class="prof-h">
-    <span class="back" style="color:#fff" onclick="historyBack()">→ رجوع</span>
-    <div class="avatar" id="pf-avatar"></div>
-    <h2 id="pf-name"></h2>
-    <div id="pf-stars" style="margin-top:4px"></div>
-    <div class="chips" id="pf-chips" style="justify-content:center"></div>
-  </div>
-  <div class="pad" style="padding-top:18px">
-    <div class="card" style="margin-bottom:14px"><h3 style="margin-bottom:6px">نبذة</h3><p class="mut" id="pf-bio" style="line-height:1.9"></p></div>
-    <div class="sec-h"><h3>من شغله 📸</h3></div>
-    <div class="gallery" id="pf-gallery" style="margin-bottom:16px"></div>
-    <div class="sec-h"><h3>تقييمات العملاء ⭐</h3></div>
-    <div id="pf-reviews"></div>
-  </div>
-  <div class="sticky-cta"><button class="btn btn-pri" id="pf-chat-btn">💬 ابدأ المحادثة واتفق على السعر</button></div>
-</section>
-
-<!-- ================= CHAT ================= -->
-<section id="s-chat" class="screen">
-  <div class="chat-top">
-    <div class="row1">
-      <span class="back" style="margin:0" onclick="historyBack()">→</span>
-      <div class="avatar" id="ch-avatar" style="width:40px;height:40px;font-size:15px"></div>
-      <div style="flex:1"><b id="ch-name" style="font-size:15px"></b><div class="mini" style="color:var(--ok)">● متاح الآن</div></div>
+    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <h1 style="margin-bottom:4px">انشر طلبك 📝</h1>
+    <p class="mut" style="margin-bottom:16px">اكتب طلبك بالتفصيل عشان الصنايعي يوصلك جاهز</p>
+    <div class="guide">
+      <h3>إيه اللي هيحصل بعد ما تنشر؟</h3>
+      <ul>
+        <li><span>1️⃣</span><span>طلبك بيظهر في <b>طلباتي</b> بكل التفاصيل، وتقدر تلغيه في أي وقت.</span></li>
+        <li><span>2️⃣</span><span>الصنايعية المعتمدين في نفس التخصص بيشوفوا الطلب.</span></li>
+        <li><span>3️⃣</span><span>رقمك <b>مش بيظهر</b> لحد غير الصنايعي اللي يدوس "تواصل".</span></li>
+      </ul>
     </div>
-    <div class="neg">
-      <p>⚖️ اتفاوا هنا على السعر بالاتفاق.. واختاروا النتيجة:</p>
-      <div class="btns">
-        <button class="btn btn-ok" onclick="agree()">✅ تم الاتفاق</button>
-        <button class="btn btn-bad" onclick="disagree()">⛔ لم يتم الاتفاق</button>
+    <form class="card" onsubmit="submitRequest(event)" novalidate>
+      <div class="field"><label for="q-cat">1️⃣ نوع الشغل</label>
+        <select class="inp" id="q-cat">
+          <optgroup label="⚡ كهرباء"><option>كهرباء — أعطال وأسلاك</option><option>كهرباء — تأسيس وتشطيب</option><option>كهرباء — لوحات وأجهزة</option><option>كهرباء — تركيب سخانات وأجهزة</option></optgroup>
+          <optgroup label="🔧 سباكة"><option>سباكة — أعطال وتسريبات</option><option>سباكة — تأسيس</option><option>سباكة — سخانات مياه</option><option>سباكة — أطقم حمامات ومطابخ</option></optgroup>
+          <optgroup label="🪚 نجارة"><option>نجارة — أبواب وشبابيك</option><option>نجارة — غرف وأثاث</option><option>نجارة — مطابخ خشبية</option><option>نجارة — تصليح وصيانة</option></optgroup>
+        </select>
       </div>
-    </div>
-  </div>
-  <div class="msgs" id="ch-msgs"></div>
-  <div class="chat-in">
-    <input id="ch-input" placeholder="اكتب رسالتك.. (جرّب: بكام؟ / امتى تيجي؟)" onkeydown="if(event.key==='Enter')sendMsg()">
-    <button onclick="sendMsg()">➤</button>
+      <div class="field"><label for="q-area">2️⃣ المكان (العريش)</label><select class="inp" id="q-area"></select></div>
+      <div class="field"><label for="q-details">3️⃣ تفاصيل الشغل</label>
+        <textarea class="inp" id="q-details" rows="4" maxlength="1000" placeholder="مثال: السخان بيسرّب مياه ومحتاج حد يشوفه النهاردة"></textarea>
+      </div>
+      <button class="btn btn-pri" id="q-btn" type="submit">📣 انشر طلبك</button>
+    </form>
   </div>
 </section>
 
-<!-- ================= ORDERS ================= -->
-<section id="s-orders" class="screen">
+<!-- ============ MY REQUESTS ============ -->
+<section id="s-myreq" class="screen">
   <div class="pad">
     <h1 style="margin-bottom:4px">طلباتي 📋</h1>
-    <p class="mut" style="margin-bottom:18px">تابع حالة طلباتك ومحادثاتك</p>
-    <div id="orders-list"></div>
+    <p class="mut" style="margin-bottom:16px">كل الطلبات اللي نشرتها</p>
+    <div id="myreq-list"></div>
   </div>
 </section>
 
-<!-- ================= ACCOUNT ================= -->
+<!-- ============ JOBS (craftsman) ============ -->
+<section id="s-jobs" class="screen">
+  <div class="pad">
+    <h1 style="margin-bottom:4px">الطلبات 🛠️</h1>
+    <p class="mut" id="jobs-sub" style="margin-bottom:16px"></p>
+    <div id="jobs-list"></div>
+  </div>
+</section>
+
+<!-- ============ ACCOUNT ============ -->
 <section id="s-account" class="screen">
   <div class="pad">
-    <h1 style="margin-bottom:20px">حسابي 👤</h1>
-    <div class="card" style="text-align:center;padding:26px">
-      <div class="avatar" id="ac-avatar" style="width:80px;height:80px;font-size:30px;margin:0 auto 12px;background:linear-gradient(135deg,#0891b2,#0d9488)"></div>
-      <h2 id="ac-name"></h2>
-      <p class="mut" id="ac-phone" style="margin-top:4px"></p>
-      <span class="badge b-cat" style="margin-top:10px">عميل</span>
-    </div>
-    <button class="btn btn-ghost" style="margin-top:20px" onclick="logout()">تسجيل الخروج</button>
+    <h1 style="margin-bottom:16px">حسابي 👤</h1>
+    <div id="acc-box"></div>
   </div>
 </section>
 
-<!-- ================= JOIN AS CRAFTSMAN ================= -->
-<section id="s-join" class="screen">
-  <div class="pad">
-    <span class="back" onclick="showScreen('s-auth')">→ رجوع</span>
-    <h1 style="margin-bottom:4px">انضم كصنايعي 🛠️</h1>
-    <p class="mut" style="margin-bottom:20px">اشتغل بحرية زي نظام أوبر — بتاخد طلبات العملاء على طول ومن غير عمولة مننا</p>
-    <div id="join-wrap">
-      <form class="card" onsubmit="joinCraftsman(event)">
-        <div class="field"><label>الاسم بالكامل</label><input class="inp" id="jn-name" placeholder="مثال: محمد أبو السعود"></div>
-        <div class="field"><label>رقم الموبايل</label><input class="inp" id="jn-phone" inputmode="numeric" placeholder="01xxxxxxxxx" maxlength="11"></div>
-        <div class="field"><label>كلمة السر</label><input class="inp" id="jn-pass" type="password" placeholder="6 حروف على الأقل"></div>
-        <div class="field"><label>التخصص</label>
-          <select class="inp" id="jn-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select>
-        </div>
-        <div class="field"><label>منطقتك في العريش</label><select class="inp" id="jn-area"></select></div>
-        <div class="field"><label>سنين الخبرة</label><input class="inp" id="jn-exp" inputmode="numeric" placeholder="مثال: 7"></div>
-        <div class="field"><label>نبذة عن شغلك (اختياري)</label><textarea class="inp" id="jn-bio" rows="3" placeholder="اكتب أبرز شغلك وخبراتك"></textarea></div>
-        <button class="btn btn-pri">سجل دلوقتي مجانًا</button>
-      </form>
-    </div>
-    <div id="join-done" class="hidden">
-      <div class="succ">
-        <div class="check">✓</div>
-        <h2>تم استلام بياناتك!</h2>
-        <p class="mut" style="margin-top:8px;line-height:1.9">حسابك قيد المراجعة دلوقتي.<br>هنتواصل معاك على رقمك خلال 24 ساعة عشان نفعّل حسابك.</p>
-        <button class="btn btn-pri" style="margin-top:20px" onclick="showScreen('s-auth')">رجوع</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SUCCESS ================= -->
-<section id="s-success" class="screen">
-  <div class="succ">
-    <div class="check">✓</div>
-    <h2>تم الاتفاق بنجاح! 🎉</h2>
-    <p class="mut" style="margin-top:8px" id="sc-order"></p>
-    <div class="card" style="text-align:right;margin-top:18px" id="sc-box"></div>
-    <p class="mut" style="margin-top:14px;font-size:13px">💵 الدفع كاش للصنايعي بعد ما الشغل يخلص.<br>⭐ متنساش تقيّم الصنايعي بعد الشغل!</p>
-    <button class="btn btn-pri" style="margin-top:18px" onclick="showScreen('s-home')">رجوع للرئيسية</button>
-    <button class="btn btn-ghost" onclick="showScreen('s-orders')">شوف طلباتي</button>
+<!-- ============ PRIVACY ============ -->
+<section id="s-privacy" class="screen">
+  <div class="pad legal">
+    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <h1 style="margin-bottom:10px">الخصوصية والشروط 🔒</h1>
+    <h3>إيه البيانات اللي بنجمعها؟</h3>
+    <p>اسمك ورقم موبايلك ومنطقتك وتفاصيل الطلبات اللي بتنشرها. وللصنايعية: التخصص وسنين الخبرة.</p>
+    <h3>بنخزنها فين وبنستخدمها في إيه؟</h3>
+    <p>بتتخزن في قاعدة بيانات مؤمّنة، وبنستخدمها بس عشان نوصّلك بالصنايعي المناسب أو نراجع طلب انضمامك كصنايعي.</p>
+    <h3>مين يشوف رقمك؟</h3>
+    <p>رقم العميل بيظهر للصنايعي المعتمد اللي بيدوس "تواصل" على طلبه بس. بقية الصنايعية بيشوفوا تفاصيل الشغل والمنطقة من غير رقمك.</p>
+    <h3>حذف البيانات</h3>
+    <p>لو عايز حسابك وبياناتك يتمسحوا، كلمنا من "تواصل معنا".</p>
+    <h3>شروط الاستخدام</h3>
+    <p>ورشة العريش بتوصّلك بصنايعي، لكن الاتفاق على السعر وتنفيذ الشغل بيتم بينك وبين الصنايعي مباشرة. الدفع كاش للصنايعي بعد ما الشغل يخلص. اتأكد من الشغل قبل ما تدفع.</p>
   </div>
 </section>
 
 </div>
 
-<!-- TABBAR -->
-<nav id="tabbar">
-  <button data-t="s-home" onclick="navHome()"><span class="ic">🏠</span>الرئيسية</button>
-  <button data-t="s-search" onclick="goSearch()"><span class="ic">🔍</span>دور على صنايعي</button>
-  <button data-t="s-orders" onclick="showOrders()"><span class="ic">📋</span>طلباتي</button>
-  <button data-t="s-account" onclick="showAccount()"><span class="ic">👤</span>حسابي</button>
-</nav>
+<nav id="tabbar" aria-label="التنقل"></nav>
+<div id="toast" role="status" aria-live="polite"></div>
 
-<div id="toast"></div>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
 <script>
-/* ================= DATA ================= */
+/* ================= الإعدادات ================= */
+const SUPABASE_URL = "https://oliyswglvrhxdmkijann.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Gjm1kZ33UbvUAR1KTURxZQ_SRXTmv_A"; // مفتاح عام وآمن
+const SUPPORT_WA = "201508207016";
 const AREAS = ["حي أول العريش","حي ثاني العريش","حي ثالث العريش","حي رابع العريش","حي السلام","حي النصر","حي الزهور","حي المستقبل","وسط البلد","المنطقة الصناعية","كفر العريش الجديدة","أبو صقل"];
-const CAT_ICON = {"كهرباء":"⚡","سباكة":"🔧","نجارة":"🪚"};
-const AV_COLORS = ["#0891b2","#0d9488","#7c3aed","#db2777","#ea580c","#65a30d","#2563eb","#c026d3","#0f766e"];
 
-const CRAFTSMEN = [
- {id:1,name:"أ/ محمد السيد",cat:"كهرباء",area:"حي أول العريش",rating:4.9,jobs:320,years:12,price:"فحص مجاني — السعر بعد المعاينة",bio:"مهندس كهرباء بخبرة 12 سنة في أعطال الكهرباء والتأسيس والتشطيبات. شغل نظيف وبالضمان، وبشتغل في كل أحياء العريش."},
- {id:2,name:"أ/ أحمد فتحي",cat:"كهرباء",area:"حي السلام",rating:4.7,jobs:210,years:8,price:"زيارة معاينة 50 جنيه",bio:"متخصص في أعطال الأسلاك واللوحات وتركيب السخانات والأجهزة. سريع في التوصيل وشغل مضمون."},
- {id:3,name:"أ/ كريم عبد الله",cat:"كهرباء",area:"حي ثالث العريش",rating:4.5,jobs:150,years:6,price:"فحص مجاني",bio:"كهربائي منازل وتشطيبات، بشتغل بنظام الفورمة وبضمان سنة على الشغل."},
- {id:4,name:"أ/ مصطفى النجار",cat:"سباكة",area:"حي النصر",rating:4.8,jobs:280,years:10,price:"زيارة معاينة 50 جنيه",bio:"سباك محترف في الأعطال والتسريبات والتأسيس، عندي عدد كامل وشغل بنظام الضمان."},
- {id:5,name:"أ/ حسن علي",cat:"سباكة",area:"حي ثاني العريش",rating:4.6,jobs:190,years:7,price:"فحص مجاني",bio:"متخصص في السخانات والأطقم وكشف التسريبات بجهاز حديث من غير تكسير."},
- {id:6,name:"أ/ إبراهيم قطب",cat:"سباكة",area:"حي السلام",rating:4.4,jobs:120,years:5,price:"زيارة معاينة 30 جنيه",bio:"سباك شاطر وأسعاره في المتناول، بيشتغل في كل مناطق العريش ومتاح طوال الأسبوع."},
- {id:7,name:"أ/ سمير فرج",cat:"نجارة",area:"حي أول العريش",rating:4.9,jobs:350,years:15,price:"سعر حسب المقايس",bio:"نجار موبيليا بخبرة 15 سنة — غرف نوم، مطابخ، أبواب وشبابيك. تصميم ومعاينة مجانية."},
- {id:8,name:"أ/ رمضان شعبان",cat:"نجارة",area:"حي المستقبل",rating:4.6,jobs:160,years:8,price:"سعر حسب المقايس",bio:"نجار ديكور وتشطيبات، شغل مودرن ودقة في المواعيد."},
- {id:9,name:"أ/ جمال حسين",cat:"نجارة",area:"حي الزهور",rating:4.3,jobs:90,years:4,price:"أسعار تبدأ من 150 جنيه",bio:"نجار شباب وأسعاره حلوة، بيشتغل صيانة وتصليح أثاث وأبواب."}
-];
-const REVIEWS = {
- "كهرباء":[["أم كريم","حي السلام","شغل نظيف جدًا وخلص في نفس اليوم، والسعر كان مناسب جدًا."],["أبو آدم","حي النصر","محترم ووصل في المعاد بالظبط، ركّبلي لوحة جديدة بالضمان."]],
- "سباكة":[["الحاج سالم","حي أول العريش","كشف التسريب في دقايق من غير ما يكسر حاجة، ربنا يباركله."],["م/ هشام","حي ثالث العريش","سريع ونضيف وضمير، أنصح بيه وبقوة."]],
- "نجارة":[["أ/ منى","حي المستقبل","عمللي مطبخ تحفة وبسعر أحسن من السوق بكتير."],["أبو سلمى","وسط البلد","غرفة نوم عظمة، معاد وتسليم في الوقت."]]
-};
-const GALLERY = {
- "كهرباء":["تأسيس كهرباء كامل","لوحة توزيع حديثة","تركيب سخان","تشطيب إنتركم"],
- "سباكة":["تأسيس حمام كامل","كشف تسريب","تركيب سخان مياه","أطقم حمامات"],
- "نجارة":["مطبخ خشب مودرن","غرفة نوم","أبواب وشبابيك","ديكور خشبي"]
-};
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const validPhone = p => /^01[0-9]{9}$/.test(p);
+const AR_DIGITS = {"٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9","۰":"0","۱":"1","۲":"2","۳":"3","۴":"4","۵":"5","۶":"6","۷":"7","۸":"8","۹":"9"};
+function normPhone(s){
+  let d = String(s || "").replace(/[٠-٩۰-۹]/g, c => AR_DIGITS[c]).replace(/\D/g, "");
+  if(/^201[0-9]{9}$/.test(d)) d = "0" + d.slice(2);
+  return d;
+}
+const EMAIL_DOMAIN = "warsha-el-arish.app"; // إيميل داخلي بيتبني من رقم الموبايل، المستخدم مش بيشوفه
+const phoneToEmail = p => p + "@" + EMAIL_DOMAIN;
+const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", month:"short"});
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
 
-/* ================= STATE ================= */
-const LS_U="warsha_user_v1", LS_O="warsha_orders_v1";
-let user = JSON.parse(localStorage.getItem(LS_U)||"null");
-let orders = JSON.parse(localStorage.getItem(LS_O)||"[]");
-let curOrder=null, curCraft=null, hist=[];
+let sb = null, me = null, profile = null, afterLogin = null, current = "s-home";
+let ignored = new Set(), contacted = new Set();
+try { ignored = new Set(JSON.parse(localStorage.getItem("warsha_ignored") || "[]")); } catch(e) {}
+function saveIgnored(){ try { localStorage.setItem("warsha_ignored", JSON.stringify([...ignored])); } catch(e) {} }
 
-const $=id=>document.getElementById(id);
-function saveOrders(){localStorage.setItem(LS_O,JSON.stringify(orders))}
-function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),2600)}
-function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function stars(r){const n=Math.round(r);return `<span class="stars">${"★".repeat(n)}</span><span class="stars-off">${"★".repeat(5-n)}</span> <b style="font-size:13px">${r}</b>`}
-function colorFor(n){let h=0;for(const c of n)h+=c.charCodeAt(0);return AV_COLORS[h%AV_COLORS.length]}
-function avatar(c,size){return `<div class="avatar" style="background:${colorFor(c.name)};${size?`width:${size}px;height:${size}px;font-size:${size/2.4}px`:""}">${c.name.replace("أ/ ","")[0]}</div>`}
+/* ================= التنقل ================= */
+const role = () => profile ? profile.role : null;
+const isCraft = () => role() === "craftsman";
 
-/* ================= NAV ================= */
+function buildTabs(){
+  const t = [{id:"s-home", ic:"🏠", n:"الرئيسية"}];
+  if(!me) t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-auth", ic:"👤", n:"دخول"});
+  else if(isCraft()) t.push({id:"s-jobs", ic:"🛠️", n:"الطلبات"}, {id:"s-account", ic:"👤", n:"حسابي"});
+  else t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-myreq", ic:"📋", n:"طلباتي"}, {id:"s-account", ic:"👤", n:"حسابي"});
+  $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" onclick="showScreen('${x.id}')"><span class="ic">${x.ic}</span>${x.n}</button>`).join("");
+  markTab();
+}
+function markTab(){ document.querySelectorAll("#tabbar button").forEach(b => b.classList.toggle("on", b.dataset.t === current)); }
+
 function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  const needLogin = ["s-request","s-myreq","s-jobs","s-account"];
+  if(needLogin.includes(id) && !me){
+    afterLogin = id;
+    $("auth-msg").textContent = id === "s-request" ? "سجّل دخول الأول عشان تنشر طلبك" : "سجّل دخول الأول";
+    id = "s-auth";
+  }
+  if(id === "s-request" && isCraft()) id = "s-jobs";
+  if((id === "s-myreq") && isCraft()) id = "s-jobs";
+  if(id === "s-jobs" && me && !isCraft()) id = "s-myreq";
+  current = id;
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $(id).classList.add("active");
   window.scrollTo(0,0);
-  const noTab = (id==="s-auth"||id==="s-join");
-  $("tabbar").classList.toggle("show",!noTab);
-  document.querySelectorAll("#tabbar button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));
-  hist.push(id);
+  markTab();
+  if(id === "s-myreq") loadMyRequests();
+  if(id === "s-jobs") loadJobs();
+  if(id === "s-account") loadAccount();
 }
-function historyBack(){hist.pop();const p=hist.pop()||"s-home";showScreen(p);if(p==="s-results")renderResults();}
-function navHome(){renderHome();showScreen("s-home")}
-function goSearch(){fillAreas();showScreen("s-search")}
-function fillAreas(){const o=$("q-area");if(o.options.length)return;AREAS.forEach(a=>{const op=document.createElement("option");op.textContent=a;o.appendChild(op)});const j=$("jn-area");AREAS.forEach(a=>{const op=document.createElement("option");op.textContent=a;j.appendChild(op)})}
+function goRequest(){ showScreen("s-request"); }
+function quickRequest(cat){
+  const o = [...$("q-cat").options].find(x => x.textContent.startsWith(cat));
+  if(o) $("q-cat").value = o.value;
+  showScreen("s-request");
+}
+function goJoin(){
+  if(me){ showScreen(isCraft() ? "s-jobs" : "s-account"); return; }
+  afterLogin = null;
+  $("auth-msg").textContent = "اعمل حساب صنايعي وهنراجع بياناتك";
+  authTab("signup");
+  document.querySelector('input[name="s-role"][value="craftsman"]').checked = true;
+  roleChange();
+  showScreen("s-auth");
+}
 
-/* ================= AUTH ================= */
-function authTab(t){
-  $("tabLogin").classList.toggle("on",t==="login");$("tabReg").classList.toggle("on",t==="reg");
-  $("formLogin").classList.toggle("hidden",t!=="login");$("formReg").classList.toggle("hidden",t!=="reg");
+/* ================= الحسابات ================= */
+function authTab(w){
+  $("t-login").classList.toggle("on", w === "login");
+  $("t-signup").classList.toggle("on", w === "signup");
+  $("f-login").classList.toggle("hidden", w !== "login");
+  $("f-signup").classList.toggle("hidden", w !== "signup");
 }
-function validPhone(p){return /^01[0-9]{9}$/.test(p)}
-function doRegister(e){
+function roleChange(){
+  const c = document.querySelector('input[name="s-role"]:checked').value === "craftsman";
+  $("craft-fields").classList.toggle("hidden", !c);
+}
+function authError(err){
+  const m = (err && err.message || "").toLowerCase();
+  if(m.includes("already") || m.includes("registered")) return "الرقم ده مسجّل قبل كده، ادخل بيه";
+  if(m.includes("invalid login")) return "الرقم أو كلمة السر غلط";
+  if(m.includes("password")) return "كلمة السر ضعيفة، اكتب 6 حروف على الأقل";
+  if(m.includes("rate") || m.includes("too many")) return "محاولات كتير، استنى شوية وجرب تاني";
+  if(m.includes("email") && m.includes("invalid")) return "الرقم مش مقبول، راجعه وجرب تاني";
+  if(m.includes("database")) return "حصلت مشكلة في البيانات، راجع الاسم والرقم وجرب تاني";
+  return "حصلت مشكلة، جرب تاني";
+}
+async function loadProfile(){
+  if(!me){ profile = null; return; }
+  const { data } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
+  profile = data || null;
+}
+async function afterAuth(session){
+  me = session.user;
+  await loadProfile();
+  buildTabs();
+  const go = afterLogin; afterLogin = null;
+  showScreen(go || (isCraft() ? "s-jobs" : "s-home"));
+}
+async function doLogin(e){
   e.preventDefault();
-  const n=$("rg-name").value.trim(),p=$("rg-phone").value.trim(),p1=$("rg-pass").value,p2=$("rg-pass2").value;
-  if(n.length<3)return toast("اكتب اسمك بالكامل");
-  if(!validPhone(p))return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
-  if(p1.length<6)return toast("كلمة السر 6 حروف على الأقل");
-  if(p1!==p2)return toast("كلمتي السر مش متطابقتين");
-  user={name:n,phone:p};localStorage.setItem(LS_U,JSON.stringify(user));
-  toast("أهلًا بيك يا "+n+"! 👋");renderHome();showScreen("s-home");
+  const phone = normPhone($("l-phone").value), password = $("l-pass").value;
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(!password) return toast("اكتب كلمة السر");
+  const b = $("l-btn"); b.disabled = true;
+  const { data, error } = await sb.auth.signInWithPassword({ email: phoneToEmail(phone), password });
+  b.disabled = false;
+  if(error || !data.session) return toast(authError(error));
+  $("l-pass").value = "";
+  toast("أهلاً بيك 👋");
+  afterAuth(data.session);
 }
-function doLogin(e){
+async function doSignup(e){
   e.preventDefault();
-  const p=$("li-phone").value.trim(),p1=$("li-pass").value;
-  if(!validPhone(p))return toast("اكتب رقم موبايل صحيح");
-  if(!p1)return toast("اكتب كلمة السر");
-  const saved=JSON.parse(localStorage.getItem(LS_U)||"null");
-  const nm=saved&&saved.phone===p?saved.name:"عميل ورشة العريش";
-  user={name:nm,phone:p};localStorage.setItem(LS_U,JSON.stringify(user));
-  toast("أهلًا بيك تاني! 👋");renderHome();showScreen("s-home");
-}
-function demoLogin(){user={name:"ضيف ورشة العريش",phone:"01508207016"};localStorage.setItem(LS_U,JSON.stringify(user));toast("دخلت بالحساب التجريبي ✓");renderHome();showScreen("s-home")}
-function logout(){user=null;localStorage.removeItem(LS_U);showScreen("s-auth")}
-
-/* ================= HOME ================= */
-function renderHome(){$("hi-user").textContent="أهلًا، "+(user?user.name.split(" ")[0]:"")+" 👋"}
-function quickSearch(cat){fillAreas();const def={"كهرباء":"كهرباء — أعطال وأسلاك","سباكة":"سباكة — أعطال وتسريبات","نجارة":"نجارة — أبواب وشبابيك"};$("q-cat").value=def[cat];showScreen("s-search")}
-
-/* ================= SEARCH ================= */
-function phoneOpt(show){$("q-phone-new").classList.toggle("hidden",!show)}
-function submitSearch(e){
-  e.preventDefault();
-  const cat=$("q-cat").value.split(" — ")[0];
-  const area=$("q-area").value;
-  const same=document.querySelector('input[name="q-phone"]:checked').value==="same";
-  const phone=same?user.phone:$("q-phone-new").value.trim();
-  if(!same&&!validPhone(phone))return toast("اكتب رقم التواصل صحيح");
-  const det=$("q-details").value.trim();
-  if(det.length<5)return toast("اكتب تفاصيل الشغل بشكل أوضح");
-  const o={id:Date.now(),no:"WR-"+Math.floor(1000+Math.random()*9000),cat,area,phone,det,status:"active",craftsmanId:null,msgs:[],created:Date.now()};
-  orders.unshift(o);saveOrders();
-  curOrder=o;renderResults();showScreen("s-results");
-}
-
-/* ================= RESULTS ================= */
-function renderResults(){
-  const o=curOrder;
-  $("res-sub").innerHTML=`${CAT_ICON[o.cat]} ${o.cat} — 📍 ${o.area} — <span class="badge b-active">متاح</span>`;
-  let list=CRAFTSMEN.filter(c=>c.cat===o.cat)
-    .map(c=>({...c,near:c.area===o.area}))
-    .sort((a,b)=>(b.near-a.near)||(b.rating-a.rating));
-  $("res-list").innerHTML=list.map(c=>`
-    <div class="craft" onclick="openProfile(${c.id})">
-      <div class="top">${avatar(c)}
-        <div class="info">
-          <div class="nm">${c.name} ${c.near?'<span class="badge b-near">قريب منك 📍</span>':""}</div>
-          <div>${stars(c.rating)}</div>
-          <div class="mini">${CAT_ICON[c.cat]} ${c.cat} — ${c.area} — ${c.jobs} شغلانة — خبرة ${c.years} سنة</div>
-        </div>
-      </div>
-      <div class="acts">
-        <button class="btn-s p" onclick="event.stopPropagation();openChat(${c.id})">💬 كلّمه واتفق</button>
-        <button class="btn-s g" onclick="event.stopPropagation();openProfile(${c.id})">الملف الشخصي</button>
-      </div>
-    </div>`).join("");
-}
-
-/* ================= PROFILE ================= */
-function openProfile(id){
-  const c=CRAFTSMEN.find(x=>x.id===id);curCraft=c;
-  $("pf-avatar").outerHTML=avatar(c,84).replace('class="avatar"','class="avatar" id="pf-avatar"');
-  $("pf-name").textContent=c.name;
-  $("pf-stars").innerHTML=stars(c.rating);
-  $("pf-chips").innerHTML=`<span class="c">${CAT_ICON[c.cat]} ${c.cat}</span><span class="c">📍 ${c.area}</span><span class="c">🧰 ${c.jobs} شغلانة</span><span class="c">💼 خبرة ${c.years} سنة</span><span class="c">💰 ${c.price}</span>`;
-  $("pf-bio").textContent=c.bio;
-  const cols=["#0891b2","#0d9488","#7c3aed","#ea580c"];
-  $("pf-gallery").innerHTML=GALLERY[c.cat].map((g,i)=>`<div class="g-item" style="background:linear-gradient(135deg,${cols[i%4]},${cols[(i+1)%4]}cc)">${g}</div>`).join("");
-  $("pf-reviews").innerHTML=REVIEWS[c.cat].map(r=>`<div class="review">"${r[2]}"<div class="who" style="display:flex;align-items:center;gap:8px;margin-top:8px">${avatar({name:r[0]},34)}<div><b style="font-size:13px">${r[0]}</b><div class="mini">${r[1]}</div></div></div></div>`).join("");
-  $("pf-chat-btn").onclick=()=>openChat(c.id);
-  showScreen("s-profile");
-}
-
-/* ================= CHAT ================= */
-function openChat(id){
-  const c=CRAFTSMEN.find(x=>x.id===id);curCraft=c;
-  if(!curOrder||curOrder.status!=="active"){toast("اعمل طلب جديد الأول");return goSearch()}
-  curOrder.craftsmanId=id;saveOrders();
-  $("ch-avatar").outerHTML=avatar(c,40).replace('class="avatar"','class="avatar" id="ch-avatar"');
-  $("ch-name").textContent=c.name;
-  if(!curOrder.seeded){
-    curOrder.msgs.push({from:"him",text:`أهلًا! أنا ${c.name} 👋 شفت طلبك: ${curOrder.cat} في ${curOrder.area} — "${curOrder.det}"`});
-    curOrder.msgs.push({from:"him",text:`أقدر أوصللك النهاردة. ${c.price}. قولي ميناسبك إيه؟`});
-    curOrder.seeded=true;saveOrders();
+  const r = document.querySelector('input[name="s-role"]:checked').value;
+  const full_name = $("s-name").value.trim(), phone = normPhone($("s-phone").value);
+  const password = $("s-pass").value;
+  if(full_name.length < 3) return toast("اكتب اسمك بالكامل");
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(password.length < 6) return toast("كلمة السر لازم 6 على الأقل");
+  const meta = { full_name, phone, role: r };
+  if(r === "craftsman"){
+    const exp = $("s-exp").value.trim();
+    if(!/^\d{1,2}$/.test(exp)) return toast("اكتب سنين خبرتك بالأرقام");
+    Object.assign(meta, { category: $("s-cat").value, area: $("s-area").value, experience_years: exp, bio: $("s-bio").value.trim() });
   }
-  renderMsgs();showScreen("s-chat");
+  const b = $("s-btn"); b.disabled = true;
+  const { data, error } = await sb.auth.signUp({ email: phoneToEmail(phone), password, options: { data: meta } });
+  b.disabled = false;
+  if(error) return toast(authError(error));
+  if(!data.session) return toast("تم إنشاء الحساب، جرّب تدخل برقم الموبايل وكلمة السر");
+  $("s-pass").value = "";
+  toast(r === "craftsman" ? "تم! حسابك قيد المراجعة ⏳" : "تم إنشاء حسابك 🎉");
+  afterAuth(data.session);
 }
-function renderMsgs(){
-  const box=$("ch-msgs");
-  box.innerHTML=curOrder.msgs.map(m=>{
-    const d=new Date(m.t||Date.now());
-    const tm=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0");
-    return `<div class="msg ${m.from}">${esc(m.text)}<span class="t">${m.from==="me"?"✓✓ ":""}${tm}</span></div>`;
-  }).join("");
-  box.scrollTop=box.scrollHeight;
-}
-function sendMsg(){
-  const inp=$("ch-input"),v=inp.value.trim();if(!v)return;
-  curOrder.msgs.push({from:"me",text:v,t:Date.now()});inp.value="";saveOrders();renderMsgs();
-  setTimeout(()=>{
-    const box=$("ch-msgs");const ty=document.createElement("div");ty.className="typing";ty.textContent="يكتب الآن...";box.appendChild(ty);box.scrollTop=box.scrollHeight;
-    setTimeout(()=>{
-      ty.remove();
-      let r;
-      if(/بكام|سعر|قد إيه|قد ايه|فلوس|تكلفة/.test(v))r=`${curCraft.price}، ولو الشغل كبير هعملك خصم. الفحص عندنا أمانة 🙂`;
-      else if(/امتى|موعد|تيجي|تعالى|خليك/.test(v))r="أقدر أكون عندك خلال ساعة إن شاء الله، ابعتلي العنوان بالتفصيل 📍";
-      else if(/صور|صورة|فوتو/.test(v))r="تمام، ابعت الصور هنا وهقولك التشخيص والسعر المبدئي على طول 📸";
-      else if(/تمام|ماشي|الله|تم|اوك|أوك|موافق/.test(v))r="تمام يا معلم 🤝 دوس على زرار (تم الاتفاق) فوق عشان نثبت الطلب";
-      else r=["تمام، وصلتني رسالتك 👌","حاضر، هرد عليك في دقيقة واحدة","ماشي يا غالي، اتفضل اسأل براحتك","خير إن شاء الله، قولي أكتر عن المشكلة"][Math.floor(Math.random()*4)];
-      curOrder.msgs.push({from:"him",text:r,t:Date.now()});saveOrders();renderMsgs();
-    },1300);
-  },400);
-}
-function agree(){
-  curOrder.status="done";curOrder.doneWith=curCraft.name;saveOrders();
-  $("sc-order").textContent="طلبك رقم "+curOrder.no;
-  $("sc-box").innerHTML=`<h3>${curCraft.name} ${CAT_ICON[curCraft.cat]}</h3>
-    <p class="mut" style="margin:6px 0">📞 هيتوصل معاك على: <b style="color:var(--dark)">${curOrder.phone}</b></p>
-    <p class="mut">📍 العنوان: ${curOrder.area} — العريش</p>
-    <p class="mut" style="margin-top:6px">📝 ${esc(curOrder.det)}</p>`;
-  showScreen("s-success");
-}
-function disagree(){
-  curOrder.craftsmanId=null;saveOrders();
-  toast("الطلب لسه موجود ✓ تقدر تدور على صنايعي تاني");
-  renderResults();showScreen("s-results");
+async function logout(){
+  await sb.auth.signOut();
+  me = null; profile = null; contacted = new Set();
+  buildTabs(); showScreen("s-home"); toast("تم تسجيل الخروج");
 }
 
-/* ================= ORDERS ================= */
-function showOrders(){
-  const box=$("orders-list");
-  if(!orders.length){box.innerHTML=`<div class="empty"><div class="big">📭</div><h3>لسه مفيش طلبات</h3><p>اطلب أول صنايعي ليك دلوقتي</p><button class="btn btn-pri" style="margin-top:14px" onclick="goSearch()">اطلب دلوقتي</button></div>`}
-  else box.innerHTML=orders.map(o=>`
-    <div class="order" onclick="openOrder(${o.id})">
-      <div class="top"><b>${CAT_ICON[o.cat.split(" — ")[0]]||"🛠️"} ${esc(o.cat)}</b>
-      <span class="badge ${o.status==="done"?"b-done":"b-active"}">${o.status==="done"?"✓ تم الاتفاق":"متاح للتفاوض"}</span></div>
-      <div class="det">📍 ${esc(o.area)} — 🔖 رقم الطلب ${o.no}${o.status==="done"?"<br>🤝 مع: "+esc(o.doneWith):""}<br>📝 ${esc(o.det.slice(0,70))}${o.det.length>70?"...":""}</div>
-    </div>`).join("");
-  showScreen("s-orders");
-}
-function openOrder(id){
-  const o=orders.find(x=>x.id===id);
-  if(o.status==="done")return toast("الطلب ده اتعمل بالفعل ✓ — اعمل طلب جديد");
-  curOrder=o;
-  if(o.craftsmanId){openChat(o.craftsmanId)}
-  else{toast("اختار صنايعي للطلب ده");renderResults();showScreen("s-results")}
-}
-
-/* ================= ACCOUNT ================= */
-function showAccount(){
-  $("ac-avatar").textContent=user.name[0];
-  $("ac-name").textContent=user.name;
-  $("ac-phone").textContent=user.phone;
-  showScreen("s-account");
-}
-
-/* ================= JOIN CRAFTSMAN ================= */
-function joinCraftsman(e){
+/* ================= نشر طلب ================= */
+async function submitRequest(e){
   e.preventDefault();
-  const n=$("jn-name").value.trim(),p=$("jn-phone").value.trim(),p1=$("jn-pass").value,ex=$("jn-exp").value.trim();
-  if(n.length<3)return toast("اكتب اسمك بالكامل");
-  if(!validPhone(p))return toast("رقم الموبايل غلط — لازم 11 رقم يبدأوا بـ 01");
-  if(p1.length<6)return toast("كلمة السر 6 حروف على الأقل");
-  if(!ex)return toast("اكتب سنين خبرتك");
-  $("join-wrap").classList.add("hidden");$("join-done").classList.remove("hidden");
+  if(!me) return showScreen("s-request");
+  const full = $("q-cat").value, category = full.split(" — ")[0];
+  const area = $("q-area").value, details = $("q-details").value.trim();
+  if(details.length < 5) return toast("اكتب تفاصيل الشغل بشكل أوضح");
+  const b = $("q-btn"); b.disabled = true;
+  const { error } = await sb.from("requests").insert({ customer_id: me.id, category, work_type: full, area, details });
+  b.disabled = false;
+  if(error) return toast("ماقدرناش ننشر الطلب، جرب تاني");
+  $("q-details").value = "";
+  toast("تم نشر طلبك ✅");
+  showScreen("s-myreq");
 }
 
-/* ================= INIT ================= */
-window.onload=()=>{
-  if(user){renderHome();showScreen("s-home")}
-};
+/* ================= طلباتي (عميل) ================= */
+const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","مغلق"] };
+async function fetchMyRequests(){
+  const [r, c] = await Promise.all([
+    sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false }),
+    sb.from("contacts").select("request_id")
+  ]);
+  if(r.error) return null;
+  const counts = {};
+  (c.data || []).forEach(x => counts[x.request_id] = (counts[x.request_id] || 0) + 1);
+  return r.data.map(x => ({ ...x, n: counts[x.id] || 0 }));
+}
+async function loadMyRequests(){
+  const box = $("myreq-list");
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  const list = await fetchMyRequests();
+  if(!list) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل طلباتك، حدّث الصفحة</p></div>';
+  if(!list.length) return box.innerHTML = '<div class="empty"><div class="big">📭</div><h3>لسه مفيش طلبات</h3><button class="btn btn-pri" style="margin-top:14px" onclick="showScreen(\'s-request\')">انشر أول طلب</button></div>';
+  box.innerHTML = list.map(r => {
+    const [cls, txt] = STATUS[r.status] || STATUS.open;
+    return `<div class="req">
+      <div class="top"><b>${esc(r.work_type)}</b><span class="badge ${cls}">${txt}</span></div>
+      <div class="meta">📍 ${esc(r.area)} — 🗓️ ${fmtDate(r.created_at)}</div>
+      <div class="det">${esc(r.details)}</div>
+      <div class="meta">${r.n ? `🤝 تواصل معاك ${r.n} صنايعي` : "⏳ لسه ماحدش تواصل"}</div>
+      ${r.status === "open" ? `<div class="acts"><button class="btn-s bad" type="button" onclick="cancelRequest('${r.id}')">إلغاء الطلب</button></div>` : ""}
+    </div>`;
+  }).join("");
+}
+async function cancelRequest(id){
+  if(!confirm("متأكد إنك عايز تلغي الطلب ده؟")) return;
+  const { error } = await sb.from("requests").update({ status:"cancelled" }).eq("id", id);
+  if(error) return toast("ماقدرناش نلغي الطلب، جرب تاني");
+  toast("تم إلغاء الطلب");
+  loadMyRequests();
+}
+
+/* ================= الطلبات (صنايعي) ================= */
+let jobs = [];
+async function loadJobs(){
+  const box = $("jobs-list"), sub = $("jobs-sub");
+  if(!profile) await loadProfile();
+  if(!profile || !profile.approved){
+    sub.textContent = "";
+    return box.innerHTML = '<div class="empty"><div class="big">⏳</div><h3>حسابك قيد المراجعة</h3><p style="margin-top:6px;line-height:1.9">هنراجع بياناتك ونفعّل حسابك، وبعدها هتشوف الطلبات هنا.</p></div>';
+  }
+  sub.textContent = "طلبات " + profile.category + " المنشورة";
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  const [r, c] = await Promise.all([
+    sb.from("requests").select("id,work_type,area,details,created_at").eq("status","open").order("created_at", { ascending:false }),
+    sb.from("contacts").select("request_id").eq("craftsman_id", me.id)
+  ]);
+  if(r.error) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل الطلبات، حدّث الصفحة</p></div>';
+  contacted = new Set((c.data || []).map(x => x.request_id));
+  jobs = r.data;
+  renderJobs();
+}
+function renderJobs(){
+  const box = $("jobs-list");
+  const list = jobs.filter(j => contacted.has(j.id) || !ignored.has(j.id));
+  if(!list.length) return box.innerHTML = '<div class="empty"><div class="big">📭</div><h3>مفيش طلبات دلوقتي</h3><p>هتظهر هنا أول ما حد ينشر طلب في تخصصك</p></div>';
+  box.innerHTML = list.map(j => {
+    const done = contacted.has(j.id);
+    return `<div class="req">
+      <div class="top"><b>${esc(j.work_type)}</b>${done ? '<span class="badge b-ok">✓ تم التواصل</span>' : ""}</div>
+      <div class="meta">📍 ${esc(j.area)} — 🗓️ ${fmtDate(j.created_at)}</div>
+      <div class="det">${esc(j.details)}</div>
+      <div class="acts">
+        <button class="btn-s ok" type="button" onclick="contactJob('${j.id}')">${done ? "💬 افتح واتساب تاني" : "💬 تواصل"}</button>
+        ${done ? "" : `<button class="btn-s g" type="button" onclick="ignoreJob('${j.id}')">تجاهل</button>`}
+      </div>
+    </div>`;
+  }).join("");
+}
+function ignoreJob(id){ ignored.add(id); saveIgnored(); renderJobs(); }
+async function contactJob(id){
+  const { data, error } = await sb.rpc("contact_request", { p_request_id: id });
+  if(error || !data || !data.length){ toast("الطلب ده مش متاح دلوقتي"); return loadJobs(); }
+  const c = data[0], j = jobs.find(x => x.id === id);
+  const msg = `أهلاً ${c.customer_name}، أنا ${profile.full_name} صنايعي ${profile.category} من ورشة العريش. شفت طلبك${j ? " (" + j.work_type + " في " + j.area + ")" : ""} وأقدر أساعدك. ينفع نتفق؟`;
+  contacted.add(id);
+  renderJobs();
+  window.location.href = "https://wa.me/2" + c.customer_phone + "?text=" + encodeURIComponent(msg);
+}
+
+/* ================= حسابي ================= */
+async function loadAccount(){
+  const box = $("acc-box");
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  if(!profile) await loadProfile();
+  if(!profile) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل بياناتك، حدّث الصفحة</p></div>';
+  const p = profile;
+  let html = `<div class="card"><div class="kv"><span>الاسم</span><b>${esc(p.full_name)}</b></div>
+    <div class="kv"><span>رقم الموبايل</span><b dir="ltr">${esc(p.phone)}</b></div>
+    <div class="kv"><span>نوع الحساب</span><b>${p.role === "craftsman" ? "صنايعي" : "عميل"}</b></div>`;
+  let history = "";
+  if(p.role === "craftsman"){
+    const { data } = await sb.rpc("my_contacts");
+    const list = data || [];
+    html += `<div class="kv"><span>التخصص</span><b>${esc(p.category)}</b></div>
+      <div class="kv"><span>حالة الحساب</span><b>${p.approved ? "✅ معتمد" : "⏳ قيد المراجعة"}</b></div>
+      <div class="kv"><span>طلبات تواصلت معاها</span><b>${list.length}</b></div></div>`;
+    history = list.length ? list.map(x => `<div class="req"><div class="top"><b>${esc(x.work_type)}</b><span class="badge b-info">${fmtDate(x.contacted_at)}</span></div>
+      <div class="meta">👤 ${esc(x.customer_name)} — 📍 ${esc(x.area)}</div></div>`).join("") : '<p class="mut">لسه ماتواصلتش مع أي عميل</p>';
+  } else {
+    const list = (await fetchMyRequests()) || [];
+    html += `<div class="kv"><span>عدد الطلبات المنشورة</span><b>${list.length}</b></div></div>`;
+    history = list.length ? list.map(x => { const [cls, txt] = STATUS[x.status] || STATUS.open;
+      return `<div class="req"><div class="top"><b>${esc(x.work_type)}</b><span class="badge ${cls}">${txt}</span></div>
+      <div class="meta">🗓️ ${fmtDate(x.created_at)} — ${x.n ? "🤝 تواصل معاك " + x.n + " صنايعي" : "⏳ لسه ماحدش تواصل"}</div></div>`; }).join("") : '<p class="mut">لسه مفيش معاملات</p>';
+  }
+  html += `<div class="sec-h" style="margin-top:20px"><h3>سجل المعاملات مع الصنايعية</h3></div>${history}
+    <button class="btn btn-ghost" type="button" onclick="logout()" style="margin-top:20px">تسجيل الخروج</button>`;
+  box.innerHTML = html;
+}
+
+/* ================= تشغيل ================= */
+function fillAreas(){
+  ["q-area","s-area"].forEach(id => AREAS.forEach(a => { const o = document.createElement("option"); o.textContent = a; $(id).appendChild(o); }));
+}
+async function init(){
+  fillAreas();
+  buildTabs();
+  if(!window.supabase){ toast("تعذّر تحميل الموقع بالكامل، حدّث الصفحة"); return; }
+  sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  try {
+    const { data } = await sb.auth.getSession();
+    if(data.session){ me = data.session.user; await loadProfile(); buildTabs(); }
+  } catch(e) {}
+}
+init();
 </script>
 </body>
 </html>
