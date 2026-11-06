@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0891b2">
+<title>ورشة العريش | صنايعية في أي وقت</title>
+<meta name="description" content="ورشة العريش — انشر طلبك واتواصل مع صنايعي كهرباء أو سباكة أو نجارة في العريش.">
+<link rel="canonical" href="https://warshaelarish-source.github.io/Warsha-El-Arish/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔧%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="ورشة العريش | صنايعية في أي وقت">
+<meta property="og:description" content="انشر طلبك واتواصل مع صنايعي في العريش.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:url" content="https://warshaelarish-source.github.io/Warsha-El-Arish/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+:root{--pri:#0891b2;--pri2:#0d9488;--dark:#0f172a;--mut:#64748b;--bg:#f1f5f9;--line:#e2e8f0;--ok:#16a34a;--bad:#dc2626}
+body{background:#e2e8f0;color:var(--dark)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.phone{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15)}
+.screen{display:none;flex:1;flex-direction:column;animation:fade .25s ease}
+.screen.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pad{padding:20px 18px 110px}
+.back{display:inline-flex;gap:6px;color:var(--pri);font-weight:700;cursor:pointer;margin-bottom:14px;font-size:15px;background:none;border:0}
+h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-size:16px;font-weight:800}
+.mut{color:var(--mut);font-size:14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#334155}
+.inp{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fff;outline:none;transition:.2s}
+.inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+.btn{display:block;width:100%;padding:14px;border:0;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;text-align:center;transition:.15s}
+.btn:disabled{opacity:.6}
+.btn-pri{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;box-shadow:0 6px 16px rgba(8,145,178,.35)}
+.btn-wa{background:var(--ok);color:#fff;box-shadow:0 6px 16px rgba(22,163,74,.3)}
+.btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--dark);margin-top:10px}
+.hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:30px 20px 60px;border-radius:0 0 30px 30px}
+.hero .logo{font-size:15px;opacity:.9;font-weight:700}
+.hero h1{font-size:24px;margin:6px 0 8px}
+.hero p{font-size:14px;opacity:.9;margin-bottom:16px}
+.hero .cta{background:#fff;color:var(--pri);border-radius:14px;padding:14px;font-weight:900;font-size:16px;display:block;width:100%;border:0;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.stats{display:flex;gap:10px;margin:-34px 18px 0}
+.stat{flex:1;background:#fff;border-radius:16px;padding:14px 6px;text-align:center;box-shadow:0 8px 20px rgba(2,6,23,.07)}
+.stat b{display:block;font-size:22px}
+.stat span{font-size:12px;color:var(--mut);font-weight:700}
+.sec{margin:26px 18px 0}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cat{background:#fff;border-radius:18px;padding:18px 8px;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(2,6,23,.05);border:2px solid transparent;font-family:inherit}
+.cat:active{transform:scale(.96)}
+.cat .ic{font-size:34px}
+.cat b{display:block;margin-top:8px;font-size:14px}
+.cat small{color:var(--mut);font-size:11px}
+.step{display:flex;gap:14px;background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.step .n{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;min-width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:17px}
+.footer{background:var(--dark);color:#cbd5e1;margin-top:30px;padding:26px 20px 110px;border-radius:28px 28px 0 0}
+.footer b{color:#fff;font-size:18px}
+.footer .row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.chip{background:#1e293b;padding:8px 14px;border-radius:10px;font-size:13px;color:#cbd5e1;border:0;cursor:pointer}
+.card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.guide{background:rgba(8,145,178,.08);border:1.5px solid rgba(8,145,178,.25);border-radius:16px;padding:14px;margin-bottom:16px}
+.guide h3{font-size:14px;color:#155e75;margin-bottom:8px}
+.guide ul{list-style:none}
+.guide li{font-size:13px;line-height:1.9;color:#155e75;display:flex;gap:8px}
+.tabs{display:flex;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:18px}
+.tabs button{flex:1;border:0;background:transparent;padding:10px;border-radius:10px;font-weight:800;font-size:15px;color:var(--mut);cursor:pointer}
+.tabs button.on{background:#fff;color:var(--pri);box-shadow:0 2px 8px rgba(2,6,23,.08)}
+.radio-row{display:flex;gap:10px}
+.radio-row label{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-size:14px;font-weight:700;cursor:pointer;margin:0}
+.radio-row input{display:none}
+.radio-row label:has(input:checked){border-color:var(--pri);background:#ecfeff;color:var(--pri)}
+.hidden{display:none!important}
+.req{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
+.req .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.req .det{font-size:13.5px;color:#334155;margin-top:8px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.req .meta{font-size:12px;color:var(--mut);font-weight:700;margin-top:6px}
+.acts{display:flex;gap:8px;margin-top:12px}
+.btn-s{padding:11px;border-radius:11px;font-size:14px;font-weight:800;cursor:pointer;border:0;flex:1;text-align:center;display:block}
+.btn-s.ok{background:var(--ok);color:#fff}
+.btn-s.g{background:#f1f5f9;color:#334155}
+.btn-s.bad{background:#fff;border:1.5px solid var(--bad);color:var(--bad)}
+.badge{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.b-open{background:#fef3c7;color:#92400e}
+.b-cancel{background:#fee2e2;color:#991b1b}
+.b-ok{background:#dcfce7;color:#166534}
+.b-info{background:#e0f2fe;color:#075985}
+.empty{text-align:center;padding:50px 20px;color:var(--mut)}
+.empty .big{font-size:52px;margin-bottom:10px}
+.kv{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kv:last-child{border-bottom:0}
+.kv span{color:var(--mut);font-weight:700}
+.kv b{font-weight:800;word-break:break-all}
+.legal p{line-height:2;margin-bottom:10px;font-size:14px;color:#334155}
+.legal h3{margin:16px 0 4px}
+#tabbar{position:fixed;bottom:0;left:0;right:0;margin:0 auto;max-width:480px;background:#fff;border-top:1px solid var(--line);display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:20}
+#tabbar button{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:800;color:var(--mut);cursor:pointer;padding:4px}
+#tabbar button.on{color:var(--pri)}
+#tabbar .ic{font-size:21px}
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:30px;font-size:14px;font-weight:700;opacity:0;transition:.3s;z-index:99;max-width:88%;text-align:center;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<!-- ============ HOME ============ -->
+<section id="s-home" class="screen active">
+  <div class="hero">
+    <div class="logo">🔧 ورشة العريش</div>
+    <h1>محتاج صنايعي<br>في العريش؟</h1>
+    <p>انشر طلبك والصنايعية المناسبين هيتواصلوا معاك.</p>
+    <button class="cta" type="button" onclick="goRequest()">⚡ انشر طلبك دلوقتي</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>🆓</b><span>الطلب مجاني</span></div>
+    <div class="stat"><b>💵</b><span>الدفع بعد الشغل</span></div>
+    <div class="stat"><b>📍</b><span>داخل العريش</span></div>
+  </div>
+  <div class="sec">
+    <div class="sec-h"><h2>الأقسام</h2><span class="mut" style="font-size:12px">وأقسام تانية قريب 🔜</span></div>
+    <div class="cats">
+      <button class="cat" type="button" onclick="quickRequest('كهرباء')"><div class="ic">⚡</div><b>كهرباء</b><small>أعطال وتأسيس</small></button>
+      <button class="cat" type="button" onclick="quickRequest('سباكة')"><div class="ic">🔧</div><b>سباكة</b><small>أعطال وتأسيس</small></button>
+      <button class="cat" type="button" onclick="quickRequest('نجارة')"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></button>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sec-h"><h2>إزاي بنشتغل؟</h2></div>
+    <div class="step"><div class="n">1</div><div><h3>انشر طلبك</h3><p class="mut">حدد نوع الشغل والمنطقة واكتب التفاصيل</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>الصنايعية يشوفوه</h3><p class="mut">الصنايعية المعتمدين في نفس التخصص بيشوفوا طلبك ويتواصلوا معاك</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3>اتفق على السعر</h3><p class="mut">اتفق مع الصنايعي، والدفع كاش له بعد ما الشغل يخلص</p></div></div>
+  </div>
+  <div class="footer">
+    <b>🔧 ورشة العريش</b>
+    <p style="margin-top:8px;font-size:13px">بنساعد أهالي العريش يوصلوا لصنايعي كهرباء وسباكة ونجارة. الطلب مجاني والدفع للصنايعي كاش بعد ما الشغل يخلص.</p>
+    <div class="row">
+      <a class="chip" href="https://wa.me/201508207016" target="_blank" rel="noopener">💬 تواصل معنا</a>
+      <button class="chip" type="button" onclick="goJoin()">🛠️ انضم كصنايعي</button>
+      <button class="chip" type="button" onclick="showScreen('s-privacy')">🔒 الخصوصية والشروط</button>
+    </div>
+    <p style="margin-top:16px;font-size:11px;opacity:.6">© 2026 ورشة العريش — جميع الحقوق محفوظة</p>
+  </div>
+</section>
+
+<!-- ============ AUTH ============ -->
+<section id="s-auth" class="screen">
+  <div class="pad">
+    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <h1 style="margin-bottom:4px">أهلاً بيك 👋</h1>
+    <p class="mut" id="auth-msg" style="margin-bottom:16px">ادخل برقم موبايلك وكلمة السر، أو اعمل حساب جديد</p>
+    <div class="tabs">
+      <button type="button" id="t-login" class="on" onclick="authTab('login')">دخول</button>
+      <button type="button" id="t-signup" onclick="authTab('signup')">حساب جديد</button>
+    </div>
+
+    <form class="card" id="f-login" onsubmit="doLogin(event)" novalidate>
+      <div class="field"><label for="l-phone">رقم الموبايل</label><input class="inp" id="l-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="l-pass">كلمة السر</label><input class="inp" id="l-pass" type="password" autocomplete="current-password"></div>
+      <button class="btn btn-pri" id="l-btn" type="submit">دخول</button>
+    </form>
+
+    <form class="card hidden" id="f-signup" onsubmit="doSignup(event)" novalidate>
+      <div class="field"><label>أنا:</label>
+        <div class="radio-row">
+          <label><input type="radio" name="s-role" value="customer" checked onchange="roleChange()"><span>🙋 عميل</span></label>
+          <label><input type="radio" name="s-role" value="craftsman" onchange="roleChange()"><span>🛠️ صنايعي</span></label>
+        </div>
+      </div>
+      <div class="field"><label for="s-name">الاسم بالكامل</label><input class="inp" id="s-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
+      <div class="field"><label for="s-phone">رقم الموبايل</label><input class="inp" id="s-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="s-pass">كلمة السر</label><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="6 حروف أو أرقام على الأقل (احفظها كويس)"></div>
+      <div id="craft-fields" class="hidden">
+        <div class="field"><label for="s-cat">التخصص</label><select class="inp" id="s-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
+        <div class="field"><label for="s-area">منطقتك في العريش</label><select class="inp" id="s-area"></select></div>
+        <div class="field"><label for="s-exp">سنين الخبرة</label><input class="inp" id="s-exp" inputmode="numeric" maxlength="2" placeholder="مثال: 7"></div>
+        <div class="field"><label for="s-bio">نبذة عن شغلك (اختياري)</label><textarea class="inp" id="s-bio" rows="3" maxlength="500"></textarea></div>
+        <p class="mut" style="margin-bottom:12px">⏳ حساب الصنايعي بيتراجع قبل التفعيل، وبعدها تشوف الطلبات.</p>
+      </div>
+      <button class="btn btn-pri" id="s-btn" type="submit">إنشاء الحساب</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ REQUEST ============ -->
+<section id="s-request" class="screen">
+  <div class="pad">
+    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <h1 style="margin-bottom:4px">انشر طلبك 📝</h1>
+    <p class="mut" style="margin-bottom:16px">اكتب طلبك بالتفصيل عشان الصنايعي يوصلك جاهز</p>
+    <div class="guide">
+      <h3>إيه اللي هيحصل بعد ما تنشر؟</h3>
+      <ul>
+        <li><span>1️⃣</span><span>طلبك بيظهر في <b>طلباتي</b> بكل التفاصيل، وتقدر تلغيه في أي وقت.</span></li>
+        <li><span>2️⃣</span><span>الصنايعية المعتمدين في نفس التخصص بيشوفوا الطلب.</span></li>
+        <li><span>3️⃣</span><span>رقمك <b>مش بيظهر</b> لحد غير الصنايعي اللي يدوس "تواصل".</span></li>
+      </ul>
+    </div>
+    <form class="card" onsubmit="submitRequest(event)" novalidate>
+      <div class="field"><label for="q-cat">1️⃣ نوع الشغل</label>
+        <select class="inp" id="q-cat">
+          <optgroup label="⚡ كهرباء"><option>كهرباء — أعطال وأسلاك</option><option>كهرباء — تأسيس وتشطيب</option><option>كهرباء — لوحات وأجهزة</option><option>كهرباء — تركيب سخانات وأجهزة</option></optgroup>
+          <optgroup label="🔧 سباكة"><option>سباكة — أعطال وتسريبات</option><option>سباكة — تأسيس</option><option>سباكة — سخانات مياه</option><option>سباكة — أطقم حمامات ومطابخ</option></optgroup>
+          <optgroup label="🪚 نجارة"><option>نجارة — أبواب وشبابيك</option><option>نجارة — غرف وأثاث</option><option>نجارة — مطابخ خشبية</option><option>نجارة — تصليح وصيانة</option></optgroup>
+        </select>
+      </div>
+      <div class="field"><label for="q-area">2️⃣ المكان (العريش)</label><select class="inp" id="q-area"></select></div>
+      <div class="field"><label for="q-details">3️⃣ تفاصيل الشغل</label>
+        <textarea class="inp" id="q-details" rows="4" maxlength="1000" placeholder="مثال: السخان بيسرّب مياه ومحتاج حد يشوفه النهاردة"></textarea>
+      </div>
+      <button class="btn btn-pri" id="q-btn" type="submit">📣 انشر طلبك</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ MY REQUESTS ============ -->
+<section id="s-myreq" class="screen">
+  <div class="pad">
+    <h1 style="margin-bottom:4px">طلباتي 📋</h1>
+    <p class="mut" style="margin-bottom:16px">كل الطلبات اللي نشرتها</p>
+    <div id="myreq-list"></div>
+  </div>
+</section>
+
+<!-- ============ JOBS (craftsman) ============ -->
+<section id="s-jobs" class="screen">
+  <div class="pad">
+    <h1 style="margin-bottom:4px">الطلبات 🛠️</h1>
+    <p class="mut" id="jobs-sub" style="margin-bottom:16px"></p>
+    <div id="jobs-list"></div>
+  </div>
+</section>
+
+<!-- ============ ACCOUNT ============ -->
+<section id="s-account" class="screen">
+  <div class="pad">
+    <h1 style="margin-bottom:16px">حسابي 👤</h1>
+    <div id="acc-box"></div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section id="s-privacy" class="screen">
+  <div class="pad legal">
+    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <h1 style="margin-bottom:10px">الخصوصية والشروط 🔒</h1>
+    <h3>إيه البيانات اللي بنجمعها؟</h3>
+    <p>اسمك ورقم موبايلك ومنطقتك وتفاصيل الطلبات اللي بتنشرها. وللصنايعية: التخصص وسنين الخبرة.</p>
+    <h3>بنخزنها فين وبنستخدمها في إيه؟</h3>
+    <p>بتتخزن في قاعدة بيانات مؤمّنة، وبنستخدمها بس عشان نوصّلك بالصنايعي المناسب أو نراجع طلب انضمامك كصنايعي.</p>
+    <h3>مين يشوف رقمك؟</h3>
+    <p>رقم العميل بيظهر للصنايعي المعتمد اللي بيدوس "تواصل" على طلبه بس. بقية الصنايعية بيشوفوا تفاصيل الشغل والمنطقة من غير رقمك.</p>
+    <h3>حذف البيانات</h3>
+    <p>لو عايز حسابك وبياناتك يتمسحوا، كلمنا من "تواصل معنا".</p>
+    <h3>شروط الاستخدام</h3>
+    <p>ورشة العريش بتوصّلك بصنايعي، لكن الاتفاق على السعر وتنفيذ الشغل بيتم بينك وبين الصنايعي مباشرة. الدفع كاش للصنايعي بعد ما الشغل يخلص. اتأكد من الشغل قبل ما تدفع.</p>
+  </div>
+</section>
+
+</div>
+
+<nav id="tabbar" aria-label="التنقل"></nav>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+<script>
+/* ================= الإعدادات ================= */
+const SUPABASE_URL = "https://oliyswglvrhxdmkijann.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Gjm1kZ33UbvUAR1KTURxZQ_SRXTmv_A"; // مفتاح عام وآمن
+const SUPPORT_WA = "201508207016";
+const AREAS = ["حي أول العريش","حي ثاني العريش","حي ثالث العريش","حي رابع العريش","حي السلام","حي النصر","حي الزهور","حي المستقبل","وسط البلد","المنطقة الصناعية","كفر العريش الجديدة","أبو صقل"];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const validPhone = p => /^01[0-9]{9}$/.test(p);
+const AR_DIGITS = {"٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9","۰":"0","۱":"1","۲":"2","۳":"3","۴":"4","۵":"5","۶":"6","۷":"7","۸":"8","۹":"9"};
+function normPhone(s){
+  let d = String(s || "").replace(/[٠-٩۰-۹]/g, c => AR_DIGITS[c]).replace(/\D/g, "");
+  if(/^201[0-9]{9}$/.test(d)) d = "0" + d.slice(2);
+  return d;
+}
+const EMAIL_DOMAIN = "warsha-el-arish.app"; // إيميل داخلي بيتبني من رقم الموبايل، المستخدم مش بيشوفه
+const phoneToEmail = p => p + "@" + EMAIL_DOMAIN;
+const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", month:"short"});
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
+
+let sb = null, me = null, profile = null, afterLogin = null, current = "s-home";
+let ignored = new Set(), contacted = new Set();
+try { ignored = new Set(JSON.parse(localStorage.getItem("warsha_ignored") || "[]")); } catch(e) {}
+function saveIgnored(){ try { localStorage.setItem("warsha_ignored", JSON.stringify([...ignored])); } catch(e) {} }
+
+/* ================= التنقل ================= */
+const role = () => profile ? profile.role : null;
+const isCraft = () => role() === "craftsman";
+
+function buildTabs(){
+  const t = [{id:"s-home", ic:"🏠", n:"الرئيسية"}];
+  if(!me) t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-auth", ic:"👤", n:"دخول"});
+  else if(isCraft()) t.push({id:"s-jobs", ic:"🛠️", n:"الطلبات"}, {id:"s-account", ic:"👤", n:"حسابي"});
+  else t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-myreq", ic:"📋", n:"طلباتي"}, {id:"s-account", ic:"👤", n:"حسابي"});
+  $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" onclick="showScreen('${x.id}')"><span class="ic">${x.ic}</span>${x.n}</button>`).join("");
+  markTab();
+}
+function markTab(){ document.querySelectorAll("#tabbar button").forEach(b => b.classList.toggle("on", b.dataset.t === current)); }
+
+function showScreen(id){
+  const needLogin = ["s-request","s-myreq","s-jobs","s-account"];
+  if(needLogin.includes(id) && !me){
+    afterLogin = id;
+    $("auth-msg").textContent = id === "s-request" ? "سجّل دخول الأول عشان تنشر طلبك" : "سجّل دخول الأول";
+    id = "s-auth";
+  }
+  if(id === "s-request" && isCraft()) id = "s-jobs";
+  if((id === "s-myreq") && isCraft()) id = "s-jobs";
+  if(id === "s-jobs" && me && !isCraft()) id = "s-myreq";
+  current = id;
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo(0,0);
+  markTab();
+  if(id === "s-myreq") loadMyRequests();
+  if(id === "s-jobs") loadJobs();
+  if(id === "s-account") loadAccount();
+}
+function goRequest(){ showScreen("s-request"); }
+function quickRequest(cat){
+  const o = [...$("q-cat").options].find(x => x.textContent.startsWith(cat));
+  if(o) $("q-cat").value = o.value;
+  showScreen("s-request");
+}
+function goJoin(){
+  if(me){ showScreen(isCraft() ? "s-jobs" : "s-account"); return; }
+  afterLogin = null;
+  $("auth-msg").textContent = "اعمل حساب صنايعي وهنراجع بياناتك";
+  authTab("signup");
+  document.querySelector('input[name="s-role"][value="craftsman"]').checked = true;
+  roleChange();
+  showScreen("s-auth");
+}
+
+/* ================= الحسابات ================= */
+function authTab(w){
+  $("t-login").classList.toggle("on", w === "login");
+  $("t-signup").classList.toggle("on", w === "signup");
+  $("f-login").classList.toggle("hidden", w !== "login");
+  $("f-signup").classList.toggle("hidden", w !== "signup");
+}
+function roleChange(){
+  const c = document.querySelector('input[name="s-role"]:checked').value === "craftsman";
+  $("craft-fields").classList.toggle("hidden", !c);
+}
+function authError(err){
+  const m = (err && err.message || "").toLowerCase();
+  if(m.includes("already") || m.includes("registered")) return "الرقم ده مسجّل قبل كده، ادخل بيه";
+  if(m.includes("invalid login")) return "الرقم أو كلمة السر غلط";
+  if(m.includes("password")) return "كلمة السر ضعيفة، اكتب 6 حروف على الأقل";
+  if(m.includes("rate") || m.includes("too many")) return "محاولات كتير، استنى شوية وجرب تاني";
+  if(m.includes("email") && m.includes("invalid")) return "الرقم مش مقبول، راجعه وجرب تاني";
+  if(m.includes("database")) return "حصلت مشكلة في البيانات، راجع الاسم والرقم وجرب تاني";
+  return "حصلت مشكلة، جرب تاني";
+}
+async function loadProfile(){
+  if(!me){ profile = null; return; }
+  const { data } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
+  profile = data || null;
+}
+async function afterAuth(session){
+  me = session.user;
+  await loadProfile();
+  buildTabs();
+  const go = afterLogin; afterLogin = null;
+  showScreen(go || (isCraft() ? "s-jobs" : "s-home"));
+}
+async function doLogin(e){
+  e.preventDefault();
+  const phone = normPhone($("l-phone").value), password = $("l-pass").value;
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(!password) return toast("اكتب كلمة السر");
+  const b = $("l-btn"); b.disabled = true;
+  const { data, error } = await sb.auth.signInWithPassword({ email: phoneToEmail(phone), password });
+  b.disabled = false;
+  if(error || !data.session) return toast(authError(error));
+  $("l-pass").value = "";
+  toast("أهلاً بيك 👋");
+  afterAuth(data.session);
+}
+async function doSignup(e){
+  e.preventDefault();
+  const r = document.querySelector('input[name="s-role"]:checked').value;
+  const full_name = $("s-name").value.trim(), phone = normPhone($("s-phone").value);
+  const password = $("s-pass").value;
+  if(full_name.length < 3) return toast("اكتب اسمك بالكامل");
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(password.length < 6) return toast("كلمة السر لازم 6 على الأقل");
+  const meta = { full_name, phone, role: r };
+  if(r === "craftsman"){
+    const exp = $("s-exp").value.trim();
+    if(!/^\d{1,2}$/.test(exp)) return toast("اكتب سنين خبرتك بالأرقام");
+    Object.assign(meta, { category: $("s-cat").value, area: $("s-area").value, experience_years: exp, bio: $("s-bio").value.trim() });
+  }
+  const b = $("s-btn"); b.disabled = true;
+  const { data, error } = await sb.auth.signUp({ email: phoneToEmail(phone), password, options: { data: meta } });
+  b.disabled = false;
+  if(error) return toast(authError(error));
+  if(!data.session) return toast("تم إنشاء الحساب، جرّب تدخل برقم الموبايل وكلمة السر");
+  $("s-pass").value = "";
+  toast(r === "craftsman" ? "تم! حسابك قيد المراجعة ⏳" : "تم إنشاء حسابك 🎉");
+  afterAuth(data.session);
+}
+async function logout(){
+  await sb.auth.signOut();
+  me = null; profile = null; contacted = new Set();
+  buildTabs(); showScreen("s-home"); toast("تم تسجيل الخروج");
+}
+
+/* ================= نشر طلب ================= */
+async function submitRequest(e){
+  e.preventDefault();
+  if(!me) return showScreen("s-request");
+  const full = $("q-cat").value, category = full.split(" — ")[0];
+  const area = $("q-area").value, details = $("q-details").value.trim();
+  if(details.length < 5) return toast("اكتب تفاصيل الشغل بشكل أوضح");
+  const b = $("q-btn"); b.disabled = true;
+  const { error } = await sb.from("requests").insert({ customer_id: me.id, category, work_type: full, area, details });
+  b.disabled = false;
+  if(error) return toast("ماقدرناش ننشر الطلب، جرب تاني");
+  $("q-details").value = "";
+  toast("تم نشر طلبك ✅");
+  showScreen("s-myreq");
+}
+
+/* ================= طلباتي (عميل) ================= */
+const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","مغلق"] };
+async function fetchMyRequests(){
+  const [r, c] = await Promise.all([
+    sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false }),
+    sb.from("contacts").select("request_id")
+  ]);
+  if(r.error) return null;
+  const counts = {};
+  (c.data || []).forEach(x => counts[x.request_id] = (counts[x.request_id] || 0) + 1);
+  return r.data.map(x => ({ ...x, n: counts[x.id] || 0 }));
+}
+async function loadMyRequests(){
+  const box = $("myreq-list");
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  const list = await fetchMyRequests();
+  if(!list) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل طلباتك، حدّث الصفحة</p></div>';
+  if(!list.length) return box.innerHTML = '<div class="empty"><div class="big">📭</div><h3>لسه مفيش طلبات</h3><button class="btn btn-pri" style="margin-top:14px" onclick="showScreen(\'s-request\')">انشر أول طلب</button></div>';
+  box.innerHTML = list.map(r => {
+    const [cls, txt] = STATUS[r.status] || STATUS.open;
+    return `<div class="req">
+      <div class="top"><b>${esc(r.work_type)}</b><span class="badge ${cls}">${txt}</span></div>
+      <div class="meta">📍 ${esc(r.area)} — 🗓️ ${fmtDate(r.created_at)}</div>
+      <div class="det">${esc(r.details)}</div>
+      <div class="meta">${r.n ? `🤝 تواصل معاك ${r.n} صنايعي` : "⏳ لسه ماحدش تواصل"}</div>
+      ${r.status === "open" ? `<div class="acts"><button class="btn-s bad" type="button" onclick="cancelRequest('${r.id}')">إلغاء الطلب</button></div>` : ""}
+    </div>`;
+  }).join("");
+}
+async function cancelRequest(id){
+  if(!confirm("متأكد إنك عايز تلغي الطلب ده؟")) return;
+  const { error } = await sb.from("requests").update({ status:"cancelled" }).eq("id", id);
+  if(error) return toast("ماقدرناش نلغي الطلب، جرب تاني");
+  toast("تم إلغاء الطلب");
+  loadMyRequests();
+}
+
+/* ================= الطلبات (صنايعي) ================= */
+let jobs = [];
+async function loadJobs(){
+  const box = $("jobs-list"), sub = $("jobs-sub");
+  if(!profile) await loadProfile();
+  if(!profile || !profile.approved){
+    sub.textContent = "";
+    return box.innerHTML = '<div class="empty"><div class="big">⏳</div><h3>حسابك قيد المراجعة</h3><p style="margin-top:6px;line-height:1.9">هنراجع بياناتك ونفعّل حسابك، وبعدها هتشوف الطلبات هنا.</p></div>';
+  }
+  sub.textContent = "طلبات " + profile.category + " المنشورة";
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  const [r, c] = await Promise.all([
+    sb.from("requests").select("id,work_type,area,details,created_at").eq("status","open").order("created_at", { ascending:false }),
+    sb.from("contacts").select("request_id").eq("craftsman_id", me.id)
+  ]);
+  if(r.error) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل الطلبات، حدّث الصفحة</p></div>';
+  contacted = new Set((c.data || []).map(x => x.request_id));
+  jobs = r.data;
+  renderJobs();
+}
+function renderJobs(){
+  const box = $("jobs-list");
+  const list = jobs.filter(j => contacted.has(j.id) || !ignored.has(j.id));
+  if(!list.length) return box.innerHTML = '<div class="empty"><div class="big">📭</div><h3>مفيش طلبات دلوقتي</h3><p>هتظهر هنا أول ما حد ينشر طلب في تخصصك</p></div>';
+  box.innerHTML = list.map(j => {
+    const done = contacted.has(j.id);
+    return `<div class="req">
+      <div class="top"><b>${esc(j.work_type)}</b>${done ? '<span class="badge b-ok">✓ تم التواصل</span>' : ""}</div>
+      <div class="meta">📍 ${esc(j.area)} — 🗓️ ${fmtDate(j.created_at)}</div>
+      <div class="det">${esc(j.details)}</div>
+      <div class="acts">
+        <button class="btn-s ok" type="button" onclick="contactJob('${j.id}')">${done ? "💬 افتح واتساب تاني" : "💬 تواصل"}</button>
+        ${done ? "" : `<button class="btn-s g" type="button" onclick="ignoreJob('${j.id}')">تجاهل</button>`}
+      </div>
+    </div>`;
+  }).join("");
+}
+function ignoreJob(id){ ignored.add(id); saveIgnored(); renderJobs(); }
+async function contactJob(id){
+  const { data, error } = await sb.rpc("contact_request", { p_request_id: id });
+  if(error || !data || !data.length){ toast("الطلب ده مش متاح دلوقتي"); return loadJobs(); }
+  const c = data[0], j = jobs.find(x => x.id === id);
+  const msg = `أهلاً ${c.customer_name}، أنا ${profile.full_name} صنايعي ${profile.category} من ورشة العريش. شفت طلبك${j ? " (" + j.work_type + " في " + j.area + ")" : ""} وأقدر أساعدك. ينفع نتفق؟`;
+  contacted.add(id);
+  renderJobs();
+  window.location.href = "https://wa.me/2" + c.customer_phone + "?text=" + encodeURIComponent(msg);
+}
+
+/* ================= حسابي ================= */
+async function loadAccount(){
+  const box = $("acc-box");
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  if(!profile) await loadProfile();
+  if(!profile) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل بياناتك، حدّث الصفحة</p></div>';
+  const p = profile;
+  let html = `<div class="card"><div class="kv"><span>الاسم</span><b>${esc(p.full_name)}</b></div>
+    <div class="kv"><span>رقم الموبايل</span><b dir="ltr">${esc(p.phone)}</b></div>
+    <div class="kv"><span>نوع الحساب</span><b>${p.role === "craftsman" ? "صنايعي" : "عميل"}</b></div>`;
+  let history = "";
+  if(p.role === "craftsman"){
+    const { data } = await sb.rpc("my_contacts");
+    const list = data || [];
+    html += `<div class="kv"><span>التخصص</span><b>${esc(p.category)}</b></div>
+      <div class="kv"><span>حالة الحساب</span><b>${p.approved ? "✅ معتمد" : "⏳ قيد المراجعة"}</b></div>
+      <div class="kv"><span>طلبات تواصلت معاها</span><b>${list.length}</b></div></div>`;
+    history = list.length ? list.map(x => `<div class="req"><div class="top"><b>${esc(x.work_type)}</b><span class="badge b-info">${fmtDate(x.contacted_at)}</span></div>
+      <div class="meta">👤 ${esc(x.customer_name)} — 📍 ${esc(x.area)}</div></div>`).join("") : '<p class="mut">لسه ماتواصلتش مع أي عميل</p>';
+  } else {
+    const list = (await fetchMyRequests()) || [];
+    html += `<div class="kv"><span>عدد الطلبات المنشورة</span><b>${list.length}</b></div></div>`;
+    history = list.length ? list.map(x => { const [cls, txt] = STATUS[x.status] || STATUS.open;
+      return `<div class="req"><div class="top"><b>${esc(x.work_type)}</b><span class="badge ${cls}">${txt}</span></div>
+      <div class="meta">🗓️ ${fmtDate(x.created_at)} — ${x.n ? "🤝 تواصل معاك " + x.n + " صنايعي" : "⏳ لسه ماحدش تواصل"}</div></div>`; }).join("") : '<p class="mut">لسه مفيش معاملات</p>';
+  }
+  html += `<div class="sec-h" style="margin-top:20px"><h3>سجل المعاملات مع الصنايعية</h3></div>${history}
+    <button class="btn btn-ghost" type="button" onclick="logout()" style="margin-top:20px">تسجيل الخروج</button>`;
+  box.innerHTML = html;
+}
+
+/* ================= تشغيل ================= */
+function fillAreas(){
+  ["q-area","s-area"].forEach(id => AREAS.forEach(a => { const o = document.createElement("option"); o.textContent = a; $(id).appendChild(o); }));
+}
+async function init(){
+  fillAreas();
+  buildTabs();
+  if(!window.supabase){ toast("تعذّر تحميل الموقع بالكامل، حدّث الصفحة"); return; }
+  sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  try {
+    const { data } = await sb.auth.getSession();
+    if(data.session){ me = data.session.user; await loadProfile(); buildTabs(); }
+  } catch(e) {}
+}
+init();
+</script>
+</body>
+</html>
