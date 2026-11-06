@@ -34,6 +34,9 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#334155}
 .inp{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fff;outline:none;transition:.2s}
 .inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(8,145,178,.12)}
+.pw{position:relative}
+.pw .inp{padding-left:50px}
+.eye{position:absolute;left:4px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:20px;padding:8px 10px;cursor:pointer;line-height:1}
 .btn{display:block;width:100%;padding:14px;border:0;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;text-align:center;transition:.15s}
 .btn:disabled{opacity:.6}
 .btn-pri{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;box-shadow:0 6px 16px rgba(8,145,178,.35)}
@@ -160,7 +163,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 
     <form class="card" id="f-login" onsubmit="doLogin(event)" novalidate>
       <div class="field"><label for="l-phone">رقم الموبايل</label><input class="inp" id="l-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
-      <div class="field"><label for="l-pass">كلمة السر</label><input class="inp" id="l-pass" type="password" autocomplete="current-password"></div>
+      <div class="field"><label for="l-pass">كلمة السر</label><div class="pw"><input class="inp" id="l-pass" type="password" autocomplete="current-password"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('l-pass',this)">👁️</button></div></div>
       <button class="btn btn-pri" id="l-btn" type="submit">دخول</button>
     </form>
 
@@ -173,7 +176,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
       </div>
       <div class="field"><label for="s-name">الاسم بالكامل</label><input class="inp" id="s-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
       <div class="field"><label for="s-phone">رقم الموبايل</label><input class="inp" id="s-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
-      <div class="field"><label for="s-pass">كلمة السر</label><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="6 حروف أو أرقام على الأقل (احفظها كويس)"></div>
+      <div class="field"><label for="s-pass">كلمة السر</label><div class="pw"><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="6 حروف أو أرقام على الأقل (احفظها كويس)"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('s-pass',this)">👁️</button></div></div>
       <div id="craft-fields" class="hidden">
         <div class="field"><label for="s-cat">التخصص</label><select class="inp" id="s-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
         <div class="field"><label for="s-area">منطقتك في العريش</label><select class="inp" id="s-area"></select></div>
@@ -286,6 +289,12 @@ function normPhone(s){
 const EMAIL_DOMAIN = "warsha-el-arish.app"; // إيميل داخلي بيتبني من رقم الموبايل، المستخدم مش بيشوفه
 const phoneToEmail = p => p + "@" + EMAIL_DOMAIN;
 const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", month:"short"});
+function togglePw(id, btn){
+  const i = $(id), show = i.type === "password";
+  i.type = show ? "text" : "password";
+  btn.textContent = show ? "🙈" : "👁️";
+  btn.setAttribute("aria-label", show ? "إخفاء كلمة السر" : "إظهار كلمة السر");
+}
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
 
 let sb = null, me = null, profile = null, afterLogin = null, current = "s-home";
