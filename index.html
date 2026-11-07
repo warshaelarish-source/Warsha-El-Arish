@@ -7,12 +7,14 @@
 <title>ورشة العريش | صنايعية في أي وقت</title>
 <meta name="description" content="ورشة العريش — انشر طلبك واتواصل مع صنايعي كهرباء أو سباكة أو نجارة في العريش.">
 <link rel="canonical" href="https://warshaelarish-source.github.io/Warsha-El-Arish/">
-<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:title" content="ورشة العريش | صنايعية في أي وقت">
 <meta property="og:description" content="انشر طلبك واتواصل مع صنايعي في العريش.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_EG">
 <meta property="og:url" content="https://warshaelarish-source.github.io/Warsha-El-Arish/">
+<meta property="og:image" content="https://warshaelarish-source.github.io/Warsha-El-Arish/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -292,15 +294,16 @@ const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", mon
 function togglePw(id, btn){
   const i = $(id), show = i.type === "password";
   i.type = show ? "text" : "password";
-  btn.textContent = show ? "👁️️" : "😑️";
+  btn.textContent = show ? "🙈" : "👁️";
   btn.setAttribute("aria-label", show ? "إخفاء كلمة السر" : "إظهار كلمة السر");
 }
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
 
 let sb = null, me = null, profile = null, afterLogin = null, current = "s-home";
 let ignored = new Set(), contacted = new Set();
-try { ignored = new Set(JSON.parse(localStorage.getItem("warsha_ignored") || "[]")); } catch(e) {}
-function saveIgnored(){ try { localStorage.setItem("warsha_ignored", JSON.stringify([...ignored])); } catch(e) {} }
+const ignKey = () => "warsha_ignored_" + (me ? me.id : "guest");
+function loadIgnored(){ try { ignored = new Set(JSON.parse(localStorage.getItem(ignKey()) || "[]")); } catch(e) { ignored = new Set(); } }
+function saveIgnored(){ try { localStorage.setItem(ignKey(), JSON.stringify([...ignored])); } catch(e) {} }
 
 /* ================= التنقل ================= */
 const role = () => profile ? profile.role : null;
@@ -379,7 +382,9 @@ async function loadProfile(){
 }
 async function afterAuth(session){
   me = session.user;
+  loadIgnored();
   await loadProfile();
+  if(!profile) toast("مقدرناش نحمّل بياناتك، حدّث الصفحة");
   buildTabs();
   const go = afterLogin; afterLogin = null;
   showScreen(go || (isCraft() ? "s-jobs" : "s-home"));
@@ -421,9 +426,9 @@ async function doSignup(e){
   afterAuth(data.session);
 }
 async function logout(){
-  await sb.auth.signOut();
-  me = null; profile = null; contacted = new Set();
+  me = null; profile = null; contacted = new Set(); ignored = new Set();
   buildTabs(); showScreen("s-home"); toast("تم تسجيل الخروج");
+  try { await sb.auth.signOut(); } catch(e) {}
 }
 
 /* ================= نشر طلب ================= */
@@ -569,8 +574,14 @@ async function init(){
   sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   try {
     const { data } = await sb.auth.getSession();
-    if(data.session){ me = data.session.user; await loadProfile(); buildTabs(); }
+    if(data.session){ me = data.session.user; loadIgnored(); await loadProfile(); buildTabs(); }
   } catch(e) {}
+  sb.auth.onAuthStateChange(ev => {
+    if(ev === "SIGNED_OUT" && me){
+      me = null; profile = null; contacted = new Set(); ignored = new Set();
+      buildTabs(); showScreen("s-home"); toast("انتهت الجلسة، ادخل تاني");
+    }
+  });
 }
 init();
 </script>
