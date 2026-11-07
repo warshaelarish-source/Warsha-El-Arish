@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <link rel="icon" type="image/png" href="/favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0891b2">
 <title>ورشة العريش | صنايعية في أي وقت</title>
 <meta name="description" content="ورشة العريش — انشر طلبك واتواصل مع صنايعي كهرباء أو سباكة أو نجارة في العريش.">
 <link rel="canonical" href="https://warshaelarish-source.github.io/Warsha-El-Arish/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🔧%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
 <meta property="og:title" content="ورشة العريش | صنايعية في أي وقت">
 <meta property="og:description" content="انشر طلبك واتواصل مع صنايعي في العريش.">
 <meta property="og:type" content="website">
@@ -293,7 +292,7 @@ const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", mon
 function togglePw(id, btn){
   const i = $(id), show = i.type === "password";
   i.type = show ? "text" : "password";
-  btn.textContent = show ? "👁️" : "🙈";
+  btn.textContent = show ? "👁️️" : "😑️";
   btn.setAttribute("aria-label", show ? "إخفاء كلمة السر" : "إظهار كلمة السر");
 }
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
