@@ -46,6 +46,9 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 .btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--dark);margin-top:10px}
 .hero{background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;padding:30px 20px 60px;border-radius:0 0 30px 30px}
 .hero .logo{font-size:15px;opacity:.9;font-weight:700}
+.brand,.hero .logo{display:flex;align-items:center;gap:8px}
+.brand-ic{width:34px;height:34px;object-fit:contain;flex-shrink:0}
+
 .hero h1{font-size:24px;margin:6px 0 8px}
 .hero p{font-size:14px;opacity:.9;margin-bottom:16px}
 .hero .cta{background:#fff;color:var(--pri);border-radius:14px;padding:14px;font-weight:900;font-size:16px;display:block;width:100%;border:0;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.15)}
@@ -116,7 +119,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 <!-- ============ HOME ============ -->
 <section id="s-home" class="screen active">
   <div class="hero">
-    <div class="logo">🔧 ورشة العريش</div>
+    <div class="logo"><img class="brand-ic" src="logo.png" alt="" width="34" height="34"><span>ورشة العريش</span></div>
     <h1>محتاج صنايعي<br>في العريش؟</h1>
     <p>انشر طلبك والصنايعية المناسبين هيتواصلوا معاك.</p>
     <button class="cta" type="button" onclick="goRequest()">⚡ انشر طلبك دلوقتي</button>
@@ -141,7 +144,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
     <div class="step"><div class="n">3</div><div><h3>اتفق على السعر</h3><p class="mut">اتفق مع الصنايعي، والدفع كاش له بعد ما الشغل يخلص</p></div></div>
   </div>
   <div class="footer">
-    <b>🔧 ورشة العريش</b>
+    <b class="brand"><img class="brand-ic" src="logo.png" alt="" width="34" height="34"><span>ورشة العريش</span></b>
     <p style="margin-top:8px;font-size:13px">بنساعد أهالي العريش يوصلوا لصنايعي كهرباء وسباكة ونجارة. الطلب مجاني والدفع للصنايعي كاش بعد ما الشغل يخلص.</p>
     <div class="row">
       <a class="chip" href="https://wa.me/201508207016" target="_blank" rel="noopener">💬 تواصل معنا</a>
