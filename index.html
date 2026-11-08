@@ -2,8 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0891b2">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://oliyswglvrhxdmkijann.supabase.co wss://oliyswglvrhxdmkijann.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'">
 <title>ورشة العريش | صنايعية في أي وقت</title>
 <meta name="description" content="ورشة العريش — انشر طلبك واتواصل مع صنايعي كهرباء أو سباكة أو نجارة في العريش.">
 <link rel="canonical" href="https://warshaelarish-source.github.io/Warsha-El-Arish/">
@@ -24,7 +25,7 @@
 body{background:#e2e8f0;color:var(--dark)}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit}
-.phone{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15)}
+.phone{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15)}
 .screen{display:none;flex:1;flex-direction:column;animation:fade .25s ease}
 .screen.active{display:flex}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -111,6 +112,62 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 #tabbar .ic{font-size:21px}
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:11px 22px;border-radius:30px;font-size:14px;font-weight:700;opacity:0;transition:.3s;z-index:99;max-width:88%;text-align:center;pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ====== الشاشات العريضة والعرضية ====== */
+.phone{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+@media (min-width:700px){
+  .phone{max-width:none;width:100%;margin:0;box-shadow:none}
+  #tabbar{max-width:none}
+  .pad{padding:28px 32px 110px}
+  .sec{margin:30px 32px 0}
+  .stats{margin:-34px 32px 0;gap:18px}
+  .hero{padding:40px 40px 70px;border-radius:0 0 36px 36px}
+  .hero h1{font-size:32px}
+  .hero p{font-size:16px;max-width:520px}
+  .hero .cta{width:auto;min-width:280px;padding:14px 34px;display:inline-block}
+  .cats{gap:18px}
+  .cat{padding:24px 10px}
+  .footer{padding:30px 32px 110px}
+  /* النماذج في النص بعرض مريح */
+  #s-auth .pad,#s-request .pad{max-width:660px;margin:0 auto;width:100%}
+  .legal{max-width:780px;margin:0 auto;width:100%}
+  /* القوايم على عمودين */
+  #myreq-list,#jobs-list,#acc-box>div:not(.card):not(.sec-h){display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;align-items:start}
+  #myreq-list .req,#jobs-list .req,#acc-box .req{margin-bottom:0}
+  #myreq-list .empty,#jobs-list .empty,#myreq-list>p,#jobs-list>p{grid-column:1/-1}
+  #acc-box{max-width:900px}
+  #toast{bottom:80px}
+}
+/* الخطوات الثلاثة جنب بعض */
+@media (min-width:760px){
+  #s-home .sec-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  #s-home .sec-steps .sec-h{grid-column:1/-1;margin-bottom:0}
+  #s-home .sec-steps .step{margin-bottom:0}
+  #s-home .sec-steps .step{flex-direction:column}
+}
+/* الموبايل في الوضع العرضي (ارتفاع قصير) */
+@media (orientation:landscape) and (max-height:520px){
+  .pad{padding:16px 24px 76px}
+  .hero{padding:18px 24px 48px;border-radius:0 0 24px 24px;display:grid;grid-template-columns:1fr auto;column-gap:20px;align-items:center}
+  .hero .logo{grid-column:1/-1}
+  .hero h1{font-size:22px;margin:2px 0}
+  .hero h1 br{display:none}
+  .hero p{margin-bottom:0;font-size:13px}
+  .hero .cta{grid-column:2;grid-row:2/4;min-width:220px}
+  .stats{margin-top:-26px}
+  .stat{padding:10px 6px}.stat b{font-size:18px}
+  .sec{margin-top:20px}
+  .cat{padding:12px 8px}.cat .ic{font-size:26px}.cat b{margin-top:4px}
+  .footer{padding:22px 24px 76px;margin-top:22px}
+  #tabbar{padding:3px 6px calc(3px + env(safe-area-inset-bottom))}
+  #tabbar button{flex-direction:row;justify-content:center;gap:8px;font-size:13px;padding:6px}
+  #tabbar .ic{font-size:18px}
+  #toast{bottom:56px}
+  .btn{padding:11px}
+  .inp{padding:10px 12px}
+  .field{margin-bottom:10px}
+  h1{font-size:22px}
+}
 </style>
 </head>
 <body>
@@ -137,7 +194,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
       <button class="cat" type="button" onclick="quickRequest('نجارة')"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></button>
     </div>
   </div>
-  <div class="sec">
+  <div class="sec sec-steps">
     <div class="sec-h"><h2>إزاي بنشتغل؟</h2></div>
     <div class="step"><div class="n">1</div><div><h3>انشر طلبك</h3><p class="mut">حدد نوع الشغل والمنطقة واكتب التفاصيل</p></div></div>
     <div class="step"><div class="n">2</div><div><h3>الصنايعية يشوفوه</h3><p class="mut">الصنايعية المعتمدين في نفس التخصص بيشوفوا طلبك ويتواصلوا معاك</p></div></div>
@@ -181,7 +238,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
       </div>
       <div class="field"><label for="s-name">الاسم بالكامل</label><input class="inp" id="s-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
       <div class="field"><label for="s-phone">رقم الموبايل</label><input class="inp" id="s-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
-      <div class="field"><label for="s-pass">كلمة السر</label><div class="pw"><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="6 حروف أو أرقام على الأقل (احفظها كويس)"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('s-pass',this)">👁️</button></div></div>
+      <div class="field"><label for="s-pass">كلمة السر</label><div class="pw"><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="8 حروف أو أرقام على الأقل (احفظها كويس)"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('s-pass',this)">👁️</button></div></div>
       <div id="craft-fields" class="hidden">
         <div class="field"><label for="s-cat">التخصص</label><select class="inp" id="s-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
         <div class="field"><label for="s-area">منطقتك في العريش</label><select class="inp" id="s-area"></select></div>
@@ -274,8 +331,10 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 <nav id="tabbar" aria-label="التنقل"></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js" crossorigin="anonymous"></script>
 <script>
+/* حماية من التضمين داخل iframe (clickjacking) */
+if(window.top !== window.self){ document.documentElement.style.display = "none"; }
 /* ================= الإعدادات ================= */
 const SUPABASE_URL = "https://oliyswglvrhxdmkijann.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Gjm1kZ33UbvUAR1KTURxZQ_SRXTmv_A"; // مفتاح عام وآمن
@@ -372,7 +431,7 @@ function authError(err){
   const m = (err && err.message || "").toLowerCase();
   if(m.includes("already") || m.includes("registered")) return "الرقم ده مسجّل قبل كده، ادخل بيه";
   if(m.includes("invalid login")) return "الرقم أو كلمة السر غلط";
-  if(m.includes("password")) return "كلمة السر ضعيفة، اكتب 6 حروف على الأقل";
+  if(m.includes("password")) return "كلمة السر ضعيفة، اكتب 8 حروف على الأقل";
   if(m.includes("rate") || m.includes("too many")) return "محاولات كتير، استنى شوية وجرب تاني";
   if(m.includes("email") && m.includes("invalid")) return "الرقم مش مقبول، راجعه وجرب تاني";
   if(m.includes("database")) return "حصلت مشكلة في البيانات، راجع الاسم والرقم وجرب تاني";
@@ -412,7 +471,8 @@ async function doSignup(e){
   const password = $("s-pass").value;
   if(full_name.length < 3) return toast("اكتب اسمك بالكامل");
   if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
-  if(password.length < 6) return toast("كلمة السر لازم 6 على الأقل");
+  if(password.length < 8) return toast("كلمة السر لازم 8 على الأقل");
+  if(password === phone || /^(.)\1+$/.test(password)) return toast("كلمة السر ضعيفة، اختار حاجة أصعب");
   const meta = { full_name, phone, role: r };
   if(r === "craftsman"){
     const exp = $("s-exp").value.trim();
@@ -438,8 +498,10 @@ async function logout(){
 async function submitRequest(e){
   e.preventDefault();
   if(!me) return showScreen("s-request");
+  if(isCraft()) return toast("حساب الصنايعي مش بينشر طلبات");
   const full = $("q-cat").value, category = full.split(" — ")[0];
   const area = $("q-area").value, details = $("q-details").value.trim();
+  if(!AREAS.includes(area)) return toast("اختار المنطقة");
   if(details.length < 5) return toast("اكتب تفاصيل الشغل بشكل أوضح");
   const b = $("q-btn"); b.disabled = true;
   const { error } = await sb.from("requests").insert({ customer_id: me.id, category, work_type: full, area, details });
@@ -453,13 +515,13 @@ async function submitRequest(e){
 /* ================= طلباتي (عميل) ================= */
 const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","مغلق"] };
 async function fetchMyRequests(){
-  const [r, c] = await Promise.all([
-    sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false }),
-    sb.from("contacts").select("request_id")
-  ]);
+  const r = await sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false });
   if(r.error) return null;
-  const counts = {};
-  (c.data || []).forEach(x => counts[x.request_id] = (counts[x.request_id] || 0) + 1);
+  const ids = r.data.map(x => x.id), counts = {};
+  if(ids.length){
+    const c = await sb.from("contacts").select("request_id").in("request_id", ids);
+    (c.data || []).forEach(x => counts[x.request_id] = (counts[x.request_id] || 0) + 1);
+  }
   return r.data.map(x => ({ ...x, n: counts[x.id] || 0 }));
 }
 async function loadMyRequests(){
@@ -475,13 +537,13 @@ async function loadMyRequests(){
       <div class="meta">📍 ${esc(r.area)} — 🗓️ ${fmtDate(r.created_at)}</div>
       <div class="det">${esc(r.details)}</div>
       <div class="meta">${r.n ? `🤝 تواصل معاك ${r.n} صنايعي` : "⏳ لسه ماحدش تواصل"}</div>
-      ${r.status === "open" ? `<div class="acts"><button class="btn-s bad" type="button" onclick="cancelRequest('${r.id}')">إلغاء الطلب</button></div>` : ""}
+      ${r.status === "open" ? `<div class="acts"><button class="btn-s bad" type="button" data-id="${esc(r.id)}" onclick="cancelRequest(this.dataset.id)">إلغاء الطلب</button></div>` : ""}
     </div>`;
   }).join("");
 }
 async function cancelRequest(id){
   if(!confirm("متأكد إنك عايز تلغي الطلب ده؟")) return;
-  const { error } = await sb.from("requests").update({ status:"cancelled" }).eq("id", id);
+  const { error } = await sb.from("requests").update({ status:"cancelled" }).eq("id", id).eq("customer_id", me.id).eq("status","open");
   if(error) return toast("ماقدرناش نلغي الطلب، جرب تاني");
   toast("تم إلغاء الطلب");
   loadMyRequests();
@@ -499,7 +561,7 @@ async function loadJobs(){
   sub.textContent = "طلبات " + profile.category + " المنشورة";
   box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
   const [r, c] = await Promise.all([
-    sb.from("requests").select("id,work_type,area,details,created_at").eq("status","open").order("created_at", { ascending:false }),
+    sb.from("requests").select("id,work_type,area,details,created_at").eq("status","open").eq("category", profile.category).order("created_at", { ascending:false }),
     sb.from("contacts").select("request_id").eq("craftsman_id", me.id)
   ]);
   if(r.error) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل الطلبات، حدّث الصفحة</p></div>';
@@ -518,8 +580,8 @@ function renderJobs(){
       <div class="meta">📍 ${esc(j.area)} — 🗓️ ${fmtDate(j.created_at)}</div>
       <div class="det">${esc(j.details)}</div>
       <div class="acts">
-        <button class="btn-s ok" type="button" onclick="contactJob('${j.id}')">${done ? "💬 افتح واتساب تاني" : "💬 تواصل"}</button>
-        ${done ? "" : `<button class="btn-s g" type="button" onclick="ignoreJob('${j.id}')">تجاهل</button>`}
+        <button class="btn-s ok" type="button" data-id="${esc(j.id)}" onclick="contactJob(this.dataset.id)">${done ? "💬 افتح واتساب تاني" : "💬 تواصل"}</button>
+        ${done ? "" : `<button class="btn-s g" type="button" data-id="${esc(j.id)}" onclick="ignoreJob(this.dataset.id)">تجاهل</button>`}
       </div>
     </div>`;
   }).join("");
@@ -529,10 +591,12 @@ async function contactJob(id){
   const { data, error } = await sb.rpc("contact_request", { p_request_id: id });
   if(error || !data || !data.length){ toast("الطلب ده مش متاح دلوقتي"); return loadJobs(); }
   const c = data[0], j = jobs.find(x => x.id === id);
+  const ph = normPhone(c.customer_phone);
+  if(!validPhone(ph)){ toast("رقم العميل مش صالح"); return; }
   const msg = `أهلاً ${c.customer_name}، أنا ${profile.full_name} صنايعي ${profile.category} من ورشة العريش. شفت طلبك${j ? " (" + j.work_type + " في " + j.area + ")" : ""} وأقدر أساعدك. ينفع نتفق؟`;
   contacted.add(id);
   renderJobs();
-  window.location.href = "https://wa.me/2" + c.customer_phone + "?text=" + encodeURIComponent(msg);
+  window.location.href = "https://wa.me/2" + ph + "?text=" + encodeURIComponent(msg);
 }
 
 /* ================= حسابي ================= */
