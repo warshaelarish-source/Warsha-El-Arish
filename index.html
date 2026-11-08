@@ -356,7 +356,7 @@ const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", mon
 function togglePw(id, btn){
   const i = $(id), show = i.type === "password";
   i.type = show ? "text" : "password";
-  btn.textContent = show ? "🙈" : "👁️";
+  btn.textContent = show ? "👁️" : "🙈";
   btn.setAttribute("aria-label", show ? "إخفاء كلمة السر" : "إظهار كلمة السر");
 }
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
