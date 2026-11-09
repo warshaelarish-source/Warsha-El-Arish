@@ -356,7 +356,7 @@ const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", mon
 function togglePw(id, btn){
   const i = $(id), show = i.type === "password";
   i.type = show ? "text" : "password";
-  btn.textContent = show ? "👁️" : "🙈";
+  btn.textContent = show ? "🙈" : "👁️";
   btn.setAttribute("aria-label", show ? "إخفاء كلمة السر" : "إظهار كلمة السر");
 }
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
@@ -437,15 +437,31 @@ function authError(err){
   if(m.includes("database")) return "حصلت مشكلة في البيانات، راجع الاسم والرقم وجرب تاني";
   return "حصلت مشكلة، جرب تاني";
 }
+async function forceLogout(msg){
+  me = null; profile = null; contacted = new Set(); ignored = new Set();
+  buildTabs(); showScreen("s-home"); toast(msg || "الحساب ده مبقاش موجود، تم تسجيل الخروج");
+  try { await sb.auth.signOut({ scope: "local" }); } catch(e) {}
+}
+// بيتأكد من السيرفر إن المستخدم لسه موجود، لو اتحذف بيعمل تسجيل خروج تلقائي
+async function checkUserStillExists(){
+  try {
+    const { data, error } = await sb.auth.getUser();
+    if(error && [401, 403, 404].includes(error.status)) return false;
+    if(!error && !data.user) return false;
+  } catch(e) {}
+  return true;
+}
 async function loadProfile(){
   if(!me){ profile = null; return; }
-  const { data } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
+  const { data, error } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
   profile = data || null;
+  if(!profile && !error && !(await checkUserStillExists())) await forceLogout();
 }
 async function afterAuth(session){
   me = session.user;
   loadIgnored();
   await loadProfile();
+  if(!me) return; // الحساب اتحذف واتعمل تسجيل خروج تلقائي
   if(!profile) toast("مقدرناش نحمّل بياناتك، حدّث الصفحة");
   buildTabs();
   const go = afterLogin; afterLogin = null;
@@ -604,6 +620,7 @@ async function loadAccount(){
   const box = $("acc-box");
   box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
   if(!profile) await loadProfile();
+  if(!me) return; // اتعمل تسجيل خروج تلقائي
   if(!profile) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل بياناتك، حدّث الصفحة</p></div>';
   const p = profile;
   let html = `<div class="card"><div class="kv"><span>الاسم</span><b>${esc(p.full_name)}</b></div>
@@ -643,6 +660,10 @@ async function init(){
     const { data } = await sb.auth.getSession();
     if(data.session){ me = data.session.user; loadIgnored(); await loadProfile(); buildTabs(); }
   } catch(e) {}
+  // لو المستخدم رجع للصفحة بعد ما حسابه اتحذف، نتأكد ونطلّعه
+  document.addEventListener("visibilitychange", async () => {
+    if(document.visibilityState === "visible" && me && !(await checkUserStillExists())) forceLogout();
+  });
   sb.auth.onAuthStateChange(ev => {
     if(ev === "SIGNED_OUT" && me){
       me = null; profile = null; contacted = new Set(); ignored = new Set();
