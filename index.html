@@ -454,8 +454,21 @@ async function checkUserStillExists(){
 async function loadProfile(){
   if(!me){ profile = null; return; }
   const { data, error } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
-  profile = data || null;
-  if(!profile && !error && !(await checkUserStillExists())) await forceLogout();
+  if(error){
+    // الجلسة نفسها مرفوضة = الحساب اتمسح
+    if([401, 403].includes(error.status) || /jwt|sub claim/i.test(error.message || "")){ await accountDeleted(); return; }
+    profile = null; // مشكلة اتصال عادية
+    return;
+  }
+  // مفيش خطأ ومفيش بروفايل = الحساب اتمسح
+  if(!data){ await accountDeleted(); return; }
+  profile = data;
+}
+async function accountDeleted(){
+  await forceLogout("حسابك اتمسح، اعمل حساب جديد");
+  authTab("signup");
+  $("auth-msg").textContent = "حسابك اتمسح، اعمل حساب جديد";
+  showScreen("s-auth");
 }
 async function afterAuth(session){
   me = session.user;
