@@ -749,6 +749,12 @@ async function init(){
   fillAreas();
   buildTabs();
   if(!window.supabase){ toast("تعذّر تحميل الموقع بالكامل، حدّث الصفحة"); return; }
+  // لو الدخول بجوجل رجّع خطأ في الرابط، نعرضه عشان نعرف السبب
+  let oauthErr = "";
+  try {
+    const q = new URLSearchParams(location.hash.replace(/^#/, "") + "&" + location.search.replace(/^\?/, ""));
+    oauthErr = q.get("error_description") || q.get("error") || "";
+  } catch(e) {}
   sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   try {
     const { data } = await sb.auth.getSession();
@@ -765,6 +771,11 @@ async function init(){
       else if(fromGoogle && profile){ toast("أهلاً بيك 👋"); const go = afterLogin; afterLogin = null; showScreen(go || (isCraft() ? "s-jobs" : "s-home")); }
     } else { try { localStorage.removeItem("warsha_google"); } catch(e) {} }
   } catch(e) {}
+  if(oauthErr){
+    history.replaceState(null, "", location.pathname);
+    showScreen("s-auth");
+    $("auth-msg").textContent = "خطأ من الدخول بجوجل: " + oauthErr;
+  }
   // لو المستخدم رجع للصفحة بعد ما حسابه اتحذف، نتأكد ونطلّعه
   document.addEventListener("visibilitychange", async () => {
     if(document.visibilityState === "visible" && me && !(await checkUserStillExists())) forceLogout();
