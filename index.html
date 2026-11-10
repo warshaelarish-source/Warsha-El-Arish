@@ -84,6 +84,10 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 .radio-row input{display:none}
 .radio-row label:has(input:checked){border-color:var(--pri);background:#ecfeff;color:var(--pri)}
 .hidden{display:none!important}
+.or{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:13px;margin:14px 0 4px}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.btn-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:10px;background:#fff;border:1.5px solid var(--line);color:var(--dark);font-weight:800;font-size:15px;padding:13px;border-radius:12px;cursor:pointer}
+.btn-google:disabled{opacity:.6}
 .req{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 4px 14px rgba(2,6,23,.05)}
 .req .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .req .det{font-size:13.5px;color:#334155;margin-top:8px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
@@ -227,6 +231,8 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
       <div class="field"><label for="l-phone">رقم الموبايل</label><input class="inp" id="l-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
       <div class="field"><label for="l-pass">كلمة السر</label><div class="pw"><input class="inp" id="l-pass" type="password" autocomplete="current-password"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('l-pass',this)">👁️</button></div></div>
       <button class="btn btn-pri" id="l-btn" type="submit">دخول</button>
+      <div class="or">أو</div>
+      <button class="btn-google" type="button" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>الدخول بحساب جوجل</span></button>
     </form>
 
     <form class="card hidden" id="f-signup" onsubmit="doSignup(event)" novalidate>
@@ -247,6 +253,35 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
         <p class="mut" style="margin-bottom:12px">⏳ حساب الصنايعي بيتراجع قبل التفعيل، وبعدها تشوف الطلبات.</p>
       </div>
       <button class="btn btn-pri" id="s-btn" type="submit">إنشاء الحساب</button>
+      <div class="or">أو</div>
+      <button class="btn-google" type="button" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>التسجيل بحساب جوجل</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ COMPLETE PROFILE (Google) ============ -->
+<section id="s-complete" class="screen">
+  <div class="pad" style="max-width:660px;margin:0 auto;width:100%">
+    <h1 style="margin-bottom:4px">كمّل بياناتك 📝</h1>
+    <p class="mut" style="margin-bottom:16px">دخلت بجوجل، محتاجين كام معلومة بس عشان نفتحلك حسابك</p>
+    <form class="card" onsubmit="completeProfile(event)" novalidate>
+      <div class="field"><label>أنا:</label>
+        <div class="radio-row">
+          <label><input type="radio" name="c-role" value="customer" checked onchange="cRoleChange()"><span>🙋 عميل</span></label>
+          <label><input type="radio" name="c-role" value="craftsman" onchange="cRoleChange()"><span>🛠️ صنايعي</span></label>
+        </div>
+      </div>
+      <div class="field"><label for="c-name">الاسم بالكامل</label><input class="inp" id="c-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
+      <div class="field"><label for="c-phone">رقم الموبايل</label><input class="inp" id="c-phone" type="tel" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div id="c-craft" class="hidden">
+        <div class="field"><label for="c-cat">التخصص</label><select class="inp" id="c-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
+        <div class="field"><label for="c-area">منطقتك في العريش</label><select class="inp" id="c-area"></select></div>
+        <div class="field"><label for="c-exp">سنين الخبرة</label><input class="inp" id="c-exp" inputmode="numeric" maxlength="2" placeholder="مثال: 7"></div>
+        <div class="field"><label for="c-bio">نبذة عن شغلك (اختياري)</label><textarea class="inp" id="c-bio" rows="3" maxlength="500"></textarea></div>
+        <p class="mut" style="margin-bottom:12px">⏳ حساب الصنايعي بيتراجع قبل التفعيل، وبعدها تشوف الطلبات.</p>
+      </div>
+      <button class="btn btn-pri" id="c-btn" type="submit">حفظ وإكمال</button>
+      <button class="btn btn-ghost" type="button" onclick="logout()">إلغاء وتسجيل خروج</button>
     </form>
   </div>
 </section>
@@ -361,7 +396,7 @@ function togglePw(id, btn){
 }
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
 
-let sb = null, me = null, profile = null, afterLogin = null, current = "s-home";
+let sb = null, me = null, profile = null, afterLogin = null, current = "s-home", needComplete = false;
 let ignored = new Set(), contacted = new Set();
 const ignKey = () => "warsha_ignored_" + (me ? me.id : "guest");
 function loadIgnored(){ try { ignored = new Set(JSON.parse(localStorage.getItem(ignKey()) || "[]")); } catch(e) { ignored = new Set(); } }
@@ -388,6 +423,7 @@ function showScreen(id){
     $("auth-msg").textContent = id === "s-request" ? "سجّل دخول الأول عشان تنشر طلبك" : "سجّل دخول الأول";
     id = "s-auth";
   }
+  if(me && needComplete) id = "s-complete";
   if(id === "s-request" && isCraft()) id = "s-jobs";
   if((id === "s-myreq") && isCraft()) id = "s-jobs";
   if(id === "s-jobs" && me && !isCraft()) id = "s-myreq";
@@ -452,6 +488,7 @@ async function checkUserStillExists(){
   return true;
 }
 async function loadProfile(){
+  needComplete = false;
   if(!me){ profile = null; return; }
   const { data, error } = await sb.from("profiles").select("*").eq("id", me.id).maybeSingle();
   if(error){
@@ -461,7 +498,11 @@ async function loadProfile(){
     return;
   }
   // مفيش خطأ ومفيش بروفايل = الحساب اتمسح
-  if(!data){ await accountDeleted(); return; }
+  if(!data){
+    // مستخدم جوجل لسه ماكمّلش بياناته (الحساب موجود في السيرفر بس مفيش بروفايل)
+    if(isGoogleUser() && await checkUserStillExists()){ profile = null; needComplete = true; prefillComplete(); return; }
+    await accountDeleted(); return;
+  }
   profile = data;
 }
 async function accountDeleted(){
@@ -469,6 +510,46 @@ async function accountDeleted(){
   authTab("signup");
   $("auth-msg").textContent = "حسابك اتمسح، اعمل حساب جديد";
   showScreen("s-auth");
+}
+const isGoogleUser = () => !!me && ((me.app_metadata && me.app_metadata.provider === "google") || (me.identities || []).some(i => i.provider === "google"));
+async function googleLogin(){
+  if(!sb) return toast("حدّث الصفحة وجرب تاني");
+  try { localStorage.setItem("warsha_google", "1"); if(afterLogin) localStorage.setItem("warsha_after", afterLogin); } catch(e) {}
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: "select_account" } }
+  });
+  if(error) toast("تعذّر الدخول بجوجل، جرب تاني");
+}
+function prefillComplete(){
+  const m = (me && me.user_metadata) || {};
+  if(!$("c-name").value) $("c-name").value = m.full_name || m.name || "";
+}
+function cRoleChange(){
+  $("c-craft").classList.toggle("hidden", document.querySelector('input[name="c-role"]:checked').value !== "craftsman");
+}
+async function completeProfile(e){
+  e.preventDefault();
+  const r = document.querySelector('input[name="c-role"]:checked').value;
+  const full_name = $("c-name").value.trim(), phone = normPhone($("c-phone").value);
+  if(full_name.length < 3) return toast("اكتب اسمك بالكامل");
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  const args = { p_role: r, p_full_name: full_name, p_phone: phone, p_category: null, p_area: null, p_experience_years: null, p_bio: null };
+  if(r === "craftsman"){
+    const exp = $("c-exp").value.trim();
+    if(!/^\d{1,2}$/.test(exp)) return toast("اكتب سنين خبرتك بالأرقام");
+    Object.assign(args, { p_category: $("c-cat").value, p_area: $("c-area").value, p_experience_years: parseInt(exp, 10), p_bio: $("c-bio").value.trim() || null });
+  }
+  const b = $("c-btn"); b.disabled = true;
+  const { error } = await sb.rpc("complete_profile", args);
+  b.disabled = false;
+  if(error) return toast(/duplicate|unique/i.test(error.message || "") ? "رقم الموبايل ده مسجّل قبل كده" : "حصلت مشكلة في حفظ البيانات، جرب تاني");
+  await loadProfile();
+  if(!profile) return toast("مقدرناش نحمّل بياناتك، حدّث الصفحة");
+  buildTabs();
+  toast(r === "craftsman" ? "تم! حسابك قيد المراجعة ⏳" : "تم إنشاء حسابك 🎉");
+  const go = afterLogin; afterLogin = null;
+  showScreen(go || (isCraft() ? "s-jobs" : "s-home"));
 }
 async function afterAuth(session){
   me = session.user;
@@ -662,7 +743,7 @@ async function loadAccount(){
 
 /* ================= تشغيل ================= */
 function fillAreas(){
-  ["q-area","s-area"].forEach(id => AREAS.forEach(a => { const o = document.createElement("option"); o.textContent = a; $(id).appendChild(o); }));
+  ["q-area","s-area","c-area"].forEach(id => AREAS.forEach(a => { const o = document.createElement("option"); o.textContent = a; $(id).appendChild(o); }));
 }
 async function init(){
   fillAreas();
@@ -671,7 +752,18 @@ async function init(){
   sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   try {
     const { data } = await sb.auth.getSession();
-    if(data.session){ me = data.session.user; loadIgnored(); await loadProfile(); buildTabs(); }
+    if(data.session){
+      me = data.session.user; loadIgnored(); await loadProfile(); buildTabs();
+      let fromGoogle = false;
+      try {
+        fromGoogle = localStorage.getItem("warsha_google") === "1";
+        afterLogin = localStorage.getItem("warsha_after");
+        localStorage.removeItem("warsha_google"); localStorage.removeItem("warsha_after");
+      } catch(e) {}
+      if(location.hash.includes("access_token") || location.search.includes("code=")) history.replaceState(null, "", location.pathname);
+      if(needComplete) showScreen("s-complete");
+      else if(fromGoogle && profile){ toast("أهلاً بيك 👋"); const go = afterLogin; afterLogin = null; showScreen(go || (isCraft() ? "s-jobs" : "s-home")); }
+    } else { try { localStorage.removeItem("warsha_google"); } catch(e) {} }
   } catch(e) {}
   // لو المستخدم رجع للصفحة بعد ما حسابه اتحذف، نتأكد ونطلّعه
   document.addEventListener("visibilitychange", async () => {
