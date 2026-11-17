@@ -24,7 +24,6 @@
 :root{--pri:#0891b2;--pri2:#0d9488;--dark:#0f172a;--mut:#64748b;--bg:#f1f5f9;--line:#e2e8f0;--ok:#16a34a;--bad:#dc2626}
 body{background:#e2e8f0;color:var(--dark)}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:3px solid #0891b2;outline-offset:2px}
 button{font-family:inherit}
 .phone{max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.15)}
 .screen{display:none;flex:1;flex-direction:column;animation:fade .25s ease}
@@ -176,7 +175,6 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 </style>
 </head>
 <body>
-<noscript><p style="padding:30px;text-align:center">الموقع محتاج JavaScript عشان يشتغل.</p></noscript>
 <div class="phone">
 
 <!-- ============ HOME ============ -->
@@ -214,7 +212,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
       <button class="chip" type="button" onclick="goJoin()">🛠️ انضم كصنايعي</button>
       <button class="chip" type="button" onclick="showScreen('s-privacy')">🔒 الخصوصية والشروط</button>
     </div>
-    <p style="margin-top:16px;font-size:12px;opacity:.85">© 2026 ورشة العريش — جميع الحقوق محفوظة</p>
+    <p style="margin-top:16px;font-size:11px;opacity:.6">© 2026 ورشة العريش — جميع الحقوق محفوظة</p>
   </div>
 </section>
 
@@ -223,11 +221,41 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
   <div class="pad">
     <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
     <h1 style="margin-bottom:4px">أهلاً بيك 👋</h1>
-    <p class="mut" id="auth-msg" style="margin-bottom:16px">سجّل دخول بحساب جوجل، ولو أول مرة هنطلب منك كام معلومة بس</p>
-    <div class="card">
-      <button class="btn-google" type="button" style="margin-top:0" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>المتابعة بحساب جوجل</span></button>
-      <p class="mut" style="margin-top:14px;font-size:12px;text-align:center">بنستخدم جوجل بس عشان نعرّفك، ومش بنشوف كلمة سر حسابك.</p>
+    <p class="mut" id="auth-msg" style="margin-bottom:16px">ادخل برقم موبايلك وكلمة السر، أو اعمل حساب جديد</p>
+    <div class="tabs">
+      <button type="button" id="t-login" class="on" onclick="authTab('login')">دخول</button>
+      <button type="button" id="t-signup" onclick="authTab('signup')">حساب جديد</button>
     </div>
+
+    <form class="card" id="f-login" onsubmit="doLogin(event)" novalidate>
+      <div class="field"><label for="l-phone">رقم الموبايل</label><input class="inp" id="l-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="l-pass">كلمة السر</label><div class="pw"><input class="inp" id="l-pass" type="password" autocomplete="current-password"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('l-pass',this)">👁️</button></div></div>
+      <button class="btn btn-pri" id="l-btn" type="submit">دخول</button>
+      <div class="or">أو</div>
+      <button class="btn-google" type="button" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>الدخول بحساب جوجل</span></button>
+    </form>
+
+    <form class="card hidden" id="f-signup" onsubmit="doSignup(event)" novalidate>
+      <div class="field"><label>أنا:</label>
+        <div class="radio-row">
+          <label><input type="radio" name="s-role" value="customer" checked onchange="roleChange()"><span>🙋 عميل</span></label>
+          <label><input type="radio" name="s-role" value="craftsman" onchange="roleChange()"><span>🛠️ صنايعي</span></label>
+        </div>
+      </div>
+      <div class="field"><label for="s-name">الاسم بالكامل</label><input class="inp" id="s-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
+      <div class="field"><label for="s-phone">رقم الموبايل</label><input class="inp" id="s-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label for="s-pass">كلمة السر</label><div class="pw"><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="8 حروف أو أرقام على الأقل (احفظها كويس)"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('s-pass',this)">👁️</button></div></div>
+      <div id="craft-fields" class="hidden">
+        <div class="field"><label for="s-cat">التخصص</label><select class="inp" id="s-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
+        <div class="field"><label for="s-area">منطقتك في العريش</label><select class="inp" id="s-area"></select></div>
+        <div class="field"><label for="s-exp">سنين الخبرة</label><input class="inp" id="s-exp" inputmode="numeric" maxlength="2" placeholder="مثال: 7"></div>
+        <div class="field"><label for="s-bio">نبذة عن شغلك (اختياري)</label><textarea class="inp" id="s-bio" rows="3" maxlength="500"></textarea></div>
+        <p class="mut" style="margin-bottom:12px">⏳ حساب الصنايعي بيتراجع قبل التفعيل، وبعدها تشوف الطلبات.</p>
+      </div>
+      <button class="btn btn-pri" id="s-btn" type="submit">إنشاء الحساب</button>
+      <div class="or">أو</div>
+      <button class="btn-google" type="button" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>التسجيل بحساب جوجل</span></button>
+    </form>
   </div>
 </section>
 
@@ -302,8 +330,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
 <section id="s-jobs" class="screen">
   <div class="pad">
     <h1 style="margin-bottom:4px">الطلبات 🛠️</h1>
-    <p class="mut" id="jobs-sub" style="margin-bottom:10px"></p>
-    <button class="btn btn-ghost" type="button" onclick="loadJobs()" style="margin:0 0 14px">🔄 تحديث</button>
+    <p class="mut" id="jobs-sub" style="margin-bottom:16px"></p>
     <div id="jobs-list"></div>
   </div>
 </section>
@@ -324,13 +351,13 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
     <h3>إيه البيانات اللي بنجمعها؟</h3>
     <p>اسمك ورقم موبايلك ومنطقتك وتفاصيل الطلبات اللي بتنشرها. وللصنايعية: التخصص وسنين الخبرة.</p>
     <h3>بنخزنها فين وبنستخدمها في إيه؟</h3>
-    <p>بتتخزن في قاعدة بيانات على Supabase، والدخول بيتم بحساب جوجل (بنستلم منه الاسم والإيميل بس ومش بنشوف كلمة سرك). بنستخدم البيانات بس عشان نوصّلك بالصنايعي المناسب أو نراجع طلب انضمامك. بنحفظ في متصفحك جلسة الدخول وقايمة الطلبات اللي تجاهلتها.</p>
+    <p>بتتخزن في قاعدة بيانات مؤمّنة، وبنستخدمها بس عشان نوصّلك بالصنايعي المناسب أو نراجع طلب انضمامك كصنايعي.</p>
     <h3>مين يشوف رقمك؟</h3>
     <p>رقم العميل بيظهر للصنايعي المعتمد اللي بيدوس "تواصل" على طلبه بس. بقية الصنايعية بيشوفوا تفاصيل الشغل والمنطقة من غير رقمك.</p>
     <h3>حذف البيانات</h3>
-    <p>تقدر تمسح حسابك وكل بياناتك في أي وقت من صفحة "حسابي" ← "حذف حسابي نهائيًا".</p>
+    <p>لو عايز حسابك وبياناتك يتمسحوا، كلمنا من "تواصل معنا".</p>
     <h3>شروط الاستخدام</h3>
-    <p>ورشة العريش بتوصّلك بصنايعي، لكن الاتفاق على السعر وتنفيذ الشغل بيتم بينك وبين الصنايعي مباشرة. الدفع كاش للصنايعي بعد ما الشغل يخلص. اتأكد من الشغل قبل ما تدفع. ورشة العريش وسيط بس، ومش مسؤولة عن جودة الشغل أو عن الاتفاق بينك وبين الصنايعي.</p>
+    <p>ورشة العريش بتوصّلك بصنايعي، لكن الاتفاق على السعر وتنفيذ الشغل بيتم بينك وبين الصنايعي مباشرة. الدفع كاش للصنايعي بعد ما الشغل يخلص. اتأكد من الشغل قبل ما تدفع.</p>
   </div>
 </section>
 
@@ -351,19 +378,26 @@ const AREAS = ["حي أول العريش","حي ثاني العريش","حي ث�
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const validPhone = p => /^01[0125][0-9]{8}$/.test(p);
+const validPhone = p => /^01[0-9]{9}$/.test(p);
 const AR_DIGITS = {"٠":"0","١":"1","٢":"2","٣":"3","٤":"4","٥":"5","٦":"6","٧":"7","٨":"8","٩":"9","۰":"0","۱":"1","۲":"2","۳":"3","۴":"4","۵":"5","۶":"6","۷":"7","۸":"8","۹":"9"};
 function normPhone(s){
   let d = String(s || "").replace(/[٠-٩۰-۹]/g, c => AR_DIGITS[c]).replace(/\D/g, "");
   if(/^201[0-9]{9}$/.test(d)) d = "0" + d.slice(2);
   return d;
 }
+const EMAIL_DOMAIN = "warsha-el-arish.app"; // إيميل داخلي بيتبني من رقم الموبايل، المستخدم مش بيشوفه
+const phoneToEmail = p => p + "@" + EMAIL_DOMAIN;
 const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", month:"short"});
+function togglePw(id, btn){
+  const i = $(id), show = i.type === "password";
+  i.type = show ? "text" : "password";
+  btn.textContent = show ? "🙈" : "👁️";
+  btn.setAttribute("aria-label", show ? "إخفاء كلمة السر" : "إظهار كلمة السر");
+}
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove("show"),3000)}
 
 let sb = null, me = null, profile = null, afterLogin = null, current = "s-home", needComplete = false;
 let ignored = new Set(), contacted = new Set();
-let lastPost = 0, lastCheck = 0, joinRole = null;
 const ignKey = () => "warsha_ignored_" + (me ? me.id : "guest");
 function loadIgnored(){ try { ignored = new Set(JSON.parse(localStorage.getItem(ignKey()) || "[]")); } catch(e) { ignored = new Set(); } }
 function saveIgnored(){ try { localStorage.setItem(ignKey(), JSON.stringify([...ignored])); } catch(e) {} }
@@ -375,7 +409,6 @@ const isCraft = () => role() === "craftsman";
 function buildTabs(){
   const t = [{id:"s-home", ic:"🏠", n:"الرئيسية"}];
   if(!me) t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-auth", ic:"👤", n:"دخول"});
-  else if(!profile) t.push({id:"s-account", ic:"👤", n:"حسابي"});
   else if(isCraft()) t.push({id:"s-jobs", ic:"🛠️", n:"الطلبات"}, {id:"s-account", ic:"👤", n:"حسابي"});
   else t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-myreq", ic:"📋", n:"طلباتي"}, {id:"s-account", ic:"👤", n:"حسابي"});
   $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" onclick="showScreen('${x.id}')"><span class="ic">${x.ic}</span>${x.n}</button>`).join("");
@@ -386,17 +419,14 @@ function markTab(){ document.querySelectorAll("#tabbar button").forEach(b => b.c
 function showScreen(id){
   const needLogin = ["s-request","s-myreq","s-jobs","s-account"];
   if(needLogin.includes(id) && !me){
-    afterLogin = id; joinRole = null;
+    afterLogin = id;
     $("auth-msg").textContent = id === "s-request" ? "سجّل دخول الأول عشان تنشر طلبك" : "سجّل دخول الأول";
     id = "s-auth";
   }
   if(me && needComplete) id = "s-complete";
-  if(me && id === "s-auth") id = "s-home";
-  if(me && !profile && !needComplete && !["s-home","s-privacy","s-account"].includes(id)) id = "s-account";
-  if(profile){
-    if((id === "s-request" || id === "s-myreq") && isCraft()) id = "s-jobs";
-    if(id === "s-jobs" && !isCraft()) id = "s-myreq";
-  }
+  if(id === "s-request" && isCraft()) id = "s-jobs";
+  if((id === "s-myreq") && isCraft()) id = "s-jobs";
+  if(id === "s-jobs" && me && !isCraft()) id = "s-myreq";
   current = id;
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $(id).classList.add("active");
@@ -414,12 +444,35 @@ function quickRequest(cat){
 }
 function goJoin(){
   if(me){ showScreen(isCraft() ? "s-jobs" : "s-account"); return; }
-  afterLogin = null; joinRole = "craftsman";
-  $("auth-msg").textContent = "سجّل دخول بجوجل وكمّل بيانات الصنايعي، وهنراجعها";
+  afterLogin = null;
+  $("auth-msg").textContent = "اعمل حساب صنايعي وهنراجع بياناتك";
+  authTab("signup");
+  document.querySelector('input[name="s-role"][value="craftsman"]').checked = true;
+  roleChange();
   showScreen("s-auth");
 }
 
 /* ================= الحسابات ================= */
+function authTab(w){
+  $("t-login").classList.toggle("on", w === "login");
+  $("t-signup").classList.toggle("on", w === "signup");
+  $("f-login").classList.toggle("hidden", w !== "login");
+  $("f-signup").classList.toggle("hidden", w !== "signup");
+}
+function roleChange(){
+  const c = document.querySelector('input[name="s-role"]:checked').value === "craftsman";
+  $("craft-fields").classList.toggle("hidden", !c);
+}
+function authError(err){
+  const m = (err && err.message || "").toLowerCase();
+  if(m.includes("already") || m.includes("registered")) return "الرقم ده مسجّل قبل كده، ادخل بيه";
+  if(m.includes("invalid login")) return "الرقم أو كلمة السر غلط";
+  if(m.includes("password")) return "كلمة السر ضعيفة، اكتب 8 حروف على الأقل";
+  if(m.includes("rate") || m.includes("too many")) return "محاولات كتير، استنى شوية وجرب تاني";
+  if(m.includes("email") && m.includes("invalid")) return "الرقم مش مقبول، راجعه وجرب تاني";
+  if(m.includes("database")) return "حصلت مشكلة في البيانات، راجع الاسم والرقم وجرب تاني";
+  return "حصلت مشكلة، جرب تاني";
+}
 async function forceLogout(msg){
   me = null; profile = null; contacted = new Set(); ignored = new Set();
   buildTabs(); showScreen("s-home"); toast(msg || "الحساب ده مبقاش موجود، تم تسجيل الخروج");
@@ -454,17 +507,14 @@ async function loadProfile(){
 }
 async function accountDeleted(){
   await forceLogout("حسابك اتمسح، اعمل حساب جديد");
-  $("auth-msg").textContent = "حسابك اتمسح، سجّل دخول بجوجل لو عايز تعمل حساب جديد";
+  authTab("signup");
+  $("auth-msg").textContent = "حسابك اتمسح، اعمل حساب جديد";
   showScreen("s-auth");
 }
 const isGoogleUser = () => !!me && ((me.app_metadata && me.app_metadata.provider === "google") || (me.identities || []).some(i => i.provider === "google"));
 async function googleLogin(){
   if(!sb) return toast("حدّث الصفحة وجرب تاني");
-  try {
-    localStorage.setItem("warsha_google", "1");
-    if(afterLogin) localStorage.setItem("warsha_after", afterLogin); else localStorage.removeItem("warsha_after");
-    if(joinRole) localStorage.setItem("warsha_role", joinRole); else localStorage.removeItem("warsha_role");
-  } catch(e) {}
+  try { localStorage.setItem("warsha_google", "1"); if(afterLogin) localStorage.setItem("warsha_after", afterLogin); } catch(e) {}
   const { error } = await sb.auth.signInWithOAuth({
     provider: "google",
     options: { redirectTo: location.origin + location.pathname, queryParams: { prompt: "select_account" } }
@@ -474,7 +524,6 @@ async function googleLogin(){
 function prefillComplete(){
   const m = (me && me.user_metadata) || {};
   if(!$("c-name").value) $("c-name").value = m.full_name || m.name || "";
-  try { if(localStorage.getItem("warsha_role") === "craftsman"){ document.querySelector('input[name="c-role"][value="craftsman"]').checked = true; cRoleChange(); } } catch(e) {}
 }
 function cRoleChange(){
   $("c-craft").classList.toggle("hidden", document.querySelector('input[name="c-role"]:checked').value !== "craftsman");
@@ -498,10 +547,56 @@ async function completeProfile(e){
   await loadProfile();
   if(!profile) return toast("مقدرناش نحمّل بياناتك، حدّث الصفحة");
   buildTabs();
-  try { localStorage.removeItem("warsha_role"); } catch(e) {}
   toast(r === "craftsman" ? "تم! حسابك قيد المراجعة ⏳" : "تم إنشاء حسابك 🎉");
   const go = afterLogin; afterLogin = null;
   showScreen(go || (isCraft() ? "s-jobs" : "s-home"));
+}
+async function afterAuth(session){
+  me = session.user;
+  loadIgnored();
+  await loadProfile();
+  if(!me) return; // الحساب اتحذف واتعمل تسجيل خروج تلقائي
+  if(!profile) toast("مقدرناش نحمّل بياناتك، حدّث الصفحة");
+  buildTabs();
+  const go = afterLogin; afterLogin = null;
+  showScreen(go || (isCraft() ? "s-jobs" : "s-home"));
+}
+async function doLogin(e){
+  e.preventDefault();
+  const phone = normPhone($("l-phone").value), password = $("l-pass").value;
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(!password) return toast("اكتب كلمة السر");
+  const b = $("l-btn"); b.disabled = true;
+  const { data, error } = await sb.auth.signInWithPassword({ email: phoneToEmail(phone), password });
+  b.disabled = false;
+  if(error || !data.session) return toast(authError(error));
+  $("l-pass").value = "";
+  toast("أهلاً بيك 👋");
+  afterAuth(data.session);
+}
+async function doSignup(e){
+  e.preventDefault();
+  const r = document.querySelector('input[name="s-role"]:checked').value;
+  const full_name = $("s-name").value.trim(), phone = normPhone($("s-phone").value);
+  const password = $("s-pass").value;
+  if(full_name.length < 3) return toast("اكتب اسمك بالكامل");
+  if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
+  if(password.length < 8) return toast("كلمة السر لازم 8 على الأقل");
+  if(password === phone || /^(.)\1+$/.test(password)) return toast("كلمة السر ضعيفة، اختار حاجة أصعب");
+  const meta = { full_name, phone, role: r };
+  if(r === "craftsman"){
+    const exp = $("s-exp").value.trim();
+    if(!/^\d{1,2}$/.test(exp)) return toast("اكتب سنين خبرتك بالأرقام");
+    Object.assign(meta, { category: $("s-cat").value, area: $("s-area").value, experience_years: exp, bio: $("s-bio").value.trim() });
+  }
+  const b = $("s-btn"); b.disabled = true;
+  const { data, error } = await sb.auth.signUp({ email: phoneToEmail(phone), password, options: { data: meta } });
+  b.disabled = false;
+  if(error) return toast(authError(error));
+  if(!data.session) return toast("تم إنشاء الحساب، جرّب تدخل برقم الموبايل وكلمة السر");
+  $("s-pass").value = "";
+  toast(r === "craftsman" ? "تم! حسابك قيد المراجعة ⏳" : "تم إنشاء حسابك 🎉");
+  afterAuth(data.session);
 }
 async function logout(){
   me = null; profile = null; contacted = new Set(); ignored = new Set();
@@ -518,20 +613,19 @@ async function submitRequest(e){
   const area = $("q-area").value, details = $("q-details").value.trim();
   if(!AREAS.includes(area)) return toast("اختار المنطقة");
   if(details.length < 5) return toast("اكتب تفاصيل الشغل بشكل أوضح");
-  if(Date.now() - lastPost < 60000) return toast("استنى دقيقة قبل ما تنشر طلب تاني");
   const b = $("q-btn"); b.disabled = true;
   const { error } = await sb.from("requests").insert({ customer_id: me.id, category, work_type: full, area, details });
   b.disabled = false;
   if(error) return toast("ماقدرناش ننشر الطلب، جرب تاني");
-  $("q-details").value = ""; lastPost = Date.now();
+  $("q-details").value = "";
   toast("تم نشر طلبك ✅");
   showScreen("s-myreq");
 }
 
 /* ================= طلباتي (عميل) ================= */
-const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","تم الشغل"] };
+const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","مغلق"] };
 async function fetchMyRequests(){
-  const r = await sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false }).limit(50);
+  const r = await sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false });
   if(r.error) return null;
   const ids = r.data.map(x => x.id), counts = {};
   if(ids.length){
@@ -552,8 +646,8 @@ async function loadMyRequests(){
       <div class="top"><b>${esc(r.work_type)}</b><span class="badge ${cls}">${txt}</span></div>
       <div class="meta">📍 ${esc(r.area)} — 🗓️ ${fmtDate(r.created_at)}</div>
       <div class="det">${esc(r.details)}</div>
-      <div class="meta">${r.n ? `🤝 ${r.n} صنايعي فتح واتساب للتواصل معاك` : "⏳ لسه ماحدش تواصل"}</div>
-      ${r.status === "open" ? `<div class="acts"><button class="btn-s ok" type="button" data-id="${esc(r.id)}" onclick="closeRequest(this.dataset.id)">✅ الشغل خلص</button><button class="btn-s bad" type="button" data-id="${esc(r.id)}" onclick="cancelRequest(this.dataset.id)">إلغاء الطلب</button></div>` : ""}
+      <div class="meta">${r.n ? `🤝 تواصل معاك ${r.n} صنايعي` : "⏳ لسه ماحدش تواصل"}</div>
+      ${r.status === "open" ? `<div class="acts"><button class="btn-s bad" type="button" data-id="${esc(r.id)}" onclick="cancelRequest(this.dataset.id)">إلغاء الطلب</button></div>` : ""}
     </div>`;
   }).join("");
 }
@@ -565,27 +659,19 @@ async function cancelRequest(id){
   loadMyRequests();
 }
 
-async function closeRequest(id){
-  if(!confirm("الشغل خلص؟ الطلب هيتقفل ومش هيظهر للصنايعية.")) return;
-  const { error } = await sb.from("requests").update({ status:"closed" }).eq("id", id).eq("customer_id", me.id).eq("status","open");
-  if(error) return toast("ماقدرناش نقفل الطلب، جرب تاني");
-  toast("تم قفل الطلب ✅");
-  loadMyRequests();
-}
-
 /* ================= الطلبات (صنايعي) ================= */
 let jobs = [];
-async function loadJobs(silent){
+async function loadJobs(){
   const box = $("jobs-list"), sub = $("jobs-sub");
-  if(!profile || !profile.approved) await loadProfile();
+  if(!profile) await loadProfile();
   if(!profile || !profile.approved){
     sub.textContent = "";
     return box.innerHTML = '<div class="empty"><div class="big">⏳</div><h3>حسابك قيد المراجعة</h3><p style="margin-top:6px;line-height:1.9">هنراجع بياناتك ونفعّل حسابك، وبعدها هتشوف الطلبات هنا.</p></div>';
   }
-  sub.textContent = "طلبات " + profile.category + " المنشورة (آخر 14 يوم)";
-  if(silent !== true) box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  sub.textContent = "طلبات " + profile.category + " المنشورة";
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
   const [r, c] = await Promise.all([
-    sb.from("requests").select("id,work_type,area,details,created_at").eq("status","open").eq("category", profile.category).gte("created_at", new Date(Date.now() - 14*864e5).toISOString()).order("created_at", { ascending:false }).limit(50),
+    sb.from("requests").select("id,work_type,area,details,created_at").eq("status","open").eq("category", profile.category).order("created_at", { ascending:false }),
     sb.from("contacts").select("request_id").eq("craftsman_id", me.id)
   ]);
   if(r.error) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل الطلبات، حدّث الصفحة</p></div>';
@@ -600,7 +686,7 @@ function renderJobs(){
   box.innerHTML = list.map(j => {
     const done = contacted.has(j.id);
     return `<div class="req">
-      <div class="top"><b>${esc(j.work_type)}</b>${done ? '<span class="badge b-ok">✓ فتحت واتساب</span>' : ""}</div>
+      <div class="top"><b>${esc(j.work_type)}</b>${done ? '<span class="badge b-ok">✓ تم التواصل</span>' : ""}</div>
       <div class="meta">📍 ${esc(j.area)} — 🗓️ ${fmtDate(j.created_at)}</div>
       <div class="det">${esc(j.details)}</div>
       <div class="acts">
@@ -629,7 +715,7 @@ async function loadAccount(){
   box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
   if(!profile) await loadProfile();
   if(!me) return; // اتعمل تسجيل خروج تلقائي
-  if(!profile) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل بياناتك، اتأكد من النت</p><button class="btn btn-pri" type="button" style="margin-top:14px" onclick="retryProfile()">🔄 حاول تاني</button><button class="btn btn-ghost" type="button" onclick="logout()">تسجيل الخروج</button></div>';
+  if(!profile) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل بياناتك، حدّث الصفحة</p></div>';
   const p = profile;
   let html = `<div class="card"><div class="kv"><span>الاسم</span><b>${esc(p.full_name)}</b></div>
     <div class="kv"><span>رقم الموبايل</span><b dir="ltr">${esc(p.phone)}</b></div>
@@ -648,25 +734,11 @@ async function loadAccount(){
     html += `<div class="kv"><span>عدد الطلبات المنشورة</span><b>${list.length}</b></div></div>`;
     history = list.length ? list.map(x => { const [cls, txt] = STATUS[x.status] || STATUS.open;
       return `<div class="req"><div class="top"><b>${esc(x.work_type)}</b><span class="badge ${cls}">${txt}</span></div>
-      <div class="meta">🗓️ ${fmtDate(x.created_at)} — ${x.n ? "🤝 " + x.n + " صنايعي فتح واتساب للتواصل معاك" : "⏳ لسه ماحدش تواصل"}</div></div>`; }).join("") : '<p class="mut">لسه مفيش معاملات</p>';
+      <div class="meta">🗓️ ${fmtDate(x.created_at)} — ${x.n ? "🤝 تواصل معاك " + x.n + " صنايعي" : "⏳ لسه ماحدش تواصل"}</div></div>`; }).join("") : '<p class="mut">لسه مفيش معاملات</p>';
   }
-  html += `<div class="sec-h" style="margin-top:20px"><h3>${p.role === "craftsman" ? "سجل تواصلاتي" : "سجل طلباتي"}</h3></div>${history}
-    <button class="btn btn-ghost" type="button" onclick="logout()" style="margin-top:20px">تسجيل الخروج</button>
-    <button class="btn btn-ghost" type="button" onclick="deleteAccount()" style="margin-top:10px;color:var(--bad);border-color:var(--bad)">🗑️ حذف حسابي نهائيًا</button>`;
+  html += `<div class="sec-h" style="margin-top:20px"><h3>سجل المعاملات مع الصنايعية</h3></div>${history}
+    <button class="btn btn-ghost" type="button" onclick="logout()" style="margin-top:20px">تسجيل الخروج</button>`;
   box.innerHTML = html;
-}
-
-async function retryProfile(){
-  await loadProfile();
-  if(!me) return;
-  buildTabs();
-  showScreen(profile ? (isCraft() ? "s-jobs" : "s-home") : "s-account");
-}
-async function deleteAccount(){
-  if(!confirm("هتمسح حسابك وكل بياناتك نهائيًا ومش هتقدر ترجعها. متأكد؟")) return;
-  const { error } = await sb.rpc("delete_my_account");
-  if(error) return toast("ماقدرناش نمسح الحساب، كلمنا على واتساب");
-  await forceLogout("تم مسح حسابك وبياناتك");
 }
 
 /* ================= تشغيل ================= */
@@ -676,10 +748,7 @@ function fillAreas(){
 async function init(){
   fillAreas();
   buildTabs();
-  if(!window.supabase){
-    document.body.insertAdjacentHTML("afterbegin", '<div style="padding:14px;text-align:center;background:#fee2e2;color:#991b1b;font-weight:700">تعذّر تحميل الموقع بالكامل <button type="button" onclick="location.reload()" style="margin-right:8px;padding:6px 14px;border-radius:8px;border:0;background:#991b1b;color:#fff;font-weight:800;cursor:pointer">حاول تاني</button></div>');
-    return;
-  }
+  if(!window.supabase){ toast("تعذّر تحميل الموقع بالكامل، حدّث الصفحة"); return; }
   // لو الدخول بجوجل رجّع خطأ في الرابط، نعرضه عشان نعرف السبب
   let oauthErr = "";
   try {
@@ -709,12 +778,8 @@ async function init(){
   }
   // لو المستخدم رجع للصفحة بعد ما حسابه اتحذف، نتأكد ونطلّعه
   document.addEventListener("visibilitychange", async () => {
-    if(document.visibilityState === "visible" && me && Date.now() - lastCheck > 300000){
-      lastCheck = Date.now();
-      if(!(await checkUserStillExists())) forceLogout();
-    }
+    if(document.visibilityState === "visible" && me && !(await checkUserStillExists())) forceLogout();
   });
-  setInterval(() => { if(current === "s-jobs" && document.visibilityState === "visible" && me && profile && profile.approved) loadJobs(true); }, 60000);
   sb.auth.onAuthStateChange(ev => {
     if(ev === "SIGNED_OUT" && me){
       me = null; profile = null; contacted = new Set(); ignored = new Set();
