@@ -385,8 +385,8 @@ function normPhone(s){
   if(/^201[0-9]{9}$/.test(d)) d = "0" + d.slice(2);
   return d;
 }
-const EMAIL_DOMAIN = "warsha-el-arish.app"; // إيميل داخلي بيتبني من رقم الموبايل، المستخدم مش بيشوفه
-const phoneToEmail = p => p + "@" + EMAIL_DOMAIN;
+// رقم الموبايل بصيغة دولية (E.164) عشان Supabase Phone Auth: 01012345678 -> +201012345678
+const toE164 = p => "+20" + p.slice(1);
 const fmtDate = d => new Date(d).toLocaleDateString("ar-EG", {day:"numeric", month:"short"});
 function togglePw(id, btn){
   const i = $(id), show = i.type === "password";
@@ -469,7 +469,7 @@ function authError(err){
   if(m.includes("invalid login")) return "الرقم أو كلمة السر غلط";
   if(m.includes("password")) return "كلمة السر ضعيفة، اكتب 8 حروف على الأقل";
   if(m.includes("rate") || m.includes("too many")) return "محاولات كتير، استنى شوية وجرب تاني";
-  if(m.includes("email") && m.includes("invalid")) return "الرقم مش مقبول، راجعه وجرب تاني";
+  if((m.includes("phone") || m.includes("email")) && m.includes("invalid")) return "الرقم مش مقبول، راجعه وجرب تاني";
   if(m.includes("database")) return "حصلت مشكلة في البيانات، راجع الاسم والرقم وجرب تاني";
   return "حصلت مشكلة، جرب تاني";
 }
@@ -567,7 +567,7 @@ async function doLogin(e){
   if(!validPhone(phone)) return toast("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01");
   if(!password) return toast("اكتب كلمة السر");
   const b = $("l-btn"); b.disabled = true;
-  const { data, error } = await sb.auth.signInWithPassword({ email: phoneToEmail(phone), password });
+  const { data, error } = await sb.auth.signInWithPassword({ phone: toE164(phone), password });
   b.disabled = false;
   if(error || !data.session) return toast(authError(error));
   $("l-pass").value = "";
@@ -590,7 +590,7 @@ async function doSignup(e){
     Object.assign(meta, { category: $("s-cat").value, area: $("s-area").value, experience_years: exp, bio: $("s-bio").value.trim() });
   }
   const b = $("s-btn"); b.disabled = true;
-  const { data, error } = await sb.auth.signUp({ email: phoneToEmail(phone), password, options: { data: meta } });
+  const { data, error } = await sb.auth.signUp({ phone: toE164(phone), password, options: { data: meta } });
   b.disabled = false;
   if(error) return toast(authError(error));
   if(!data.session) return toast("تم إنشاء الحساب، جرّب تدخل برقم الموبايل وكلمة السر");
