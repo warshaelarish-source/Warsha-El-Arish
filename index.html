@@ -172,6 +172,27 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
   .field{margin-bottom:10px}
   h1{font-size:22px}
 }
+
+#bell{position:fixed;top:calc(10px + env(safe-area-inset-top));left:12px;z-index:30;width:42px;height:42px;border-radius:50%;border:0;background:#fff;box-shadow:0 4px 14px rgba(2,6,23,.2);font-size:20px;cursor:pointer}
+#bell b,#tabbar i.dot{position:absolute;top:-4px;right:-4px;background:var(--bad);color:#fff;font:800 11px/18px Cairo,sans-serif;min-width:18px;height:18px;border-radius:9px;text-align:center;padding:0 4px}
+#tabbar button{position:relative}
+#tabbar i.dot{top:0;right:calc(50% - 24px);font-style:normal}
+body.in-chat #tabbar{display:none}
+#s-chat{height:100vh;height:100dvh}
+.chat-head{display:flex;align-items:center;gap:10px;background:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;border-bottom:1px solid var(--line)}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.bub{max-width:80%;padding:9px 13px;border-radius:16px;line-height:1.7;white-space:pre-wrap;word-break:break-word;font-size:15px}
+.bub small{display:block;font-size:10.5px;opacity:.7;margin-top:2px}
+.bub.me{align-self:flex-start;background:linear-gradient(135deg,#0891b2,#0d9488);color:#fff;border-bottom-right-radius:4px}
+.bub.them{align-self:flex-end;background:#fff;border-bottom-left-radius:4px;box-shadow:0 2px 8px rgba(2,6,23,.06)}
+.composer{display:flex;gap:8px;align-items:flex-end;background:#fff;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.composer .inp{resize:none;max-height:110px}
+.send{width:46px;height:46px;flex:none;border:0;border-radius:50%;background:var(--pri);color:#fff;font-size:18px;cursor:pointer;transform:scaleX(-1)}
+.stars{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.star{border:0;background:none;font-size:44px;color:#cbd5e1;cursor:pointer;line-height:1}
+.star.on{color:#f59e0b}
+.req.unread{background:#ecfeff;border:1.5px solid rgba(8,145,178,.4)}
+@media (min-width:700px){#s-chat{max-width:760px;margin:0 auto;width:100%}}
 </style>
 </head>
 <body>
@@ -297,7 +318,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
       <ul>
         <li><span>1️⃣</span><span>طلبك بيظهر في <b>طلباتي</b> بكل التفاصيل، وتقدر تلغيه في أي وقت.</span></li>
         <li><span>2️⃣</span><span>الصنايعية المعتمدين في نفس التخصص بيشوفوا الطلب.</span></li>
-        <li><span>3️⃣</span><span>رقمك <b>مش بيظهر</b> لحد غير الصنايعي اللي يدوس "تواصل".</span></li>
+        <li><span>3️⃣</span><span>التواصل بيتم في <b>شات جوه الموقع</b>، ورقمك مش بيظهر لأي صنايعي.</span></li>
       </ul>
     </div>
     <form class="card" onsubmit="submitRequest(event)" novalidate>
@@ -353,7 +374,7 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
     <h3>بنخزنها فين وبنستخدمها في إيه؟</h3>
     <p>بتتخزن في قاعدة بيانات مؤمّنة، وبنستخدمها بس عشان نوصّلك بالصنايعي المناسب أو نراجع طلب انضمامك كصنايعي.</p>
     <h3>مين يشوف رقمك؟</h3>
-    <p>رقم العميل بيظهر للصنايعي المعتمد اللي بيدوس "تواصل" على طلبه بس. بقية الصنايعية بيشوفوا تفاصيل الشغل والمنطقة من غير رقمك.</p>
+    <p>التواصل بيتم بالشات جوه الموقع ورقمك مش بيظهر للصنايعي، إلا لو إنت اديته له بنفسك.</p>
     <h3>حذف البيانات</h3>
     <p>لو عايز حسابك وبياناتك يتمسحوا، كلمنا من "تواصل معنا".</p>
     <h3>شروط الاستخدام</h3>
@@ -361,8 +382,21 @@ h1{font-size:26px;font-weight:900} h2{font-size:20px;font-weight:800} h3{font-si
   </div>
 </section>
 
+<section id="s-chats" class="screen"><div class="pad"><h1 style="margin-bottom:4px">المحادثات 💬</h1><p class="mut" style="margin-bottom:16px">كل محادثاتك جوه الموقع</p><div id="chats-list" style="max-width:760px"></div></div></section>
+<section id="s-chat" class="screen">
+  <div class="chat-head"><button class="back" style="margin:0" type="button" onclick="showScreen('s-chats')">→</button><div style="flex:1;min-width:0"><b id="ch-name"></b><div class="mut" id="ch-sub" style="font-size:12px"></div></div><button class="btn-s ok hidden" id="ch-done" type="button" style="flex:none;padding:9px 12px" onclick="finishJob()">✅ تم الشغل</button></div>
+  <div class="chat-msgs" id="ch-msgs"></div>
+  <button class="btn btn-pri hidden" id="ch-rate" type="button" style="border-radius:0" onclick="rateReq(cur.req_id,cur.craft_id)">⭐ قيّم الصنايعي</button>
+  <p class="hidden mut" id="ch-closed" style="text-align:center;padding:12px;background:#fff"></p>
+  <form class="composer" id="ch-comp" onsubmit="sendMsg(event)"><textarea id="ch-in" class="inp" rows="1" maxlength="1000" placeholder="اكتب رسالتك..." oninput="this.style.height='';this.style.height=Math.min(this.scrollHeight,110)+'px'"></textarea><button class="send" type="submit" aria-label="إرسال">➤</button></form>
+</section>
+<section id="s-rate" class="screen"><div class="pad" style="max-width:660px;margin:0 auto;width:100%"><h1 style="margin-bottom:4px">قيّم الصنايعي ⭐</h1><p class="mut" style="margin-bottom:16px">الطلب خلص ✅ — رأيك بيفيد باقي العملاء</p>
+<form class="card" onsubmit="submitRate(event)"><h3 id="rt-name" style="text-align:center"></h3><div class="stars" id="rt-stars"></div><div class="field"><label for="rt-txt">تعليق (اختياري)</label><textarea class="inp" id="rt-txt" rows="3" maxlength="500"></textarea></div><button class="btn btn-pri" type="submit">إرسال التقييم</button><button class="btn btn-ghost" type="button" onclick="showScreen('s-myreq')">تخطي</button></form></div></section>
+<section id="s-notifs" class="screen"><div class="pad" style="max-width:760px;margin:0 auto;width:100%"><button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button><div class="sec-h"><h1>الإشعارات 🔔</h1><button class="chip" style="background:#e2e8f0;color:#334155" type="button" onclick="readAll()">قراءة الكل</button></div><div id="nt-list"></div></div></section>
+
 </div>
 
+<button id="bell" class="hidden" type="button" onclick="showScreen('s-notifs')" aria-label="الإشعارات">🔔<b id="bell-n" class="hidden">0</b></button>
 <nav id="tabbar" aria-label="التنقل"></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -409,15 +443,15 @@ const isCraft = () => role() === "craftsman";
 function buildTabs(){
   const t = [{id:"s-home", ic:"🏠", n:"الرئيسية"}];
   if(!me) t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-auth", ic:"👤", n:"دخول"});
-  else if(isCraft()) t.push({id:"s-jobs", ic:"🛠️", n:"الطلبات"}, {id:"s-account", ic:"👤", n:"حسابي"});
-  else t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-myreq", ic:"📋", n:"طلباتي"}, {id:"s-account", ic:"👤", n:"حسابي"});
-  $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" onclick="showScreen('${x.id}')"><span class="ic">${x.ic}</span>${x.n}</button>`).join("");
-  markTab();
+  else if(isCraft()) t.push({id:"s-jobs", ic:"🛠️", n:"الطلبات"}, {id:"s-chats", ic:"💬", n:"المحادثات"}, {id:"s-account", ic:"👤", n:"حسابي"});
+  else t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-myreq", ic:"📋", n:"طلباتي"}, {id:"s-chats", ic:"💬", n:"المحادثات"}, {id:"s-account", ic:"👤", n:"حسابي"});
+  $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" onclick="showScreen('${x.id}')"><span class="ic">${x.ic}</span>${x.n}${x.id==="s-chats"?'<i class="dot hidden"></i>':""}</button>`).join("");
+  markTab(); paintBadges();
 }
 function markTab(){ document.querySelectorAll("#tabbar button").forEach(b => b.classList.toggle("on", b.dataset.t === current)); }
 
 function showScreen(id){
-  const needLogin = ["s-request","s-myreq","s-jobs","s-account"];
+  const needLogin = ["s-request","s-myreq","s-jobs","s-account","s-chats","s-chat","s-rate","s-notifs"];
   if(needLogin.includes(id) && !me){
     afterLogin = id;
     $("auth-msg").textContent = id === "s-request" ? "سجّل دخول الأول عشان تنشر طلبك" : "سجّل دخول الأول";
@@ -427,6 +461,8 @@ function showScreen(id){
   if(id === "s-request" && isCraft()) id = "s-jobs";
   if((id === "s-myreq") && isCraft()) id = "s-jobs";
   if(id === "s-jobs" && me && !isCraft()) id = "s-myreq";
+  if(id === "s-chat" && !cur) id = "s-chats";
+  if(current === "s-chat" && id !== "s-chat" && chatCh){ sb.removeChannel(chatCh); chatCh = null; }
   current = id;
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $(id).classList.add("active");
@@ -435,6 +471,11 @@ function showScreen(id){
   if(id === "s-myreq") loadMyRequests();
   if(id === "s-jobs") loadJobs();
   if(id === "s-account") loadAccount();
+  if(id === "s-chats"){ if(!keepF) chatFilter = null; keepF = false; renderChats(); }
+  if(id === "s-chat") startChat();
+  if(id === "s-notifs") renderNotifs();
+  document.body.classList.toggle("in-chat", id === "s-chat");
+  $("bell").classList.toggle("hidden", !(me && profile) || ["s-chat","s-notifs","s-auth","s-complete","s-rate"].includes(id));
 }
 function goRequest(){ showScreen("s-request"); }
 function quickRequest(cat){
@@ -474,7 +515,7 @@ function authError(err){
   return "حصلت مشكلة، جرب تاني";
 }
 async function forceLogout(msg){
-  me = null; profile = null; contacted = new Set(); ignored = new Set();
+  me = null; profile = null; contacted = new Set(); ignored = new Set(); stopNotifs(); cur = null;
   buildTabs(); showScreen("s-home"); toast(msg || "الحساب ده مبقاش موجود، تم تسجيل الخروج");
   try { await sb.auth.signOut({ scope: "local" }); } catch(e) {}
 }
@@ -504,6 +545,7 @@ async function loadProfile(){
     await accountDeleted(); return;
   }
   profile = data;
+  startNotifs();
 }
 async function accountDeleted(){
   await forceLogout("حسابك اتمسح، اعمل حساب جديد");
@@ -599,7 +641,7 @@ async function doSignup(e){
   afterAuth(data.session);
 }
 async function logout(){
-  me = null; profile = null; contacted = new Set(); ignored = new Set();
+  me = null; profile = null; contacted = new Set(); ignored = new Set(); stopNotifs(); cur = null;
   buildTabs(); showScreen("s-home"); toast("تم تسجيل الخروج");
   try { await sb.auth.signOut(); } catch(e) {}
 }
@@ -623,7 +665,7 @@ async function submitRequest(e){
 }
 
 /* ================= طلباتي (عميل) ================= */
-const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","مغلق"] };
+const STATUS = { open:["b-open","منشور"], cancelled:["b-cancel","ملغي"], closed:["b-ok","✅ تم الشغل"] };
 async function fetchMyRequests(){
   const r = await sb.from("requests").select("*").eq("customer_id", me.id).order("created_at", { ascending:false });
   if(r.error) return null;
@@ -632,7 +674,9 @@ async function fetchMyRequests(){
     const c = await sb.from("contacts").select("request_id").in("request_id", ids);
     (c.data || []).forEach(x => counts[x.request_id] = (counts[x.request_id] || 0) + 1);
   }
-  return r.data.map(x => ({ ...x, n: counts[x.id] || 0 }));
+  const rv = await sb.from("reviews").select("request_id,rating").eq("customer_id", me.id), rm = {};
+  (rv.data || []).forEach(v => rm[v.request_id] = v.rating);
+  return r.data.map(x => ({ ...x, n: counts[x.id] || 0, rate: rm[x.id] }));
 }
 async function loadMyRequests(){
   const box = $("myreq-list");
@@ -647,7 +691,7 @@ async function loadMyRequests(){
       <div class="meta">📍 ${esc(r.area)} — 🗓️ ${fmtDate(r.created_at)}</div>
       <div class="det">${esc(r.details)}</div>
       <div class="meta">${r.n ? `🤝 تواصل معاك ${r.n} صنايعي` : "⏳ لسه ماحدش تواصل"}</div>
-      ${r.status === "open" ? `<div class="acts"><button class="btn-s bad" type="button" data-id="${esc(r.id)}" onclick="cancelRequest(this.dataset.id)">إلغاء الطلب</button></div>` : ""}
+      <div class="acts">${r.n ? `<button class="btn-s g" type="button" data-id="${esc(r.id)}" onclick="showChats(this.dataset.id)">💬 المحادثات</button>` : ""}${r.status === "open" ? `<button class="btn-s bad" type="button" data-id="${esc(r.id)}" onclick="cancelRequest(this.dataset.id)">إلغاء الطلب</button>` : ""}${r.status === "closed" && r.completed_by ? (r.rate ? `<span class="meta">⭐ قيّمت: ${stars(r.rate)}</span>` : `<button class="btn-s ok" type="button" data-r="${esc(r.id)}" data-c="${esc(r.completed_by)}" onclick="rateReq(this.dataset.r,this.dataset.c)">⭐ قيّم الصنايعي</button>`) : ""}</div>
     </div>`;
   }).join("");
 }
@@ -690,7 +734,7 @@ function renderJobs(){
       <div class="meta">📍 ${esc(j.area)} — 🗓️ ${fmtDate(j.created_at)}</div>
       <div class="det">${esc(j.details)}</div>
       <div class="acts">
-        <button class="btn-s ok" type="button" data-id="${esc(j.id)}" onclick="contactJob(this.dataset.id)">${done ? "💬 افتح واتساب تاني" : "💬 تواصل"}</button>
+        <button class="btn-s ok" type="button" data-id="${esc(j.id)}" onclick="contactJob(this.dataset.id)">${done ? "💬 افتح المحادثة" : "💬 تواصل"}</button>
         ${done ? "" : `<button class="btn-s g" type="button" data-id="${esc(j.id)}" onclick="ignoreJob(this.dataset.id)">تجاهل</button>`}
       </div>
     </div>`;
@@ -698,15 +742,13 @@ function renderJobs(){
 }
 function ignoreJob(id){ ignored.add(id); saveIgnored(); renderJobs(); }
 async function contactJob(id){
+  const was = contacted.has(id);
   const { data, error } = await sb.rpc("contact_request", { p_request_id: id });
   if(error || !data || !data.length){ toast("الطلب ده مش متاح دلوقتي"); return loadJobs(); }
-  const c = data[0], j = jobs.find(x => x.id === id);
-  const ph = normPhone(c.customer_phone);
-  if(!validPhone(ph)){ toast("رقم العميل مش صالح"); return; }
-  const msg = `أهلاً ${c.customer_name}، أنا ${profile.full_name} صنايعي ${profile.category} من ورشة العريش. شفت طلبك${j ? " (" + j.work_type + " في " + j.area + ")" : ""} وأقدر أساعدك. ينفع نتفق؟`;
-  contacted.add(id);
-  renderJobs();
-  window.location.href = "https://wa.me/2" + ph + "?text=" + encodeURIComponent(msg);
+  const j = jobs.find(x => x.id === id);
+  contacted.add(id); renderJobs();
+  if(!was) await sb.rpc("send_message", { p_request_id: id, p_craftsman_id: me.id, p_body: `أهلاً ${data[0].customer_name}، أنا ${profile.full_name} صنايعي ${profile.category}. شفت طلبك${j ? " (" + j.work_type + " في " + j.area + ")" : ""} وأقدر أساعدك. ينفع نتفق؟` });
+  openChat(id, me.id);
 }
 
 /* ================= حسابي ================= */
@@ -723,9 +765,11 @@ async function loadAccount(){
   let history = "";
   if(p.role === "craftsman"){
     const { data } = await sb.rpc("my_contacts");
+    const rv = (await sb.from("reviews").select("rating").eq("craftsman_id", me.id)).data || [], avg = rv.length ? (rv.reduce((t, x) => t + x.rating, 0) / rv.length).toFixed(1) : null;
     const list = data || [];
     html += `<div class="kv"><span>التخصص</span><b>${esc(p.category)}</b></div>
       <div class="kv"><span>حالة الحساب</span><b>${p.approved ? "✅ معتمد" : "⏳ قيد المراجعة"}</b></div>
+      <div class="kv"><span>التقييم</span><b>${avg ? "⭐ " + avg + " (" + rv.length + ")" : "لسه مفيش"}</b></div>
       <div class="kv"><span>طلبات تواصلت معاها</span><b>${list.length}</b></div></div>`;
     history = list.length ? list.map(x => `<div class="req"><div class="top"><b>${esc(x.work_type)}</b><span class="badge b-info">${fmtDate(x.contacted_at)}</span></div>
       <div class="meta">👤 ${esc(x.customer_name)} — 📍 ${esc(x.area)}</div></div>`).join("") : '<p class="mut">لسه ماتواصلتش مع أي عميل</p>';
@@ -740,6 +784,117 @@ async function loadAccount(){
     <button class="btn btn-ghost" type="button" onclick="logout()" style="margin-top:20px">تسجيل الخروج</button>`;
   box.innerHTML = html;
 }
+
+/* ================= شات / تقييم / إشعارات ================= */
+const BASE_TITLE = document.title;
+let chats = [], cur = null, chatCh = null, notifCh = null, notifs = [], rateSel = 0, rateT = null, chatFilter = null, keepF = false;
+const hm = d => new Date(d).toLocaleTimeString("ar-EG", {hour:"2-digit", minute:"2-digit"});
+const stars = n => "★".repeat(n) + "☆".repeat(5 - n);
+async function loadChats(){ const { data } = await sb.rpc("my_chats"); chats = data || []; return chats; }
+function showChats(f){ chatFilter = f || null; keepF = true; showScreen("s-chats"); }
+async function renderChats(){
+  const box = $("chats-list");
+  box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
+  await loadChats();
+  const l = chats.filter(c => !chatFilter || c.req_id === chatFilter);
+  box.innerHTML = l.length ? l.map(c => `<div class="req" style="cursor:pointer" data-r="${esc(c.req_id)}" data-c="${esc(c.craft_id)}" onclick="openChat(this.dataset.r,this.dataset.c)">
+    <div class="top"><b>${esc(c.other_name)}${c.other_rating ? ` <small>⭐ ${esc(c.other_rating)}</small>` : ""}</b>${c.unread ? `<span class="badge b-open">${c.unread} جديد</span>` : c.req_status !== "open" ? '<span class="badge b-ok">منتهي</span>' : ""}</div>
+    <div class="meta">${esc(c.work_type)} — ${esc(c.area)}</div><div class="det">${esc(c.last_body || "ابدأ المحادثة")}</div></div>`).join("") : '<div class="empty"><div class="big">💬</div><h3>مفيش محادثات لسه</h3></div>';
+}
+async function openChat(r, c){
+  if(!chats.find(x => x.req_id === r && x.craft_id === c)) await loadChats();
+  cur = chats.find(x => x.req_id === r && x.craft_id === c);
+  if(!cur) return toast("المحادثة مش متاحة");
+  showScreen("s-chat");
+}
+async function startChat(){
+  const c = cur, open = c.req_status === "open";
+  $("ch-name").textContent = c.other_name + (c.other_rating ? " ⭐" + c.other_rating : "");
+  $("ch-sub").textContent = c.work_type + " — " + c.area;
+  $("ch-done").classList.toggle("hidden", !(open && !isCraft()));
+  $("ch-rate").classList.toggle("hidden", !(!isCraft() && c.req_status === "closed" && c.completed_by === c.craft_id && !c.reviewed));
+  $("ch-comp").classList.toggle("hidden", !open);
+  $("ch-closed").classList.toggle("hidden", open);
+  $("ch-closed").textContent = c.req_status === "cancelled" ? "الطلب اتلغى" : "الطلب خلص — المحادثة للقراءة فقط";
+  await fetchMsgs(); $("ch-msgs").scrollTop = 1e9;
+  const seen = () => sb.rpc("mark_chat_read", { p_request_id: c.req_id, p_craftsman_id: c.craft_id }).then(loadNotifs);
+  seen();
+  chatCh = sb.channel("chat-" + c.req_id + c.craft_id).on("postgres_changes", { event:"*", schema:"public", table:"messages", filter:"request_id=eq." + c.req_id }, () => { fetchMsgs(); seen(); }).subscribe();
+}
+async function fetchMsgs(){
+  const c = cur; if(!c) return;
+  const { data } = await sb.from("messages").select("*").eq("request_id", c.req_id).eq("craftsman_id", c.craft_id).order("created_at").limit(300);
+  const b = $("ch-msgs"), low = b.scrollHeight - b.scrollTop - b.clientHeight < 90;
+  b.innerHTML = (data || []).map(m => `<div class="bub ${m.sender_id === me.id ? "me" : "them"}">${esc(m.body)}<small>${hm(m.created_at)}${m.sender_id === me.id && m.read_at ? " ✓✓" : ""}</small></div>`).join("") || '<p class="mut" style="text-align:center">ابدأ المحادثة 👋</p>';
+  if(low) b.scrollTop = b.scrollHeight;
+}
+async function sendMsg(e){
+  e.preventDefault();
+  const i = $("ch-in"), t = i.value.trim(); if(!t || !cur) return;
+  i.value = ""; i.style.height = "";
+  const { error } = await sb.rpc("send_message", { p_request_id: cur.req_id, p_craftsman_id: cur.craft_id, p_body: t });
+  if(error){ i.value = t; return toast("الرسالة ماتبعتتش، جرب تاني"); }
+  await fetchMsgs(); $("ch-msgs").scrollTop = 1e9;
+}
+async function finishJob(){
+  if(!confirm("الشغل خلص مع " + cur.other_name + "؟ هيتقفل الطلب.")) return;
+  const { error } = await sb.rpc("complete_request", { p_request_id: cur.req_id, p_craftsman_id: cur.craft_id });
+  if(error) return toast("ماقدرناش ننهي الطلب، جرب تاني");
+  await loadChats();
+  goRate(chats.find(x => x.req_id === cur.req_id && x.craft_id === cur.craft_id) || cur);
+}
+async function rateReq(r, c){ await loadChats(); const x = chats.find(v => v.req_id === r && v.craft_id === c); x ? goRate(x) : toast("مقدرناش نفتح التقييم"); }
+function goRate(c){ rateT = c; rateSel = 0; paintStars(); $("rt-name").textContent = c.other_name; $("rt-txt").value = ""; showScreen("s-rate"); }
+function paintStars(){ $("rt-stars").innerHTML = [1,2,3,4,5].map(n => `<button type="button" class="star ${n <= rateSel ? "on" : ""}" onclick="rateSel=${n};paintStars()">★</button>`).join(""); }
+async function submitRate(e){
+  e.preventDefault();
+  if(!rateSel) return toast("اختار عدد النجوم");
+  const { error } = await sb.rpc("submit_review", { p_request_id: rateT.req_id, p_rating: rateSel, p_comment: $("rt-txt").value.trim() });
+  if(error) return toast(/already/.test(error.message || "") ? "قيّمت الطلب ده قبل كده" : "ماقدرناش نحفظ التقييم");
+  toast("شكراً لتقييمك ⭐"); showScreen("s-myreq");
+}
+/* الإشعارات */
+async function loadNotifs(){
+  if(!me) return;
+  const { data } = await sb.from("notifications").select("*").order("created_at", { ascending:false }).limit(40);
+  notifs = data || []; paintBadges(); if(current === "s-notifs") renderNotifs();
+}
+function paintBadges(){
+  const u = notifs.filter(n => !n.read), m = u.filter(n => n.type === "message").length;
+  const b = $("bell-n"); b.textContent = u.length; b.classList.toggle("hidden", !u.length);
+  const t = document.querySelector('#tabbar [data-t="s-chats"] i'); if(t){ t.textContent = m; t.classList.toggle("hidden", !m); }
+  document.title = (u.length ? "(" + u.length + ") " : "") + BASE_TITLE;
+}
+function startNotifs(){
+  if(notifCh || !me || !sb) return;
+  loadNotifs();
+  notifCh = sb.channel("n-" + me.id).on("postgres_changes", { event:"*", schema:"public", table:"notifications", filter:"user_id=eq." + me.id }, p => {
+    const n = p.new;
+    if(n && n.read === false){
+      if(current === "s-chat" && cur && n.request_id === cur.req_id && n.craftsman_id === cur.craft_id){ sb.rpc("mark_chat_read", { p_request_id: cur.req_id, p_craftsman_id: cur.craft_id }); }
+      else {
+        toast(n.title + (n.body ? " — " + n.body : ""));
+        try { navigator.vibrate && navigator.vibrate(150); } catch(e) {}
+        if(document.hidden && window.Notification && Notification.permission === "granted"){ try { new Notification(n.title, { body:n.body || "", icon:"favicon.png" }); } catch(e) {} }
+      }
+    }
+    loadNotifs();
+  }).subscribe();
+}
+function stopNotifs(){ if(notifCh && sb){ sb.removeChannel(notifCh); } notifCh = null; notifs = []; paintBadges(); }
+function renderNotifs(){
+  const ask = window.Notification && Notification.permission === "default" ? '<button class="btn btn-ghost" style="margin:0 0 12px" type="button" onclick="askPerm()">🔔 فعّل إشعارات المتصفح</button>' : "";
+  $("nt-list").innerHTML = ask + (notifs.length ? notifs.map(n => `<div class="req ${n.read ? "" : "unread"}" style="cursor:pointer" data-i="${esc(n.id)}" onclick="openNotif(this.dataset.i)"><div class="top"><b>${esc(n.title)}</b><span class="meta">${fmtDate(n.created_at)} ${hm(n.created_at)}</span></div><div class="det">${esc(n.body || "")}</div></div>`).join("") : '<div class="empty"><div class="big">🔔</div><h3>مفيش إشعارات</h3></div>');
+}
+async function askPerm(){ try { await Notification.requestPermission(); } catch(e) {} renderNotifs(); }
+async function openNotif(id){
+  const n = notifs.find(x => x.id === id); if(!n) return;
+  await sb.from("notifications").update({ read:true }).eq("id", id); loadNotifs();
+  if(n.request_id && n.craftsman_id) return openChat(n.request_id, n.craftsman_id);
+  showScreen(n.type === "review" ? "s-account" : isCraft() ? "s-jobs" : "s-chats");
+}
+async function readAll(){ await sb.from("notifications").update({ read:true }).eq("read", false); loadNotifs(); }
+$("ch-in").addEventListener("keydown", e => { if(e.key === "Enter" && !e.shiftKey && matchMedia("(pointer:fine)").matches) sendMsg(e); });
 
 /* ================= تشغيل ================= */
 function fillAreas(){
@@ -782,7 +937,7 @@ async function init(){
   });
   sb.auth.onAuthStateChange(ev => {
     if(ev === "SIGNED_OUT" && me){
-      me = null; profile = null; contacted = new Set(); ignored = new Set();
+      me = null; profile = null; contacted = new Set(); ignored = new Set(); stopNotifs(); cur = null;
       buildTabs(); showScreen("s-home"); toast("انتهت الجلسة، ادخل تاني");
     }
   });
