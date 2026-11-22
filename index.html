@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0891b2">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://oliyswglvrhxdmkijann.supabase.co wss://oliyswglvrhxdmkijann.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-lhZ0+cHc7txO8ZBNtSL3XajzlVt1GN42SwnYfcvU51g=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://oliyswglvrhxdmkijann.supabase.co wss://oliyswglvrhxdmkijann.supabase.co; base-uri 'none'; form-action 'self'; object-src 'none'">
 <title>ورشة العريش | صنايعية في أي وقت</title>
 <meta name="description" content="ورشة العريش — انشر طلبك واتواصل مع صنايعي كهرباء أو سباكة أو نجارة في العريش.">
 <link rel="canonical" href="https://warshaelarish-source.github.io/Warsha-El-Arish/">
@@ -204,7 +204,7 @@ body.in-chat #tabbar{display:none}
     <div class="logo"><img class="brand-ic" src="logo.png" alt="" width="34" height="34"><span>ورشة العريش</span></div>
     <h1>محتاج صنايعي<br>في العريش؟</h1>
     <p>انشر طلبك والصنايعية المناسبين هيتواصلوا معاك.</p>
-    <button class="cta" type="button" onclick="goRequest()">⚡ انشر طلبك دلوقتي</button>
+    <button class="cta" type="button" data-act="goRequest">⚡ انشر طلبك دلوقتي</button>
   </div>
   <div class="stats">
     <div class="stat"><b>🆓</b><span>الطلب مجاني</span></div>
@@ -214,9 +214,9 @@ body.in-chat #tabbar{display:none}
   <div class="sec">
     <div class="sec-h"><h2>الأقسام</h2><span class="mut" style="font-size:12px">وأقسام تانية قريب 🔜</span></div>
     <div class="cats">
-      <button class="cat" type="button" onclick="quickRequest('كهرباء')"><div class="ic">⚡</div><b>كهرباء</b><small>أعطال وتأسيس</small></button>
-      <button class="cat" type="button" onclick="quickRequest('سباكة')"><div class="ic">🔧</div><b>سباكة</b><small>أعطال وتأسيس</small></button>
-      <button class="cat" type="button" onclick="quickRequest('نجارة')"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></button>
+      <button class="cat" type="button" data-act="quickRequest" data-arg="كهرباء"><div class="ic">⚡</div><b>كهرباء</b><small>أعطال وتأسيس</small></button>
+      <button class="cat" type="button" data-act="quickRequest" data-arg="سباكة"><div class="ic">🔧</div><b>سباكة</b><small>أعطال وتأسيس</small></button>
+      <button class="cat" type="button" data-act="quickRequest" data-arg="نجارة"><div class="ic">🪚</div><b>نجارة</b><small>أبواب وأثاث</small></button>
     </div>
   </div>
   <div class="sec sec-steps">
@@ -230,8 +230,8 @@ body.in-chat #tabbar{display:none}
     <p style="margin-top:8px;font-size:13px">بنساعد أهالي العريش يوصلوا لصنايعي كهرباء وسباكة ونجارة. الطلب مجاني والدفع للصنايعي كاش بعد ما الشغل يخلص.</p>
     <div class="row">
       <a class="chip" href="https://wa.me/201508207016" target="_blank" rel="noopener">💬 تواصل معنا</a>
-      <button class="chip" type="button" onclick="goJoin()">🛠️ انضم كصنايعي</button>
-      <button class="chip" type="button" onclick="showScreen('s-privacy')">🔒 الخصوصية والشروط</button>
+      <button class="chip" type="button" data-act="goJoin">🛠️ انضم كصنايعي</button>
+      <button class="chip" type="button" data-act="showScreen" data-arg="s-privacy">🔒 الخصوصية والشروط</button>
     </div>
     <p style="margin-top:16px;font-size:11px;opacity:.6">© 2026 ورشة العريش — جميع الحقوق محفوظة</p>
   </div>
@@ -240,32 +240,32 @@ body.in-chat #tabbar{display:none}
 <!-- ============ AUTH ============ -->
 <section id="s-auth" class="screen">
   <div class="pad">
-    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <button class="back" type="button" data-act="showScreen" data-arg="s-home">→ رجوع</button>
     <h1 style="margin-bottom:4px">أهلاً بيك 👋</h1>
     <p class="mut" id="auth-msg" style="margin-bottom:16px">ادخل برقم موبايلك وكلمة السر، أو اعمل حساب جديد</p>
     <div class="tabs">
-      <button type="button" id="t-login" class="on" onclick="authTab('login')">دخول</button>
-      <button type="button" id="t-signup" onclick="authTab('signup')">حساب جديد</button>
+      <button type="button" id="t-login" class="on" data-act="authTab" data-arg="login">دخول</button>
+      <button type="button" id="t-signup" data-act="authTab" data-arg="signup">حساب جديد</button>
     </div>
 
-    <form class="card" id="f-login" onsubmit="doLogin(event)" novalidate>
+    <form class="card" id="f-login" data-submit="doLogin" novalidate>
       <div class="field"><label for="l-phone">رقم الموبايل</label><input class="inp" id="l-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
-      <div class="field"><label for="l-pass">كلمة السر</label><div class="pw"><input class="inp" id="l-pass" type="password" autocomplete="current-password"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('l-pass',this)">👁️</button></div></div>
+      <div class="field"><label for="l-pass">كلمة السر</label><div class="pw"><input class="inp" id="l-pass" type="password" autocomplete="current-password"><button type="button" class="eye" aria-label="إظهار كلمة السر" data-act="togglePw" data-arg="l-pass">👁️</button></div></div>
       <button class="btn btn-pri" id="l-btn" type="submit">دخول</button>
       <div class="or">أو</div>
-      <button class="btn-google" type="button" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>الدخول بحساب جوجل</span></button>
+      <button class="btn-google" type="button" data-act="googleLogin"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>الدخول بحساب جوجل</span></button>
     </form>
 
-    <form class="card hidden" id="f-signup" onsubmit="doSignup(event)" novalidate>
+    <form class="card hidden" id="f-signup" data-submit="doSignup" novalidate>
       <div class="field"><label>أنا:</label>
         <div class="radio-row">
-          <label><input type="radio" name="s-role" value="customer" checked onchange="roleChange()"><span>🙋 عميل</span></label>
-          <label><input type="radio" name="s-role" value="craftsman" onchange="roleChange()"><span>🛠️ صنايعي</span></label>
+          <label><input type="radio" name="s-role" value="customer" checked data-change="roleChange"><span>🙋 عميل</span></label>
+          <label><input type="radio" name="s-role" value="craftsman" data-change="roleChange"><span>🛠️ صنايعي</span></label>
         </div>
       </div>
       <div class="field"><label for="s-name">الاسم بالكامل</label><input class="inp" id="s-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
       <div class="field"><label for="s-phone">رقم الموبايل</label><input class="inp" id="s-phone" type="tel" autocomplete="username" inputmode="tel" maxlength="25" placeholder="01xxxxxxxxx"></div>
-      <div class="field"><label for="s-pass">كلمة السر</label><div class="pw"><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="8 حروف أو أرقام على الأقل (احفظها كويس)"><button type="button" class="eye" aria-label="إظهار كلمة السر" onclick="togglePw('s-pass',this)">👁️</button></div></div>
+      <div class="field"><label for="s-pass">كلمة السر</label><div class="pw"><input class="inp" id="s-pass" type="password" autocomplete="new-password" placeholder="8 حروف أو أرقام على الأقل (احفظها كويس)"><button type="button" class="eye" aria-label="إظهار كلمة السر" data-act="togglePw" data-arg="s-pass">👁️</button></div></div>
       <div id="craft-fields" class="hidden">
         <div class="field"><label for="s-cat">التخصص</label><select class="inp" id="s-cat"><option>كهرباء</option><option>سباكة</option><option>نجارة</option></select></div>
         <div class="field"><label for="s-area">منطقتك في العريش</label><select class="inp" id="s-area"></select></div>
@@ -275,7 +275,7 @@ body.in-chat #tabbar{display:none}
       </div>
       <button class="btn btn-pri" id="s-btn" type="submit">إنشاء الحساب</button>
       <div class="or">أو</div>
-      <button class="btn-google" type="button" onclick="googleLogin()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>التسجيل بحساب جوجل</span></button>
+      <button class="btn-google" type="button" data-act="googleLogin"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>التسجيل بحساب جوجل</span></button>
     </form>
   </div>
 </section>
@@ -285,11 +285,11 @@ body.in-chat #tabbar{display:none}
   <div class="pad" style="max-width:660px;margin:0 auto;width:100%">
     <h1 style="margin-bottom:4px">كمّل بياناتك 📝</h1>
     <p class="mut" style="margin-bottom:16px">دخلت بجوجل، محتاجين كام معلومة بس عشان نفتحلك حسابك</p>
-    <form class="card" onsubmit="completeProfile(event)" novalidate>
+    <form class="card" data-submit="completeProfile" novalidate>
       <div class="field"><label>أنا:</label>
         <div class="radio-row">
-          <label><input type="radio" name="c-role" value="customer" checked onchange="cRoleChange()"><span>🙋 عميل</span></label>
-          <label><input type="radio" name="c-role" value="craftsman" onchange="cRoleChange()"><span>🛠️ صنايعي</span></label>
+          <label><input type="radio" name="c-role" value="customer" checked data-change="cRoleChange"><span>🙋 عميل</span></label>
+          <label><input type="radio" name="c-role" value="craftsman" data-change="cRoleChange"><span>🛠️ صنايعي</span></label>
         </div>
       </div>
       <div class="field"><label for="c-name">الاسم بالكامل</label><input class="inp" id="c-name" autocomplete="name" placeholder="مثال: أحمد محمود"></div>
@@ -302,7 +302,7 @@ body.in-chat #tabbar{display:none}
         <p class="mut" style="margin-bottom:12px">⏳ حساب الصنايعي بيتراجع قبل التفعيل، وبعدها تشوف الطلبات.</p>
       </div>
       <button class="btn btn-pri" id="c-btn" type="submit">حفظ وإكمال</button>
-      <button class="btn btn-ghost" type="button" onclick="logout()">إلغاء وتسجيل خروج</button>
+      <button class="btn btn-ghost" type="button" data-act="logout">إلغاء وتسجيل خروج</button>
     </form>
   </div>
 </section>
@@ -310,7 +310,7 @@ body.in-chat #tabbar{display:none}
 <!-- ============ REQUEST ============ -->
 <section id="s-request" class="screen">
   <div class="pad">
-    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <button class="back" type="button" data-act="showScreen" data-arg="s-home">→ رجوع</button>
     <h1 style="margin-bottom:4px">انشر طلبك 📝</h1>
     <p class="mut" style="margin-bottom:16px">اكتب طلبك بالتفصيل عشان الصنايعي يوصلك جاهز</p>
     <div class="guide">
@@ -321,7 +321,7 @@ body.in-chat #tabbar{display:none}
         <li><span>3️⃣</span><span>التواصل بيتم في <b>شات جوه الموقع</b>، ورقمك مش بيظهر لأي صنايعي.</span></li>
       </ul>
     </div>
-    <form class="card" onsubmit="submitRequest(event)" novalidate>
+    <form class="card" data-submit="submitRequest" novalidate>
       <div class="field"><label for="q-cat">1️⃣ نوع الشغل</label>
         <select class="inp" id="q-cat">
           <optgroup label="⚡ كهرباء"><option>كهرباء — أعطال وأسلاك</option><option>كهرباء — تأسيس وتشطيب</option><option>كهرباء — لوحات وأجهزة</option><option>كهرباء — تركيب سخانات وأجهزة</option></optgroup>
@@ -367,7 +367,7 @@ body.in-chat #tabbar{display:none}
 <!-- ============ PRIVACY ============ -->
 <section id="s-privacy" class="screen">
   <div class="pad legal">
-    <button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button>
+    <button class="back" type="button" data-act="showScreen" data-arg="s-home">→ رجوع</button>
     <h1 style="margin-bottom:10px">الخصوصية والشروط 🔒</h1>
     <h3>إيه البيانات اللي بنجمعها؟</h3>
     <p>اسمك ورقم موبايلك ومنطقتك وتفاصيل الطلبات اللي بتنشرها. وللصنايعية: التخصص وسنين الخبرة.</p>
@@ -384,19 +384,19 @@ body.in-chat #tabbar{display:none}
 
 <section id="s-chats" class="screen"><div class="pad"><h1 style="margin-bottom:4px">المحادثات 💬</h1><p class="mut" style="margin-bottom:16px">كل محادثاتك جوه الموقع</p><div id="chats-list" style="max-width:760px"></div></div></section>
 <section id="s-chat" class="screen">
-  <div class="chat-head"><button class="back" style="margin:0" type="button" onclick="showScreen('s-chats')">→</button><div style="flex:1;min-width:0"><b id="ch-name"></b><div class="mut" id="ch-sub" style="font-size:12px"></div></div><button class="btn-s ok hidden" id="ch-done" type="button" style="flex:none;padding:9px 12px" onclick="finishJob()">✅ تم الشغل</button></div>
+  <div class="chat-head"><button class="back" style="margin:0" type="button" data-act="showScreen" data-arg="s-chats">→</button><div style="flex:1;min-width:0"><b id="ch-name"></b><div class="mut" id="ch-sub" style="font-size:12px"></div></div><button class="btn-s ok hidden" id="ch-done" type="button" style="flex:none;padding:9px 12px" data-act="finishJob">✅ تم الشغل</button></div>
   <div class="chat-msgs" id="ch-msgs"></div>
-  <button class="btn btn-pri hidden" id="ch-rate" type="button" style="border-radius:0" onclick="rateReq(cur.req_id,cur.craft_id)">⭐ قيّم الصنايعي</button>
+  <button class="btn btn-pri hidden" id="ch-rate" type="button" style="border-radius:0" data-act="rateCurrent">⭐ قيّم الصنايعي</button>
   <p class="hidden mut" id="ch-closed" style="text-align:center;padding:12px;background:#fff"></p>
-  <form class="composer" id="ch-comp" onsubmit="sendMsg(event)"><textarea id="ch-in" class="inp" rows="1" maxlength="1000" placeholder="اكتب رسالتك..." oninput="this.style.height='';this.style.height=Math.min(this.scrollHeight,110)+'px'"></textarea><button class="send" type="submit" aria-label="إرسال">➤</button></form>
+  <form class="composer" id="ch-comp" data-submit="sendMsg"><textarea id="ch-in" class="inp" rows="1" maxlength="1000" placeholder="اكتب رسالتك..." data-input="autosize"></textarea><button class="send" type="submit" aria-label="إرسال">➤</button></form>
 </section>
 <section id="s-rate" class="screen"><div class="pad" style="max-width:660px;margin:0 auto;width:100%"><h1 style="margin-bottom:4px">قيّم الصنايعي ⭐</h1><p class="mut" style="margin-bottom:16px">الطلب خلص ✅ — رأيك بيفيد باقي العملاء</p>
-<form class="card" onsubmit="submitRate(event)"><h3 id="rt-name" style="text-align:center"></h3><div class="stars" id="rt-stars"></div><div class="field"><label for="rt-txt">تعليق (اختياري)</label><textarea class="inp" id="rt-txt" rows="3" maxlength="500"></textarea></div><button class="btn btn-pri" type="submit">إرسال التقييم</button><button class="btn btn-ghost" type="button" onclick="showScreen('s-myreq')">تخطي</button></form></div></section>
-<section id="s-notifs" class="screen"><div class="pad" style="max-width:760px;margin:0 auto;width:100%"><button class="back" type="button" onclick="showScreen('s-home')">→ رجوع</button><div class="sec-h"><h1>الإشعارات 🔔</h1><button class="chip" style="background:#e2e8f0;color:#334155" type="button" onclick="readAll()">قراءة الكل</button></div><div id="nt-list"></div></div></section>
+<form class="card" data-submit="submitRate"><h3 id="rt-name" style="text-align:center"></h3><div class="stars" id="rt-stars"></div><div class="field"><label for="rt-txt">تعليق (اختياري)</label><textarea class="inp" id="rt-txt" rows="3" maxlength="500"></textarea></div><button class="btn btn-pri" type="submit">إرسال التقييم</button><button class="btn btn-ghost" type="button" data-act="showScreen" data-arg="s-myreq">تخطي</button></form></div></section>
+<section id="s-notifs" class="screen"><div class="pad" style="max-width:760px;margin:0 auto;width:100%"><button class="back" type="button" data-act="showScreen" data-arg="s-home">→ رجوع</button><div class="sec-h"><h1>الإشعارات 🔔</h1><button class="chip" style="background:#e2e8f0;color:#334155" type="button" data-act="readAll">قراءة الكل</button></div><div id="nt-list"></div></div></section>
 
 </div>
 
-<button id="bell" class="hidden" type="button" onclick="showScreen('s-notifs')" aria-label="الإشعارات">🔔<b id="bell-n" class="hidden">0</b></button>
+<button id="bell" class="hidden" type="button" data-act="showScreen" data-arg="s-notifs" aria-label="الإشعارات">🔔<b id="bell-n" class="hidden">0</b></button>
 <nav id="tabbar" aria-label="التنقل"></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -445,7 +445,7 @@ function buildTabs(){
   if(!me) t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-auth", ic:"👤", n:"دخول"});
   else if(isCraft()) t.push({id:"s-jobs", ic:"🛠️", n:"الطلبات"}, {id:"s-chats", ic:"💬", n:"المحادثات"}, {id:"s-account", ic:"👤", n:"حسابي"});
   else t.push({id:"s-request", ic:"📝", n:"انشر طلبك"}, {id:"s-myreq", ic:"📋", n:"طلباتي"}, {id:"s-chats", ic:"💬", n:"المحادثات"}, {id:"s-account", ic:"👤", n:"حسابي"});
-  $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" onclick="showScreen('${x.id}')"><span class="ic">${x.ic}</span>${x.n}${x.id==="s-chats"?'<i class="dot hidden"></i>':""}</button>`).join("");
+  $("tabbar").innerHTML = t.map(x => `<button type="button" data-t="${x.id}" data-act="showScreen" data-arg="${x.id}"><span class="ic">${x.ic}</span>${x.n}${x.id==="s-chats"?'<i class="dot hidden"></i>':""}</button>`).join("");
   markTab(); paintBadges();
 }
 function markTab(){ document.querySelectorAll("#tabbar button").forEach(b => b.classList.toggle("on", b.dataset.t === current)); }
@@ -462,7 +462,7 @@ function showScreen(id){
   if((id === "s-myreq") && isCraft()) id = "s-jobs";
   if(id === "s-jobs" && me && !isCraft()) id = "s-myreq";
   if(id === "s-chat" && !cur) id = "s-chats";
-  if(current === "s-chat" && id !== "s-chat" && chatCh){ sb.removeChannel(chatCh); chatCh = null; }
+  if(current === "s-chat" && id !== "s-chat") closeChatCh();
   current = id;
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $(id).classList.add("active");
@@ -649,15 +649,21 @@ async function logout(){
 /* ================= نشر طلب ================= */
 async function submitRequest(e){
   e.preventDefault();
-  if(!me) return showScreen("s-request");
+  if(!me){
+    afterLogin = "s-request"; // يرجع للطلب بعد الدخول
+    $("auth-msg").textContent = "سجّل دخول الأول عشان تنشر طلبك";
+    return showScreen("s-auth");
+  }
   if(isCraft()) return toast("حساب الصنايعي مش بينشر طلبات");
   const full = $("q-cat").value, category = full.split(" — ")[0];
   const area = $("q-area").value, details = $("q-details").value.trim();
   if(!AREAS.includes(area)) return toast("اختار المنطقة");
   if(details.length < 5) return toast("اكتب تفاصيل الشغل بشكل أوضح");
   const b = $("q-btn"); b.disabled = true;
-  const { error } = await sb.from("requests").insert({ customer_id: me.id, category, work_type: full, area, details });
-  b.disabled = false;
+  let error = null;
+  try { ({ error } = await sb.from("requests").insert({ customer_id: me.id, category, work_type: full, area, details })); }
+  catch(err) { error = err; }
+  finally { b.disabled = false; } // الزرار مايفضلش مقفول لو حصل استثناء
   if(error) return toast("ماقدرناش ننشر الطلب، جرب تاني");
   $("q-details").value = "";
   toast("تم نشر طلبك ✅");
@@ -683,7 +689,7 @@ async function loadMyRequests(){
   box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
   const list = await fetchMyRequests();
   if(!list) return box.innerHTML = '<div class="empty"><div class="big">⚠️</div><p>مقدرناش نحمّل طلباتك، حدّث الصفحة</p></div>';
-  if(!list.length) return box.innerHTML = '<div class="empty"><div class="big">📭</div><h3>لسه مفيش طلبات</h3><button class="btn btn-pri" style="margin-top:14px" onclick="showScreen(\'s-request\')">انشر أول طلب</button></div>';
+  if(!list.length) return box.innerHTML = '<div class="empty"><div class="big">📭</div><h3>لسه مفيش طلبات</h3><button class="btn btn-pri" style="margin-top:14px" data-act="showScreen" data-arg="s-request">انشر أول طلب</button></div>';
   box.innerHTML = list.map(r => {
     const [cls, txt] = STATUS[r.status] || STATUS.open;
     return `<div class="req">
@@ -691,7 +697,7 @@ async function loadMyRequests(){
       <div class="meta">📍 ${esc(r.area)} — 🗓️ ${fmtDate(r.created_at)}</div>
       <div class="det">${esc(r.details)}</div>
       <div class="meta">${r.n ? `🤝 تواصل معاك ${r.n} صنايعي` : "⏳ لسه ماحدش تواصل"}</div>
-      <div class="acts">${r.n ? `<button class="btn-s g" type="button" data-id="${esc(r.id)}" onclick="showChats(this.dataset.id)">💬 المحادثات</button>` : ""}${r.status === "open" ? `<button class="btn-s bad" type="button" data-id="${esc(r.id)}" onclick="cancelRequest(this.dataset.id)">إلغاء الطلب</button>` : ""}${r.status === "closed" && r.completed_by ? (r.rate ? `<span class="meta">⭐ قيّمت: ${stars(r.rate)}</span>` : `<button class="btn-s ok" type="button" data-r="${esc(r.id)}" data-c="${esc(r.completed_by)}" onclick="rateReq(this.dataset.r,this.dataset.c)">⭐ قيّم الصنايعي</button>`) : ""}</div>
+      <div class="acts">${r.n ? `<button class="btn-s g" type="button" data-id="${esc(r.id)}" data-act="showChats">💬 المحادثات</button>` : ""}${r.status === "open" ? `<button class="btn-s bad" type="button" data-id="${esc(r.id)}" data-act="cancelRequest">إلغاء الطلب</button>` : ""}${r.status === "closed" && r.completed_by ? (r.rate ? `<span class="meta">⭐ قيّمت: ${stars(r.rate)}</span>` : `<button class="btn-s ok" type="button" data-r="${esc(r.id)}" data-c="${esc(r.completed_by)}" data-act="rateReq">⭐ قيّم الصنايعي</button>`) : ""}</div>
     </div>`;
   }).join("");
 }
@@ -734,8 +740,8 @@ function renderJobs(){
       <div class="meta">📍 ${esc(j.area)} — 🗓️ ${fmtDate(j.created_at)}</div>
       <div class="det">${esc(j.details)}</div>
       <div class="acts">
-        <button class="btn-s ok" type="button" data-id="${esc(j.id)}" onclick="contactJob(this.dataset.id)">${done ? "💬 افتح المحادثة" : "💬 تواصل"}</button>
-        ${done ? "" : `<button class="btn-s g" type="button" data-id="${esc(j.id)}" onclick="ignoreJob(this.dataset.id)">تجاهل</button>`}
+        <button class="btn-s ok" type="button" data-id="${esc(j.id)}" data-act="contactJob">${done ? "💬 افتح المحادثة" : "💬 تواصل"}</button>
+        ${done ? "" : `<button class="btn-s g" type="button" data-id="${esc(j.id)}" data-act="ignoreJob">تجاهل</button>`}
       </div>
     </div>`;
   }).join("");
@@ -781,7 +787,7 @@ async function loadAccount(){
       <div class="meta">🗓️ ${fmtDate(x.created_at)} — ${x.n ? "🤝 تواصل معاك " + x.n + " صنايعي" : "⏳ لسه ماحدش تواصل"}</div></div>`; }).join("") : '<p class="mut">لسه مفيش معاملات</p>';
   }
   html += `<div class="sec-h" style="margin-top:20px"><h3>سجل المعاملات مع الصنايعية</h3></div>${history}
-    <button class="btn btn-ghost" type="button" onclick="logout()" style="margin-top:20px">تسجيل الخروج</button>`;
+    <button class="btn btn-ghost" type="button" data-act="logout" style="margin-top:20px">تسجيل الخروج</button>`;
   box.innerHTML = html;
 }
 
@@ -797,7 +803,7 @@ async function renderChats(){
   box.innerHTML = '<p class="mut" style="text-align:center">جاري التحميل...</p>';
   await loadChats();
   const l = chats.filter(c => !chatFilter || c.req_id === chatFilter);
-  box.innerHTML = l.length ? l.map(c => `<div class="req" style="cursor:pointer" data-r="${esc(c.req_id)}" data-c="${esc(c.craft_id)}" onclick="openChat(this.dataset.r,this.dataset.c)">
+  box.innerHTML = l.length ? l.map(c => `<div class="req" style="cursor:pointer" data-r="${esc(c.req_id)}" data-c="${esc(c.craft_id)}" data-act="openChat">
     <div class="top"><b>${esc(c.other_name)}${c.other_rating ? ` <small>⭐ ${esc(c.other_rating)}</small>` : ""}</b>${c.unread ? `<span class="badge b-open">${c.unread} جديد</span>` : c.req_status !== "open" ? '<span class="badge b-ok">منتهي</span>' : ""}</div>
     <div class="meta">${esc(c.work_type)} — ${esc(c.area)}</div><div class="det">${esc(c.last_body || "ابدأ المحادثة")}</div></div>`).join("") : '<div class="empty"><div class="big">💬</div><h3>مفيش محادثات لسه</h3></div>';
 }
@@ -807,8 +813,15 @@ async function openChat(r, c){
   if(!cur) return toast("المحادثة مش متاحة");
   showScreen("s-chat");
 }
+let chatSeq = 0;
+function closeChatCh(){
+  chatSeq++; // أي startChat لسه شغال في الخلفية هيتلغي
+  if(chatCh && sb){ try { sb.removeChannel(chatCh); } catch(e) {} }
+  chatCh = null;
+}
 async function startChat(){
-  const c = cur, open = c.req_status === "open";
+  closeChatCh(); // اقفل أي قناة قديمة قبل ما نفتح واحدة جديدة
+  const c = cur, my = chatSeq, open = c.req_status === "open";
   $("ch-name").textContent = c.other_name + (c.other_rating ? " ⭐" + c.other_rating : "");
   $("ch-sub").textContent = c.work_type + " — " + c.area;
   $("ch-done").classList.toggle("hidden", !(open && !isCraft()));
@@ -816,9 +829,12 @@ async function startChat(){
   $("ch-comp").classList.toggle("hidden", !open);
   $("ch-closed").classList.toggle("hidden", open);
   $("ch-closed").textContent = c.req_status === "cancelled" ? "الطلب اتلغى" : "الطلب خلص — المحادثة للقراءة فقط";
-  await fetchMsgs(); $("ch-msgs").scrollTop = 1e9;
+  await fetchMsgs();
+  if(my !== chatSeq || current !== "s-chat" || cur !== c) return; // المستخدم خرج أو فتح محادثة تانية
+  $("ch-msgs").scrollTop = 1e9;
   const seen = () => sb.rpc("mark_chat_read", { p_request_id: c.req_id, p_craftsman_id: c.craft_id }).then(loadNotifs);
   seen();
+  if(my !== chatSeq) return;
   chatCh = sb.channel("chat-" + c.req_id + c.craft_id).on("postgres_changes", { event:"*", schema:"public", table:"messages", filter:"request_id=eq." + c.req_id }, () => { fetchMsgs(); seen(); }).subscribe();
 }
 async function fetchMsgs(){
@@ -845,7 +861,9 @@ async function finishJob(){
 }
 async function rateReq(r, c){ await loadChats(); const x = chats.find(v => v.req_id === r && v.craft_id === c); x ? goRate(x) : toast("مقدرناش نفتح التقييم"); }
 function goRate(c){ rateT = c; rateSel = 0; paintStars(); $("rt-name").textContent = c.other_name; $("rt-txt").value = ""; showScreen("s-rate"); }
-function paintStars(){ $("rt-stars").innerHTML = [1,2,3,4,5].map(n => `<button type="button" class="star ${n <= rateSel ? "on" : ""}" onclick="rateSel=${n};paintStars()">★</button>`).join(""); }
+function setStar(n){ rateSel = +n; paintStars(); }
+function rateCurrent(){ rateReq(cur.req_id, cur.craft_id); }
+function paintStars(){ $("rt-stars").innerHTML = [1,2,3,4,5].map(n => `<button type="button" class="star ${n <= rateSel ? "on" : ""}" data-act="setStar" data-arg="${n}">★</button>`).join(""); }
 async function submitRate(e){
   e.preventDefault();
   if(!rateSel) return toast("اختار عدد النجوم");
@@ -881,10 +899,10 @@ function startNotifs(){
     loadNotifs();
   }).subscribe();
 }
-function stopNotifs(){ if(notifCh && sb){ sb.removeChannel(notifCh); } notifCh = null; notifs = []; paintBadges(); }
+function stopNotifs(){ closeChatCh(); if(notifCh && sb){ sb.removeChannel(notifCh); } notifCh = null; notifs = []; paintBadges(); }
 function renderNotifs(){
-  const ask = window.Notification && Notification.permission === "default" ? '<button class="btn btn-ghost" style="margin:0 0 12px" type="button" onclick="askPerm()">🔔 فعّل إشعارات المتصفح</button>' : "";
-  $("nt-list").innerHTML = ask + (notifs.length ? notifs.map(n => `<div class="req ${n.read ? "" : "unread"}" style="cursor:pointer" data-i="${esc(n.id)}" onclick="openNotif(this.dataset.i)"><div class="top"><b>${esc(n.title)}</b><span class="meta">${fmtDate(n.created_at)} ${hm(n.created_at)}</span></div><div class="det">${esc(n.body || "")}</div></div>`).join("") : '<div class="empty"><div class="big">🔔</div><h3>مفيش إشعارات</h3></div>');
+  const ask = window.Notification && Notification.permission === "default" ? '<button class="btn btn-ghost" style="margin:0 0 12px" type="button" data-act="askPerm">🔔 فعّل إشعارات المتصفح</button>' : "";
+  $("nt-list").innerHTML = ask + (notifs.length ? notifs.map(n => `<div class="req ${n.read ? "" : "unread"}" style="cursor:pointer" data-i="${esc(n.id)}" data-act="openNotif"><div class="top"><b>${esc(n.title)}</b><span class="meta">${fmtDate(n.created_at)} ${hm(n.created_at)}</span></div><div class="det">${esc(n.body || "")}</div></div>`).join("") : '<div class="empty"><div class="big">🔔</div><h3>مفيش إشعارات</h3></div>');
 }
 async function askPerm(){ try { await Notification.requestPermission(); } catch(e) {} renderNotifs(); }
 async function openNotif(id){
@@ -943,6 +961,28 @@ async function init(){
   });
 }
 init();
+
+
+/* ================= Event delegation (بدل onclick المضمّنة، عشان الـ CSP من غير unsafe-inline) ================= */
+const D = e => e.dataset;
+const ACT_ARGS = {
+  showChats: e => [D(e).id], cancelRequest: e => [D(e).id], contactJob: e => [D(e).id], ignoreJob: e => [D(e).id],
+  openNotif: e => [D(e).i], openChat: e => [D(e).r, D(e).c], rateReq: e => [D(e).r, D(e).c]
+};
+const INPUT_FX = { autosize: el => { el.style.height = ""; el.style.height = Math.min(el.scrollHeight, 110) + "px"; } };
+function dispatch(attr, ev){
+  const el = ev.target.closest("[" + attr + "]"); if(!el) return;
+  const name = el.getAttribute(attr);
+  if(attr === "data-input"){ if(INPUT_FX[name]) INPUT_FX[name](el); return; }
+  const fn = window[name]; if(typeof fn !== "function") return;
+  if(attr === "data-submit") return fn(ev);
+  const args = ACT_ARGS[name] ? ACT_ARGS[name](el) : [D(el).arg, el];
+  fn(...args);
+}
+document.addEventListener("click", ev => dispatch("data-act", ev));
+document.addEventListener("change", ev => dispatch("data-change", ev));
+document.addEventListener("input", ev => dispatch("data-input", ev));
+document.addEventListener("submit", ev => dispatch("data-submit", ev));
 </script>
 </body>
 </html>
